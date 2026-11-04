@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!-- 시네마틱 발표자료 스킬 템플릿: DECK 객체만 바꿔 새 덱을 만든다(레이아웃 8종 예시) -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>미국 상원·하원과 대한민국 국회 비교 · 시네마틱 레거시</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+<style>
+/* ===== 엔진 스타일 — 덱마다 수정하지 않음. 색은 DECK.accent 하나로 제어 ===== */
+:root{
+  --ac:#4d9fff; --ac-rgb:77,159,255;
+  --ink:#ffffff; --mu:rgba(235,240,250,.72); --dim:rgba(235,240,250,.42);
+  --navy:8,12,22;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#05070c}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#05070c}
+
+/* --- 배경: 사진 2장 크로스페이드 + 켄번스. 사진 실패 시 아래 그라디언트가 그대로 보임 --- */
+.bg{position:absolute;inset:-2%;opacity:0;transition:opacity 1.2s ease;
+  background-size:cover;background-position:center;
+  filter:saturate(.9) brightness(.95)}
+.bg.show{opacity:1;animation:kenburns 16s ease-out forwards}
+@keyframes kenburns{from{transform:scale(1.1)}to{transform:scale(1)}}
+.shade{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%,rgba(var(--navy),.24) 0%,rgba(var(--navy),.62) 70%,rgba(var(--navy),.88) 100%),
+    linear-gradient(180deg,rgba(var(--navy),.7) 0%,rgba(var(--navy),.15) 30%,rgba(var(--navy),.25) 65%,rgba(var(--navy),.88) 100%);
+}
+.rays{position:absolute;inset:0;pointer-events:none;opacity:.32;mix-blend-mode:screen;
+  background:repeating-conic-gradient(from 0deg at 50% 118%,rgba(var(--ac-rgb),.07) 0deg 1.2deg,transparent 1.2deg 9deg);
+  -webkit-mask:radial-gradient(ellipse 60% 70% at 50% 100%,#000 10%,transparent 75%);
+          mask:radial-gradient(ellipse 60% 70% at 50% 100%,#000 10%,transparent 75%)}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hud{position:absolute;width:46px;height:46px;border:2px solid rgba(255,255,255,.22);pointer-events:none}
+.hud.tl{left:56px;top:136px;border-right:0;border-bottom:0}
+.hud.tr{right:56px;top:136px;border-left:0;border-bottom:0}
+.hud.bl{left:56px;bottom:56px;border-right:0;border-top:0}
+.hud.br{right:56px;bottom:56px;border-left:0;border-top:0}
+
+/* --- 상단 챕터 바 --- */
+#topbar{position:absolute;left:48px;right:48px;top:34px;height:66px;display:flex;align-items:center;gap:8px;padding:8px;
+  background:rgba(var(--navy),.55);border:1px solid rgba(255,255,255,.09);border-radius:16px;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:5}
+.brand{display:flex;align-items:center;gap:10px;height:100%;padding:0 18px 0 12px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(var(--ac-rgb),.22),rgba(var(--ac-rgb),.05));border:1px solid rgba(var(--ac-rgb),.35);
+  font-size:15px;font-weight:800;letter-spacing:.12em;white-space:nowrap}
+.brand iconify-icon{font-size:24px;color:var(--ac)}
+.tab{flex:1;position:relative;height:100%;display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:10px;
+  color:var(--dim);font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;transition:color .4s,background .4s,border-color .4s;
+  border:1px solid transparent}
+.tab b{font-size:14px;font-weight:700;opacity:.8;font-variant-numeric:tabular-nums}
+.tab.on{color:var(--ink);background:rgba(var(--ac-rgb),.13);border-color:rgba(var(--ac-rgb),.38)}
+.tab.on b{color:var(--ac);opacity:1}
+.tab.done{color:rgba(235,240,250,.62)}
+.tab .gauge{position:absolute;left:18px;right:18px;bottom:7px;height:3px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden;opacity:0;transition:opacity .4s}
+.tab.on .gauge{opacity:1}
+.tab .gauge i{display:block;height:100%;width:0;background:var(--ac);box-shadow:0 0 10px var(--ac);transition:width .9s cubic-bezier(.2,.7,.2,1)}
+
+/* --- 슬라이드 본문 공통 --- */
+#slide{position:absolute;left:0;right:0;top:100px;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 160px 110px;text-align:center;z-index:2}
+.eyebrow{font-size:23px;font-weight:600;color:var(--ac);letter-spacing:.04em;margin-bottom:18px;text-shadow:0 0 18px rgba(var(--ac-rgb),.5)}
+.title{font-size:76px;font-weight:800;line-height:1.18;letter-spacing:-.03em;text-shadow:0 4px 30px rgba(0,0,0,.55)}
+.title em,.quote em{font-style:normal;color:var(--ac)}
+.sub{font-size:30px;font-weight:500;color:var(--mu);margin-top:26px;line-height:1.5}
+.note{position:absolute;left:0;right:0;bottom:74px;font-size:21px;color:var(--dim);font-weight:500}
+.credit{position:absolute;left:120px;bottom:22px;font-size:13px;color:rgba(255,255,255,.3);z-index:3;letter-spacing:.02em}
+
+/* --- reveal: data-s 순서대로 페이드업 --- */
+[data-s]{opacity:0;transform:translateY(26px);transition:opacity .75s ease var(--d,0s),transform .85s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+[data-s].on{opacity:1;transform:none}
+
+/* cover */
+.cover .chip{display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border-radius:999px;font-size:20px;font-weight:700;letter-spacing:.14em;color:var(--ac);
+  background:rgba(var(--ac-rgb),.1);border:1px solid rgba(var(--ac-rgb),.4);margin-bottom:34px}
+.cover .title{font-size:112px;line-height:1.12}
+.cover .meta{margin-top:48px;font-size:19px;letter-spacing:.24em;color:var(--dim);font-weight:600}
+
+/* bullets */
+.bullets{margin-top:58px;display:flex;flex-direction:column;gap:26px;text-align:left}
+.bullet{display:flex;align-items:center;gap:26px;font-size:34px;font-weight:500;color:var(--mu)}
+.ico{flex:none;width:68px;height:68px;border-radius:16px;display:grid;place-items:center;font-size:32px;color:var(--ac);
+  background:rgba(var(--ac-rgb),.12);border:1.5px solid rgba(var(--ac-rgb),.5);box-shadow:0 0 24px rgba(var(--ac-rgb),.18)}
+.bullet.em{color:var(--ink);font-weight:800}
+.bullet.em .ico{background:rgba(var(--ac-rgb),.28);box-shadow:0 0 34px rgba(var(--ac-rgb),.45)}
+
+/* stats */
+.stats{margin-top:64px;display:flex;align-items:stretch;justify-content:center}
+.stat{padding:0 90px;display:flex;flex-direction:column;align-items:center}
+.stat+.stat{border-left:1px solid rgba(255,255,255,.14)}
+.stat .v{font-size:180px;font-weight:800;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;text-shadow:0 0 50px rgba(var(--ac-rgb),.35)}
+.stat .v small{font-size:64px;color:var(--ac);margin-left:6px;letter-spacing:0}
+.stat .l{margin-top:22px;font-size:27px;color:var(--mu);font-weight:500;max-width:520px;line-height:1.45}
+
+/* flow: 마름모 배지 + 화살표 */
+.flow{margin-top:70px;display:flex;align-items:flex-start;justify-content:center}
+.step{width:340px;display:flex;flex-direction:column;align-items:center}
+.dia{width:112px;height:112px;display:grid;place-items:center;position:relative;margin:14px 0 40px}
+.dia::before{content:'';position:absolute;inset:0;transform:rotate(45deg) scale(.82);border-radius:14px;
+  background:rgba(var(--navy),.75);border:2px solid rgba(var(--ac-rgb),.75);box-shadow:0 0 30px rgba(var(--ac-rgb),.4),inset 0 0 22px rgba(var(--ac-rgb),.18)}
+.dia span{position:relative;font-size:38px;font-weight:800;color:var(--ac);font-variant-numeric:tabular-nums}
+.step .lb{font-size:38px;font-weight:700;line-height:1.3}
+.step .lb::after{content:'';display:block;width:56px;height:3px;margin:18px auto 0;background:var(--ac);border-radius:2px;opacity:.8}
+.step .ds{margin-top:16px;font-size:24px;color:var(--mu);line-height:1.45}
+.arrow{width:150px;height:2px;margin-top:68px;position:relative;transform-origin:left center;
+  background:linear-gradient(90deg,rgba(var(--ac-rgb),.1),var(--ac));box-shadow:0 0 12px rgba(var(--ac-rgb),.6)}
+.arrow::after{content:'';position:absolute;right:-2px;top:-6px;border-left:12px solid var(--ac);border-top:7px solid transparent;border-bottom:7px solid transparent}
+.arrow[data-s]{transform:scaleX(0)}
+.arrow[data-s].on{transform:scaleX(1)}
+
+/* compare */
+.compare{margin-top:60px;display:flex;gap:40px;text-align:left}
+.panel{width:640px;padding:44px 48px;border-radius:24px;background:rgba(var(--navy),.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px)}
+.panel.hi{background:rgba(var(--ac-rgb),.1);border-color:rgba(var(--ac-rgb),.5);box-shadow:0 0 50px rgba(var(--ac-rgb),.18)}
+.panel h3{display:flex;align-items:center;gap:16px;font-size:38px;font-weight:800;margin-bottom:28px}
+.panel h3 iconify-icon{font-size:40px;color:var(--dim)}
+.panel.hi h3 iconify-icon{color:var(--ac)}
+.panel li{list-style:none;font-size:27px;color:var(--mu);padding:14px 0;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:14px;align-items:center}
+.panel li::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--dim);flex:none}
+.panel.hi li{color:var(--ink)}
+.panel.hi li::before{background:var(--ac);box-shadow:0 0 10px var(--ac)}
+
+/* quote */
+.quote{font-size:74px;font-weight:700;line-height:1.35;letter-spacing:-.025em;text-shadow:0 4px 30px rgba(0,0,0,.6);position:relative}
+.by{margin-top:44px;font-size:24px;color:var(--dim);letter-spacing:.08em}
+
+/* timeline */
+.timeline{margin-top:80px;display:flex;position:relative;width:1500px}
+.timeline::before{content:'';position:absolute;left:12.5%;right:12.5%;top:13px;height:2px;background:linear-gradient(90deg,rgba(var(--ac-rgb),.2),var(--ac),rgba(var(--ac-rgb),.2))}
+.tl-item{flex:1;display:flex;flex-direction:column;align-items:center}
+.tl-item .dot{width:28px;height:28px;border-radius:50%;background:#0a0f1a;border:3px solid var(--ac);box-shadow:0 0 20px rgba(var(--ac-rgb),.7);position:relative}
+.tl-item.em .dot{background:var(--ac)}
+.tl-item .t{margin-top:28px;font-size:24px;font-weight:700;color:var(--ac);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.tl-item .lb{margin-top:10px;font-size:36px;font-weight:800}
+.tl-item .ds{margin-top:12px;font-size:23px;color:var(--mu);line-height:1.45;max-width:300px}
+
+/* closing */
+.closing .title{font-size:104px}
+.chips{margin-top:56px;display:flex;gap:18px;justify-content:center}
+.chips span{padding:16px 30px;border-radius:999px;font-size:25px;font-weight:600;background:rgba(var(--navy),.55);border:1px solid rgba(var(--ac-rgb),.45);backdrop-filter:blur(10px)}
+
+/* --- 네비 · 점프 --- */
+#nav{position:absolute;right:120px;bottom:20px;display:flex;align-items:center;gap:6px;z-index:6;opacity:.55;transition:opacity .3s}
+#nav:hover{opacity:1}
+#nav button{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(var(--navy),.6);color:var(--ink);font-size:16px;cursor:pointer}
+#counter{min-width:84px;text-align:center;font-size:17px;font-weight:600;color:var(--mu);cursor:pointer;font-variant-numeric:tabular-nums}
+#jump-toast{position:absolute;left:50%;top:130px;transform:translateX(-50%);padding:14px 26px;border-radius:14px;font-size:22px;font-weight:700;
+  background:rgba(var(--navy),.85);border:1px solid rgba(var(--ac-rgb),.5);z-index:9;display:none}
+#jump-toast b{color:var(--ac)}
+#jump-modal{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;place-items:center;z-index:10}
+#jump-modal.open{display:grid}
+#jump-modal form{padding:40px 48px;border-radius:22px;background:rgba(var(--navy),.92);border:1px solid rgba(var(--ac-rgb),.45);display:flex;flex-direction:column;gap:20px;align-items:center}
+#jump-modal label{font-size:24px;font-weight:700;color:var(--ac)}
+#jump-modal input{width:220px;padding:14px;font-size:30px;text-align:center;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:#0b1020;color:#fff;font-family:inherit}
+#jump-modal button{padding:12px 40px;font-size:20px;font-weight:700;border-radius:12px;border:0;background:var(--ac);color:#05070c;cursor:pointer;font-family:inherit}
+
+@media (prefers-reduced-motion:reduce){
+  .bg.show{animation:none}
+  [data-s]{transition:none}
+}
+</style>
+<style>.title{font-size:67px}.cover .title{font-size:98px}.compare{margin-top:40px;gap:34px}.panel{padding:32px 38px}.panel h3{font-size:33px;margin-bottom:22px}.panel li{font-size:27px;line-height:1.45;padding:14px 0}.note{font-size:17px;line-height:1.45;bottom:63px;padding:0 110px}.note a{color:#a6d5ff;text-decoration:none}.cover .meta{font-size:19px;line-height:1.7;letter-spacing:.04em}.stat .v{font-size:145px}.stat .l{font-size:26px}.stat{padding:0 75px}.step .lb{font-size:38px}.step .ds{font-size:24px}.comparison-table{margin-top:40px;width:1540px;border-collapse:collapse;font-size:26px;text-align:left;background:rgba(8,12,22,.6)}.comparison-table th,.comparison-table td{padding:22px 27px;border-bottom:1px solid #ffffff25}.comparison-table th{color:var(--ac);background:#78b8ff12}.comparison-table td:first-child{color:#b2c7e0}.source-list{display:grid;grid-template-columns:1fr 1fr;gap:20px 35px;margin-top:42px;width:1500px;text-align:left}.source-list a{display:flex;gap:20px;align-items:center;color:#dcecff;text-decoration:none;font-size:25px;padding:18px;border-bottom:1px solid #ffffff20}.source-list b{color:var(--ac);font-size:20px}.tab{cursor:pointer}.tab:hover{background:#ffffff12}a:focus-visible,.tab:focus-visible{outline:2px solid var(--ac)}.closing .title{font-size:82px}.flow{margin-top:50px}.closing .sub{font-size:30px}.cover .chip{font-size:19px}.bullets{margin-top:45px}.bullet{font-size:32px}@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}</style></head>
+<body>
+<div id="stage">
+  <div class="bg" id="bgA"></div><div class="bg" id="bgB"></div>
+  <div class="shade"></div><div class="rays"></div><div class="grain"></div>
+  <div class="hud tl"></div><div class="hud tr"></div><div class="hud bl"></div><div class="hud br"></div>
+  <div id="topbar"></div>
+  <div id="slide"></div>
+  <div class="credit" id="credit"></div>
+  <div id="nav"><button id="prev" aria-label="이전">◀</button><span id="counter" title="클릭하거나 G 키로 페이지 이동"></span><button id="next" aria-label="다음">▶</button></div>
+  <div id="jump-toast">Go to <b id="jump-num"></b></div>
+  <div id="jump-modal"><form><label for="jump-input">페이지 바로 이동</label><input id="jump-input" type="number" min="1"><button>이동</button></form></div>
+</div>
+
+<script>
+/* ===================== 덱 데이터 — 이 객체만 바꾸면 새 발표자료 =====================
+   - 문자열 안에는 <br>, <em>강조</em>, <b> 같은 간단한 HTML을 써도 된다. 백틱(`)은 쓰지 않는다.
+   - bg: Unsplash 사진 ID('photo-...') 또는 이미지 URL/상대경로. 비우면 그라디언트 배경.
+   - photo: 사진 작가 이름(크레딧 표시). focus: 배경 위치(예 'center 30%').
+   - chapter: DECK.chapters 인덱스(0부터). 상단 바의 활성 탭과 게이지를 결정한다.
+   - reveal: 슬라이드별로 'auto' | 'click' 덮어쓰기 가능. */
+const DECK = {"brand": {"name": "미국·한국 의회 비교", "icon": "solar:buildings-2-bold"}, "accent": "#78b8ff", "reveal": "auto", "chapters": ["기본 구조", "미국 상·하원", "대한민국 국회", "핵심 차이", "장점과 한계", "종합"], "slides": [{"layout": "cover", "chapter": 0, "title": "미국의 상원·하원<br>대한민국의 <em>국회</em>", "eyebrow": "COMPARATIVE LEGISLATURES", "sub": "무엇을 대표하고, 어떻게 결정하며, 누가 견제하는가", "meta": "제도 비교 · 정의 / 특징 / 차이 / 장단점<br>기준일 2026.11.04. · 정원·구조 기준, 정당별 의석수와 선거 결과 제외"}, {"layout": "compare", "chapter": 0, "title": "출발점은 <em>의회의 수와 대표 원리</em>", "left": {"title": "미국 · 양원제", "icon": "solar:buildings-2-bold", "items": ["연방의회 Congress는 상원 Senate와 하원 House로 구성", "두 의회가 각각 심사하며 일반 법률은 동일한 문안에 합의해야 함", "상원은 하원의 상급기관이 아님"]}, "right": {"title": "대한민국 · 단원제", "icon": "solar:scale-bold", "items": ["하나의 국회가 국가 입법권을 행사", "지역구 의원과 비례대표 의원은 같은 본회의에서 활동", "비례대표는 별도 상원이나 두 번째 의회가 아님"]}, "note": "<a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a> · <a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a>"}, {"layout": "stats", "chapter": 0, "title": "세 기관의 <em>규모와 임기</em>", "items": [{"value": "100", "unit": "석", "label": "미국 상원 · 임기 6년"}, {"value": "435", "unit": "석", "label": "미국 하원 · 임기 2년"}, {"value": "300", "unit": "석", "label": "대한민국 국회 · 임기 4년"}], "note": "미국 하원은 본회의 의결권 있는 의원 기준. 비투표 대표 6명은 별도. 한국은 제22대 선거 구성 기준.<br><a href=\"https://www.house.gov/the-house-explained\" target=\"_blank\" rel=\"noopener\">미국 하원 · The House Explained</a> · <a href=\"https://www.senate.gov/senators/qualifications_termsofservice.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 구성과 임기</a> · <a href=\"https://img.nec.go.kr/common/board/Download.do?bcIdx=236532&cbIdx=1132&streFileNm=cdr_f4cb6cc2-8449-4208-8364-f45815549b76.pdf\" target=\"_blank\" rel=\"noopener\">중앙선관위 · 제22대 국회의원선거 외부평가</a>"}, {"layout": "compare", "chapter": 1, "title": "상원은 <em>주를 동등하게 대표</em>한다", "left": {"title": "정의와 구성", "icon": "solar:buildings-2-bold", "items": ["50개 주가 각각 2석을 선출해 총 100석", "주 전체 유권자가 직접 선출", "6년 임기 · 약 3분의 1씩 2년마다 교체"]}, "right": {"title": "설계의 의미", "icon": "solar:scale-bold", "items": ["인구가 작은 주도 연방 의사결정에 동등하게 참여", "분할 선거로 의회의 연속성 확보", "주 간 평등과 유권자 1인당 영향력의 평등은 다를 수 있음"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.senate.gov/senators/qualifications_termsofservice.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 구성과 임기</a> · <a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a>"}, {"layout": "compare", "chapter": 1, "title": "하원은 <em>인구에 따른 대표</em>를 지향한다", "left": {"title": "정의와 구성", "icon": "solar:buildings-2-bold", "items": ["50개 주의 인구에 비례해 의석 배분", "각 선거구 주민을 대표하는 의원을 선출", "2년마다 의결권 있는 435석 전체를 선거"]}, "right": {"title": "설계의 의미", "icon": "solar:scale-bold", "items": ["상원보다 민심 변화가 선거에 빠르게 반영될 수 있음", "선거구와 의원의 책임 관계가 비교적 명확", "인구 비례 배분이 정당 득표율과 의석률의 일치를 뜻하지는 않음"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.house.gov/the-house-explained\" target=\"_blank\" rel=\"noopener\">미국 하원 · The House Explained</a> · <a href=\"https://www.usa.gov/midterm-elections\" target=\"_blank\" rel=\"noopener\">미국 정부 · 의회 선거</a>"}, {"layout": "compare", "chapter": 1, "title": "같은 의회 안에서도 <em>특별 권한은 다르다</em>", "left": {"title": "하원의 특별 역할", "icon": "solar:buildings-2-bold", "items": ["세입 법안은 하원에서 시작", "연방 공직자에 대한 탄핵소추", "일반 법안은 상원 동의도 필요"]}, "right": {"title": "상원의 특별 역할", "icon": "solar:scale-bold", "items": ["조약 체결 동의: 출석 상원의원 3분의 2", "주요 대통령 지명 인사에 대한 동의", "탄핵 심판: 유죄 판단에 출석 의원 3분의 2"]}, "note": "<a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a> · <a href=\"https://www.senate.gov/about/powers-procedures/treaties.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 조약 동의권</a>"}, {"layout": "flow", "chapter": 1, "title": "미국의 법률은 <em>두 의회의 합의</em>를 거친다", "steps": [{"label": "한 의회 심사", "desc": "위원회 검토·본회의 의결"}, {"label": "다른 의회 심사", "desc": "같은 문안으로 합의"}, {"label": "대통령 단계", "desc": "서명 또는 거부권 등"}], "note": "단순화한 일반 경로. 법안은 원칙적으로 어느 의회에서든 시작할 수 있으나 세입 법안은 하원에서 시작.<br><a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a>"}, {"layout": "compare", "chapter": 2, "title": "한국 국회는 <em>한 의회 안에 대표 경로를 결합</em>한다", "left": {"title": "지역구 · 254석", "icon": "solar:buildings-2-bold", "items": ["지역구별 선거로 선출", "지역 현안과 주민 요구를 의정활동에 연결", "선거구 당선 결과가 의석 구성에 직접 반영"]}, "right": {"title": "비례대표 · 46석", "icon": "solar:scale-bold", "items": ["정당 투표를 바탕으로 법정 배분 규칙에 따라 선출", "정치적 다양성과 전문성을 보완할 수 있는 통로", "지역구와 동일하게 입법·표결에 참여"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://img.nec.go.kr/common/board/Download.do?bcIdx=236532&cbIdx=1132&streFileNm=cdr_f4cb6cc2-8449-4208-8364-f45815549b76.pdf\" target=\"_blank\" rel=\"noopener\">중앙선관위 · 제22대 국회의원선거 외부평가</a>"}, {"layout": "bullets", "chapter": 2, "title": "국회의원의 핵심 역할은 <em>입법·재정·통제</em>", "items": [{"icon": "solar:document-text-bold", "text": "입법: 법률안 심의·의결과 법률 제정·개정"}, {"icon": "solar:chart-square-bold", "text": "재정: 예산안 심의·확정과 결산 심사"}, {"icon": "solar:shield-check-bold", "text": "통제: 국정감사·조사, 탄핵소추, 헌법상 동의권"}], "note": "<a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a>"}, {"layout": "flow", "chapter": 2, "title": "한국은 <em>국회 의결과 대통령 단계</em>를 거친다", "steps": [{"label": "법률안 제출", "desc": "국회의원 또는 정부"}, {"label": "국회 심사", "desc": "위원회 심사·본회의 의결"}, {"label": "대통령 단계", "desc": "공포 또는 재의요구"}], "note": "헌법 제49·52·53조 및 입법과정. 특별한 정족수·절차가 있는 안건은 예외.<br><a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a> · <a href=\"https://moleg.go.kr/menu.es?mid=a10105020000\" target=\"_blank\" rel=\"noopener\">법제처 · 입법과정안내</a>"}, {"layout": "table", "chapter": 3, "title": "차이점을 <em>한눈에 비교</em>", "headers": ["비교 기준", "미국 상원", "미국 하원", "대한민국 국회"], "rows": [["의회 구조", "양원제의 한 의회", "양원제의 한 의회", "단원제"], ["대표 기준", "주별 동등 대표", "인구에 따른 선거구 대표", "지역구 + 비례대표"], ["임기", "6년", "2년", "4년"], ["정기 선거 교체", "약 1/3씩, 2년마다", "전체, 2년마다", "전체, 4년마다"], ["일반 법안", "하원과 동일 문안 합의", "상원과 동일 문안 합의", "국회 본회의 의결"]], "note": "<a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a> · <a href=\"https://www.house.gov/the-house-explained\" target=\"_blank\" rel=\"noopener\">미국 하원 · The House Explained</a> · <a href=\"https://www.usa.gov/midterm-elections\" target=\"_blank\" rel=\"noopener\">미국 정부 · 의회 선거</a> · <a href=\"https://img.nec.go.kr/common/board/Download.do?bcIdx=236532&cbIdx=1132&streFileNm=cdr_f4cb6cc2-8449-4208-8364-f45815549b76.pdf\" target=\"_blank\" rel=\"noopener\">중앙선관위 · 제22대 국회의원선거 외부평가</a>"}, {"layout": "compare", "chapter": 3, "title": "탄핵은 <em>소추와 판단의 담당 기관</em>이 다르다", "left": {"title": "미국", "icon": "solar:buildings-2-bold", "items": ["하원: 탄핵소추", "상원: 탄핵 심판", "유죄 판단은 출석 상원의원 3분의 2 필요"]}, "right": {"title": "대한민국", "icon": "solar:scale-bold", "items": ["국회: 탄핵소추", "헌법재판소: 탄핵 심판", "국회가 소추했다는 이유만으로 파면이 확정되지는 않음"]}, "note": "<a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a> · <a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a>"}, {"layout": "compare", "chapter": 3, "title": "의회 수만으로 <em>처리 속도를 설명할 수 없다</em>", "left": {"title": "미국의 추가 변수", "icon": "solar:buildings-2-bold", "items": ["양원 사이의 다수당과 정책 입장이 다를 수 있음", "상원 일반 입법의 토론종결은 통상 3/5 필요", "토론종결과 법안 최종 가결은 서로 다른 표결"]}, "right": {"title": "한국의 추가 변수", "icon": "solar:scale-bold", "items": ["대통령 재의요구와 국회 재의결 절차", "위원회 심사와 다수·소수 정당의 협상", "한 의회여도 정당 대립이 크면 처리가 지연될 수 있음"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.senate.gov/about/powers-procedures/filibusters-cloture.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 필리버스터와 토론종결</a> · <a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a>"}, {"layout": "compare", "chapter": 4, "title": "상원의 장단점: <em>지속성과 대표성의 긴장</em>", "left": {"title": "장점 · 기대 효과", "icon": "solar:buildings-2-bold", "items": ["장기 임기로 단기 여론에 덜 흔들릴 여지", "작은 주의 이해를 보호하는 제도적 통로", "하원 법안을 다시 심사해 성급한 결정을 보완"]}, "right": {"title": "단점 · 발생 위험", "icon": "solar:scale-bold", "items": ["인구가 작은 주 주민의 상대적 영향력이 커짐", "선거를 통한 책임 추궁 주기가 길어짐", "합의 실패 시 정책 대응이 지연될 수 있음"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.senate.gov/senators/qualifications_termsofservice.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 구성과 임기</a> · <a href=\"https://www.senate.gov/civics/constitution_item/constitution.htm\" target=\"_blank\" rel=\"noopener\">미국 헌법 제1·2조 및 수정헌법 제17조</a>"}, {"layout": "compare", "chapter": 4, "title": "하원의 장단점: <em>반응성과 단기성의 긴장</em>", "left": {"title": "장점 · 기대 효과", "icon": "solar:buildings-2-bold", "items": ["잦은 선거로 유권자의 평가를 빠르게 반영", "지역구 주민과 의원의 연결이 명확", "다수 의석 확보와 정책 추진 책임을 연결"]}, "right": {"title": "단점 · 발생 위험", "icon": "solar:scale-bold", "items": ["상시 선거 준비가 장기 과제보다 앞설 위험", "선거구 획정 방식에 따라 대표성 왜곡 가능", "지역구 중심 경쟁은 소수 정당의 진입을 어렵게 할 수 있음"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.house.gov/the-house-explained\" target=\"_blank\" rel=\"noopener\">미국 하원 · The House Explained</a>"}, {"layout": "compare", "chapter": 4, "title": "한국 단원제의 장단점: <em>간결성과 재심사의 긴장</em>", "left": {"title": "장점 · 기대 효과", "icon": "solar:buildings-2-bold", "items": ["두 의회 간 문안 조정이 없어 절차가 비교적 간결", "입법 결정의 책임 소재를 파악하기 쉬움", "비례대표를 통해 지역구 선거의 한계를 보완할 여지"]}, "right": {"title": "단점 · 발생 위험", "icon": "solar:scale-bold", "items": ["별도 제2원의 독립적 재심사 장치가 없음", "다수당이 의사일정을 주도하면 견제 부담이 커짐", "지역 대표의 균형은 선거구·정당 운영에 크게 의존"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a> · <a href=\"https://img.nec.go.kr/common/board/Download.do?bcIdx=236532&cbIdx=1132&streFileNm=cdr_f4cb6cc2-8449-4208-8364-f45815549b76.pdf\" target=\"_blank\" rel=\"noopener\">중앙선관위 · 제22대 국회의원선거 외부평가</a>"}, {"layout": "compare", "chapter": 4, "title": "장단점은 <em>정치 운영 조건</em>에 따라 달라진다", "left": {"title": "제도만으로 보장되지 않는 것", "icon": "solar:buildings-2-bold", "items": ["양원제가 언제나 숙의를 높이는 것은 아님", "단원제가 언제나 신속한 것도 아님", "비례대표가 있다는 이유만으로 다양성이 충분해지지는 않음"]}, "right": {"title": "함께 평가할 조건", "icon": "solar:scale-bold", "items": ["정당 간 양극화와 협상 관행", "위원회 전문성·정보 공개·공청회", "선거제도와 공천, 의원의 책임성과 시민 참여"]}, "note": "제도 비교에 따른 분석 · <a href=\"https://www.house.gov/the-house-explained\" target=\"_blank\" rel=\"noopener\">미국 하원 · The House Explained</a> · <a href=\"https://www.senate.gov/about/powers-procedures/filibusters-cloture.htm\" target=\"_blank\" rel=\"noopener\">미국 상원 · 필리버스터와 토론종결</a> · <a href=\"https://www.law.go.kr/법령/대한민국헌법\" target=\"_blank\" rel=\"noopener\">대한민국헌법 · 제40~65조</a>"}, {"layout": "closing", "chapter": 5, "title": "어느 제도가 우월한가보다<br><em>무엇을 균형 있게 달성하는가</em>", "sub": "미국은 두 대표 원리와 재심사를 결합하고,<br>한국은 한 의회 안에서 대표성과 책임성을 구현한다.", "chips": ["대표성", "숙의와 견제", "결정의 효율", "책임성"]}, {"layout": "sources", "chapter": 5, "title": "공식자료와 <em>분석 범위</em>", "items": [["미국 헌법 제1·2조 및 수정헌법 제17조", "https://www.senate.gov/civics/constitution_item/constitution.htm"], ["미국 하원 · The House Explained", "https://www.house.gov/the-house-explained"], ["미국 상원 · 구성과 임기", "https://www.senate.gov/senators/qualifications_termsofservice.htm"], ["미국 정부 · 의회 선거", "https://www.usa.gov/midterm-elections"], ["미국 상원 · 조약 동의권", "https://www.senate.gov/about/powers-procedures/treaties.htm"], ["미국 상원 · 필리버스터와 토론종결", "https://www.senate.gov/about/powers-procedures/filibusters-cloture.htm"], ["대한민국헌법 · 제40~65조", "https://www.law.go.kr/법령/대한민국헌법"], ["중앙선관위 · 제22대 국회의원선거 외부평가", "https://img.nec.go.kr/common/board/Download.do?bcIdx=236532&cbIdx=1132&streFileNm=cdr_f4cb6cc2-8449-4208-8364-f45815549b76.pdf"], ["법제처 · 입법과정안내", "https://moleg.go.kr/menu.es?mid=a10105020000"]], "note": "기준일 2026.11.04. · 제도상 정원 기준이며 재적 현원과 다를 수 있습니다.<br>장단점은 제도 설계에 따른 분석이며 특정 정당·정치인에 대한 평가가 아닙니다."}]};
+const $ = id => document.getElementById(id);
+const S = DECK.slides;
+let cur = 0, step = 0, maxStep = 0, bgFlip = false;
+
+// 레이아웃별 렌더러. n(k)은 등장 순서 k를 붙이는 헬퍼
+const head = (s, n) =>
+  (s.eyebrow ? `<div class="eyebrow" ${n(0)}>${s.eyebrow}</div>` : '') +
+  (s.title ? `<h1 class="title" ${n(0)}>${s.title}</h1>` : '');
+const note = (s, n, k) => s.note ? `<div class="note" ${n(k)}>${s.note}</div>` : '';
+const LAYOUTS = {
+  cover: (s, n) => `<div class="cover">
+      ${s.eyebrow ? `<div class="chip" ${n(0)}>${s.eyebrow}</div>` : ''}
+      <h1 class="title" ${n(1)}>${s.title}</h1>
+      ${s.sub ? `<p class="sub" ${n(2)}>${s.sub}</p>` : ''}
+      ${s.meta ? `<div class="meta" ${n(3)}>${s.meta}</div>` : ''}</div>`,
+  bullets: (s, n) => head(s, n) + `<div class="bullets">${s.items.map((it, i) =>
+      `<div class="bullet${it.em ? ' em' : ''}" ${n(i + 1)}><span class="ico"><iconify-icon icon="${it.icon}"></iconify-icon></span>${it.text}</div>`).join('')}</div>` + note(s, n, s.items.length + 1),
+  stats: (s, n) => head(s, n) + `<div class="stats">${s.items.map((it, i) =>
+      `<div class="stat" ${n(i + 1)}><div class="v">${it.value}<small>${it.unit || ''}</small></div><div class="l">${it.label}</div></div>`).join('')}</div>` + note(s, n, s.items.length + 1),
+  flow: (s, n) => head(s, n) + `<div class="flow">${s.steps.map((it, i) =>
+      (i ? `<div class="arrow" ${n(i * 2)}></div>` : '') +
+      `<div class="step" ${n(i * 2 + 1)}><div class="dia"><span>${String(i + 1).padStart(2, '0')}</span></div><div class="lb">${it.label}</div>${it.desc ? `<div class="ds">${it.desc}</div>` : ''}</div>`).join('')}</div>` + note(s, n, s.steps.length * 2),
+  compare: (s, n) => head(s, n) + `<div class="compare">${[s.left, s.right].map((p, i) =>
+      `<div class="panel${i ? ' hi' : ''}" ${n(i + 1)}><h3><iconify-icon icon="${p.icon}"></iconify-icon>${p.title}</h3><ul>${p.items.map(t => `<li>${t}</li>`).join('')}</ul></div>`).join('')}</div>` + note(s, n, 3),
+  quote: (s, n) => (s.eyebrow ? `<div class="eyebrow" ${n(0)}>${s.eyebrow}</div>` : '') +
+      `<blockquote class="quote" ${n(1)}>${s.quote}</blockquote>${s.by ? `<div class="by" ${n(2)}>${s.by}</div>` : ''}`,
+  timeline: (s, n) => head(s, n) + `<div class="timeline">${s.items.map((it, i) =>
+      `<div class="tl-item${it.em ? ' em' : ''}" ${n(i + 1)}><div class="dot"></div><div class="t">${it.time}</div><div class="lb">${it.label}</div>${it.desc ? `<div class="ds">${it.desc}</div>` : ''}</div>`).join('')}</div>` + note(s, n, s.items.length + 1),
+  closing: (s, n) => `<div class="closing">${head(s, n)}
+      ${s.sub ? `<p class="sub" ${n(1)}>${s.sub}</p>` : ''}
+      ${s.chips ? `<div class="chips" ${n(2)}>${s.chips.map(c => `<span>${c}</span>`).join('')}</div>` : ''}</div>`
+};
+
+
+LAYOUTS.table=(s,n)=>head(s,n)+`<table class="comparison-table" ${n(1)}><thead><tr>${s.headers.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${s.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')}</tbody></table>`+note(s,n,2);
+LAYOUTS.sources=(s,n)=>head(s,n)+`<div class="source-list" ${n(1)}>${s.items.map(([label,url],i)=>`<a href="${url}" target="_blank" rel="noopener"><b>${String(i+1).padStart(2,'0')}</b>${label}</a>`).join('')}</div>`+note(s,n,2);
+
+const bgUrl = id => /^(https?:|data:|\.|\/)/.test(id) ? id : `https://images.unsplash.com/${id}?w=2560&q=88&auto=format&fit=crop`;
+// 사진이 실패해도 그라디언트가 남도록 항상 두 겹으로 지정
+const fallback = `radial-gradient(ellipse 60% 50% at 30% 30%,rgba(var(--ac-rgb),.5),transparent 70%),radial-gradient(ellipse 50% 60% at 75% 70%,rgba(110,80,255,.35),transparent 70%),linear-gradient(160deg,#0c1426,#05070c)`;
+
+function setBg(s) {
+  const show = bgFlip ? $('bgB') : $('bgA'), hide = bgFlip ? $('bgA') : $('bgB');
+  bgFlip = !bgFlip;
+  show.style.backgroundImage = (s.bg ? `url("${bgUrl(s.bg)}"),` : '') + fallback;
+  show.style.backgroundPosition = s.focus || 'center';
+  show.classList.remove('show'); void show.offsetWidth; show.classList.add('show');
+  hide.classList.remove('show');
+  $('credit').textContent = '';
+  if (s.bg && s.photo) {   // 사진이 실제로 뜰 때만 크레딧 표시
+    const img = new Image();
+    img.onload = () => { if (S[cur] === s) $('credit').textContent = `Photo · ${s.photo} / Unsplash`; };
+    img.src = bgUrl(s.bg);
+  }
+}
+
+function renderTopbar() {
+  const s = S[cur], ch = s.chapter ?? 0;
+  const inCh = S.map((x, i) => [x, i]).filter(([x]) => (x.chapter ?? 0) === ch);
+  const pos = inCh.findIndex(([, i]) => i === cur) + 1;
+  $('topbar').innerHTML = `<div class="brand"><iconify-icon icon="${DECK.brand.icon}"></iconify-icon>${DECK.brand.name}</div>` +
+    DECK.chapters.map((c, i) => `<div role="button" tabindex="0" data-chapter="${i}" class="tab${i === ch ? ' on' : i < ch ? ' done' : ''}"><b>${String(i + 1).padStart(2, '0')}</b>${c}<span class="gauge"><i></i></span></div>`).join('');
+  const g = $('topbar').querySelector('.tab.on .gauge i');
+  if (g) requestAnimationFrame(() => requestAnimationFrame(() => g.style.width = (pos / inCh.length * 100) + '%'));
+}
+
+function go(i, full) {
+  cur = Math.max(0, Math.min(S.length - 1, i));
+  const s = S[cur];
+  $('slide').innerHTML = LAYOUTS[s.layout](s, k => `data-s="${k}"`);
+  setBg(s); renderTopbar();
+  $('counter').textContent = `${cur + 1} / ${S.length}`;
+  try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) { }
+  const els = [...$('slide').querySelectorAll('[data-s]')];
+  maxStep = Math.max(0, ...els.map(e => +e.dataset.s));
+  const mode = s.reveal || DECK.reveal;
+  step = (full || mode === 'auto') ? maxStep : 0;
+  els.forEach(e => e.style.setProperty('--d', mode === 'auto' && !full ? (0.15 + e.dataset.s * 0.32) + 's' : '0s'));
+  requestAnimationFrame(() => requestAnimationFrame(showSteps));
+  [S[cur + 1], S[cur - 1]].forEach(n => { if (n && n.bg) new Image().src = bgUrl(n.bg); });
+}
+function showSteps() { $('slide').querySelectorAll('[data-s]').forEach(e => e.classList.toggle('on', +e.dataset.s <= step)); }
+function next() { if (step < maxStep) { step++; showSteps(); } else if (cur < S.length - 1) go(cur + 1); }
+function prev() { if (cur > 0) go(cur - 1, true); }
+
+// 1920x1080 고정 비율 스케일
+function scale() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  $('stage').style.transform = `translate(${(innerWidth - 1920 * k) / 2}px,${(innerHeight - 1080 * k) / 2}px) scale(${k})`;
+}
+
+// 퀵 점프: 숫자 연속 입력 + Enter / G 키 모달 / 카운터 클릭
+let buf = '', bufT;
+function jumpTo(v) { const n = parseInt(v, 10); if (n >= 1 && n <= S.length) go(n - 1, true); }
+function openModal() { $('jump-modal').classList.add('open'); const inp = $('jump-input'); inp.max = S.length; inp.value = ''; inp.focus(); }
+function closeModal() { $('jump-modal').classList.remove('open'); }
+$('jump-modal').querySelector('form').addEventListener('submit', e => { e.preventDefault(); jumpTo($('jump-input').value); closeModal(); });
+$('jump-modal').addEventListener('click', e => { if (e.target.id === 'jump-modal') closeModal(); });
+$('counter').addEventListener('click', openModal);
+$('prev').addEventListener('click', e => { e.stopPropagation(); prev(); });
+$('next').addEventListener('click', e => { e.stopPropagation(); next(); });
+
+window.addEventListener('keydown', e => {
+  if ($('jump-modal').classList.contains('open')) { if (e.key === 'Escape') closeModal(); return; }
+  if (/^[0-9]$/.test(e.key)) {
+    buf += e.key; $('jump-num').textContent = buf; $('jump-toast').style.display = 'block';
+    clearTimeout(bufT); bufT = setTimeout(() => { jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; }, 1200);
+    return;
+  }
+  if (e.key === 'Enter' && buf) { clearTimeout(bufT); jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; return; }
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+  else if (e.key === 'Home') go(0);
+  else if (e.key === 'End') go(S.length - 1, true);
+  else if (e.key === 'g' || e.key === 'G') { e.preventDefault(); openModal(); }
+  else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.(); }
+});
+$('topbar').addEventListener('click',e=>{const t=e.target.closest('[data-chapter]');if(t){e.stopPropagation();go(S.findIndex(s=>s.chapter===Number(t.dataset.chapter)),true)}});
+$('topbar').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}});
+$('stage').addEventListener('click', e => { if (!e.target.closest('#nav,#jump-modal,#topbar,a')) next(); });
+let tx0 = null;
+addEventListener('touchstart', e => tx0 = e.touches[0].clientX, { passive: true });
+addEventListener('touchend', e => { if (tx0 === null) return; const dx = e.changedTouches[0].clientX - tx0; if (Math.abs(dx) > 50) dx < 0 ? next() : prev(); tx0 = null; });
+
+const hex = DECK.accent.replace('#', '');
+document.documentElement.style.setProperty('--ac', DECK.accent);
+document.documentElement.style.setProperty('--ac-rgb', [0, 2, 4].map(i => parseInt(hex.substr(i, 2), 16)).join(','));
+addEventListener('resize', scale); scale();
+go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>

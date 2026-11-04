@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>재난안전 연구개발의 실용화의 한계 | Strategy Brief</title>
+  <meta name="description" content="McKinsey & Company Energy and Materials Practice 플래그십 리포트 분석: 자본지출의 새로운 현실과 글로벌 광물 공급망 재편">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23051c2c'/%3E%3Ctext x='16' y='22' fill='%230070ad' font-family='Georgia,serif' font-weight='bold' font-size='18' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+
+  <!-- McKinsey Typography: Playfair Display / Cormorant Garamond for Editorial Serif Headlines, Inter for Data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Pretendard: Modern Korean Sans-Serif -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <style>
+    /* ==========================================================================
+       MCKINSEY & COMPANY DESIGN SYSTEM TOKENS
+       ========================================================================== */
+    :root {
+      /* Signature McKinsey Palette */
+      --mck-navy-deep: #051c2c;     /* Midnight Navy (Cover / Dark cards) */
+      --mck-navy-mid: #0a2540;      /* McKinsey Classic Blue-Black */
+      --mck-navy-subtle: #113355;   /* Surface Navy */
+      --mck-blue: #0070ad;          /* Iconic McKinsey Electric Blue */
+      --mck-blue-hover: #005a8c;
+      --mck-blue-light: #e6f3fa;    /* Highlighting tint */
+      --mck-cyan: #00a3e0;          /* Secondary Accent Cyan */
+      --mck-teal: #00c7b7;          /* EBITDA / Clean Tech Accent */
+      --mck-gold: #c69214;          /* Gold Rally Accent */
+      --mck-purple: #7c3aed;        /* Plastics & Secondary Category */
+
+      /* Neutral Grayscale */
+      --bg-canvas: #f7f9fb;         /* Pristine Report Background */
+      --bg-surface: #ffffff;        /* Pure White Card */
+      --border-card: #dce3eb;       /* Crisp Border */
+      --border-subtle: #e8eef3;     /* Hairline Divider */
+
+      /* Typography Tokens */
+      --text-main: #111827;         /* Deep Charcoal Ink */
+      --text-muted: #4b5563;        /* Secondary Slate */
+      --text-subtle: #6b7280;       /* Footnote & Meta */
+      --text-inverse: #ffffff;      /* Contrast White */
+
+      /* Font Families */
+      --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-num: "Inter", "Pretendard", sans-serif;
+
+      --ease-mck: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--mck-navy-deep);
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    /* 1920x1080 Viewport Scaler */
+    #viewport {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020b12;
+    }
+
+    #stage {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      background: var(--bg-canvas);
+      overflow: hidden;
+      transform-origin: center center;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ==========================================================================
+       TOP MCKINSEY HEADER & PROGRESS BAR
+       ========================================================================== */
+    .mck-topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      z-index: 100;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .mck-topbar.dark-mode {
+      background: rgba(5, 28, 44, 0.94);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Top Reading Progress Bar */
+    .reading-progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+    }
+
+    .reading-progress-bar {
+      height: 100%;
+      width: 10%;
+      background: var(--mck-blue);
+      transition: width 0.4s var(--ease-mck);
+    }
+
+    .mck-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .mck-logo-text {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--mck-navy-deep);
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+
+    .mck-topbar.dark-mode .mck-logo-text { color: #ffffff; }
+
+    .mck-practice-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      background: var(--mck-blue-light);
+      color: var(--mck-blue);
+      border-radius: 2px;
+    }
+
+    .mck-topbar.dark-mode .mck-practice-tag {
+      background: rgba(0, 112, 173, 0.25);
+      color: var(--mck-cyan);
+    }
+
+    /* Chapter Tabs */
+    .mck-chapters {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .mck-tab {
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      padding: 8px 4px;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .mck-topbar.dark-mode .mck-tab { color: rgba(255, 255, 255, 0.65); }
+
+    .mck-tab .tab-num {
+      font-family: var(--font-num);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mck-blue);
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    .mck-tab:hover { color: var(--mck-blue); }
+    .mck-topbar.dark-mode .mck-tab:hover { color: #ffffff; }
+
+    .mck-tab.active {
+      color: var(--mck-navy-deep);
+      font-weight: 700;
+    }
+
+    .mck-topbar.dark-mode .mck-tab.active { color: #ffffff; }
+
+    .mck-tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--mck-blue);
+      border-radius: 2px 2px 0 0;
+    }
+
+    /* Header Tools */
+    .mck-tools {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+    }
+
+    .tool-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mck-navy-deep);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .tool-btn.summarize {
+      background: var(--mck-blue-light);
+      border-color: rgba(0, 112, 173, 0.3);
+      color: var(--mck-blue);
+    }
+
+    .mck-topbar.dark-mode .tool-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .tool-btn:hover {
+      background: var(--mck-blue);
+      color: #ffffff;
+      border-color: var(--mck-blue);
+    }
+
+    /* ==========================================================================
+       SLIDE DECK CONTAINER
+       ========================================================================== */
+    .deck {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      bottom: 56px;
+      width: 1920px;
+      height: 952px;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px 56px 32px 56px;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.4s var(--ease-mck), transform 0.4s var(--ease-mck);
+      transform: translateY(12px);
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-canvas);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+      transform: translateY(0);
+      z-index: 2;
+    }
+
+    .slide.dark-theme {
+      background: var(--mck-navy-deep);
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       TITLE COVER WITH MCKINSEY PRISM VIDEO HERO (SLIDE 1)
+       ========================================================================== */
+    .slide-cover-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020e18;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+      padding: 80px 80px 64px 80px;
+    }
+
+    .video-hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.82;
+      z-index: 1;
+      filter: saturate(1.25) contrast(1.1);
+      transition: opacity 0.5s ease;
+    }
+
+    /* McKinsey Polygonal Prism Geometric Overlay */
+    .prism-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background: 
+        linear-gradient(135deg, rgba(5, 28, 44, 0.65) 0%, rgba(5, 28, 44, 0.35) 45%, rgba(0, 34, 68, 0.5) 100%),
+        linear-gradient(to top, rgba(5, 28, 44, 0.95) 0%, rgba(5, 28, 44, 0.3) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .prism-shard-left {
+      position: absolute;
+      top: -10%;
+      left: -5%;
+      width: 55%;
+      height: 120%;
+      background: linear-gradient(135deg, rgba(0, 112, 173, 0.22), rgba(5, 28, 44, 0.45));
+      clip-path: polygon(0 0, 75% 0, 40% 100%, 0 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .prism-shard-right {
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 50%;
+      height: 120%;
+      background: linear-gradient(225deg, rgba(0, 163, 224, 0.18), rgba(5, 28, 44, 0.5));
+      clip-path: polygon(60% 0, 100% 0, 100% 100%, 25% 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cover-title {
+      font-family: var(--font-serif);
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+    }
+
+    .cover-report-sub {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 32px;
+    }
+
+    .cover-desc-pill {
+      background: rgba(5, 28, 44, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 16px 36px;
+      border-radius: 40px;
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: #ffffff;
+      max-width: 1000px;
+      margin-bottom: 40px;
+    }
+
+    .scroll-arrow-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      animation: floatArrow 2s infinite ease-in-out;
+    }
+
+    @keyframes floatArrow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Video Control Widget on Cover */
+    .video-control-floater {
+      position: absolute;
+      bottom: 48px;
+      right: 56px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(5, 28, 44, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .video-pill-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ==========================================================================
+       MCKINSEY 2-COLUMN EDITORIAL & EXHIBIT LAYOUT (ACTUAL WEB STYLE)
+       ========================================================================== */
+    .editorial-layout {
+      display: grid;
+      grid-template-columns: 480px 1fr;
+      gap: 48px;
+      height: 100%;
+    }
+
+    /* Left Editorial Column */
+    .col-story {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-right: 32px;
+      border-right: 1px solid var(--border-subtle);
+    }
+
+    .pull-statement {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      line-height: 1.32;
+      font-weight: 700;
+      color: var(--mck-navy-deep);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .slide.dark-theme .pull-statement {
+      color: #ffffff;
+    }
+
+    .pull-statement em {
+      font-style: italic;
+      color: var(--mck-blue);
+    }
+
+    .story-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .slide.dark-theme .story-body {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .story-body p {
+      margin-bottom: 16px;
+    }
+
+    .drop-cap {
+      float: left;
+      font-family: var(--font-serif);
+      font-size: 56px;
+      line-height: 0.85;
+      padding-top: 4px;
+      padding-right: 10px;
+      font-weight: 700;
+      color: var(--mck-navy-deep);
+    }
+
+    .slide.dark-theme .drop-cap {
+      color: var(--mck-cyan);
+    }
+
+    /* Right Exhibit Column */
+    .col-exhibit {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: 4px;
+      padding: 32px 36px;
+      box-shadow: 0 2px 10px rgba(5, 28, 44, 0.04);
+      position: relative;
+    }
+
+    .slide.dark-theme .col-exhibit {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .exhibit-headline {
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.38;
+      color: var(--mck-navy-deep);
+      margin-bottom: 8px;
+    }
+
+    .slide.dark-theme .exhibit-headline {
+      color: #ffffff;
+    }
+
+    .exhibit-unit {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-subtle);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Stacked Bar Visuals */
+    .chart-stage {
+      flex: 1;
+      display: flex;
+      gap: 36px;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .chart-visual-area {
+      flex: 1.4;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 12px;
+      position: relative;
+    }
+
+    .bars-horizon {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 380px;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    .bar-stack-col {
+      width: 72px;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      position: relative;
+    }
+
+    .stack-segment {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-num);
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: height 0.6s var(--ease-mck);
+    }
+
+    .seg-steel { background: var(--mck-navy-deep); }
+    .seg-coal { background: #334155; }
+    .seg-gold { background: var(--mck-gold); }
+    .seg-copper { background: var(--mck-blue); }
+    .seg-aluminum { background: var(--mck-cyan); }
+    .seg-plastics { background: var(--mck-purple); }
+
+    .stack-total-tag {
+      position: absolute;
+      top: -26px;
+      font-family: var(--font-num);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--mck-navy-deep);
+    }
+
+    .slide.dark-theme .stack-total-tag {
+      color: #ffffff;
+    }
+
+    .stack-year-label {
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Legend & CAGR Matrix Area */
+    .chart-legend-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: 24px;
+    }
+
+    .cagr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    .cagr-table th {
+      text-align: right;
+      padding: 8px 6px;
+      color: var(--text-subtle);
+      font-weight: 700;
+      font-size: 11px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .cagr-table th:first-child {
+      text-align: left;
+    }
+
+    .cagr-table td {
+      padding: 10px 6px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--text-main);
+      text-align: right;
+      font-family: var(--font-num);
+      font-weight: 600;
+    }
+
+    .slide.dark-theme .cagr-table td {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .cagr-table td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .leg-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* Footnotes at Exhibit Bottom */
+    .exhibit-footer {
+      margin-top: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-card);
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .exhibit-footer .mck-sig {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--mck-navy-deep);
+    }
+
+    .slide.dark-theme .exhibit-footer .mck-sig {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       BOTTOM FOOTNOTE & NAVIGATION STRIP
+       ========================================================================== */
+    .mck-bottombar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #ffffff;
+      border-top: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      z-index: 100;
+    }
+
+    .mck-bottombar.dark-mode {
+      background: var(--mck-navy-deep);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .bottom-source {
+      font-size: 12px;
+      color: var(--text-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mck-bottombar.dark-mode .bottom-source { color: rgba(255, 255, 255, 0.55); }
+
+    .bottom-source strong {
+      font-weight: 600;
+      color: var(--mck-navy-deep);
+    }
+
+    .mck-bottombar.dark-mode .bottom-source strong { color: #ffffff; }
+
+    .bottom-takeaway {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--mck-blue);
+      background: var(--mck-blue-light);
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .mck-bottombar.dark-mode .bottom-takeaway {
+      background: rgba(0, 112, 173, 0.25);
+      color: var(--mck-cyan);
+    }
+
+    .bottom-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .page-indicator {
+      font-family: var(--font-num);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--mck-navy-deep);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .mck-bottombar.dark-mode .page-indicator { color: #ffffff; }
+
+    .nav-arrow-btn {
+      background: none;
+      border: 1px solid var(--border-card);
+      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--mck-navy-deep);
+      transition: all 0.2s ease;
+    }
+
+    .mck-bottombar.dark-mode .nav-arrow-btn {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .nav-arrow-btn:hover {
+      background: var(--mck-blue);
+      color: #ffffff;
+      border-color: var(--mck-blue);
+    }
+
+    /* Jump Modal */
+    .jump-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 28, 44, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .jump-modal.open { display: flex; }
+
+    .jump-card {
+      background: #ffffff;
+      border-radius: 8px;
+      width: 720px;
+      padding: 36px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .jump-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+
+    .jump-item {
+      padding: 12px 16px;
+      border: 1px solid var(--border-card);
+      border-radius: 4px;
+      background: var(--bg-canvas);
+      cursor: pointer;
+      text-align: left;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .jump-item:hover {
+      background: var(--mck-blue);
+      color: #ffffff;
+      border-color: var(--mck-blue);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="viewport">
+    <div id="stage">
+
+      <!-- ======================================================================
+           TOP MCKINSEY HEADER & CHAPTER TABS
+           ====================================================================== -->
+      <header class="mck-topbar" id="mckTopbar">
+        <div class="reading-progress-track">
+          <div class="reading-progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="mck-brand" onclick="goToSlide(1)">
+          <div class="mck-logo-text">
+            McKinsey<span>&</span>Company
+          </div>
+          <span class="mck-practice-tag">Energy & Materials</span>
+        </div>
+
+        <nav class="mck-chapters" id="mckChapters">
+          <!-- Rendered via JS -->
+        </nav>
+
+        <div class="mck-tools">
+          <button class="tool-btn summarize" onclick="openJumpModal()" title="요약 및 목차">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Summarize
+          </button>
+          <button class="tool-btn" id="videoToggleBtn" onclick="toggleHeroVideo()" title="헤더 비디오 제어">
+            <span id="videoStatusIcon">⏸</span> 비디오
+          </button>
+          <button class="tool-btn" onclick="toggleFullscreen()" title="전체화면 (F)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           SLIDE DECK AREA (10 SLIDES)
+           ====================================================================== -->
+      <main class="deck" id="deckContainer">
+
+        <!-- ==================================================================
+             SLIDE 1: MCKINSEY PRISM VIDEO HERO (실제 맥킨지 리포트 비주얼 완벽 재현)
+             ================================================================== -->
+        <section class="slide slide-cover-video active dark-theme" data-chapter="0" data-theme="dark">
+          <!-- Canvas Wave Fallback -->
+          <canvas id="ambientCanvas" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
+
+          <!-- HTML5 Video Hero Loop (로컬 고화질 비디오 및 오픈 CDN 백업) -->
+          <video id="heroVideo" class="video-hero-bg" autoplay muted loop playsinline preload="auto">
+            <source src="mckinsey_hero_loop.mp4" type="video/mp4">
+            <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+          </video>
+
+          <!-- McKinsey Polygonal Prism Geometric Overlay -->
+          <div class="prism-overlay"></div>
+          <div class="prism-shard-left"></div>
+          <div class="prism-shard-right"></div>
+
+          <!-- Cover Content -->
+          <div class="cover-content">
+            <h1 class="cover-title">
+              Global Materials Perspective 2026
+            </h1>
+
+            <div class="cover-report-sub">
+              October 13, 2026 | Report · Global Energy & Materials Practice
+            </div>
+
+            <div class="cover-desc-pill">
+              <strong>"2025년 원자재 업계는 사상 최고 수익을 달성했으나, 생산성 정체와 포트폴리오 양극화가 시작되었습니다."</strong><br>
+              철강·석탄의 49% 축소, 금(Gold)의 +46% 랠리, $4.2조 달러의 CapEx 소요, 그리고 AI 인프라가 촉발한 구리 공급망 병목 심층 분석.
+            </div>
+
+            <div class="scroll-arrow-indicator" onclick="nextSlide()">
+              <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Explore Report</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+
+          <!-- Video Play/Pause Widget -->
+          <div class="video-control-floater">
+            <button class="video-pill-btn" onclick="toggleHeroVideo()">
+              <span id="videoStatusIconFloater">⏸</span>
+              <span>McKinsey Hero Loop</span>
+            </button>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 2: EXHIBIT 1 (실제 맥킨지 리포트 Exhibit 1 데이터 구조 완벽 연동)
+             ================================================================== -->
+        <section class="slide" data-chapter="1" data-theme="light">
+          <div class="editorial-layout">
+            <!-- Left Editorial -->
+            <div class="col-story">
+              <h2 class="pull-statement">
+                The materials industry <em>marginally grew in 2025</em> as a decline in construction was offset by pulp, mining, and plastics.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">T</span>가격 변동성과 무역 조건 재편 속에서 2025년 글로벌 원자재 총매출은 전년 대비 약 1% 증가한 <strong>$6.6조 달러(nominal $6.6 trillion)</strong>를 기록했습니다.
+                </p>
+                <p>
+                  글로벌 건설 경기 침체로 건축 자재 수요는 -2.3% 감소했으나, 금속·광업(+1.2%)과 제지(+2.5%)의 견고한 성장이 전체 하락을 방어했습니다.
+                </p>
+                <p>
+                  이로써 2025년은 지난 20년 역사상 네 번째로 높은 수익성을 기록한 해로 확정되었습니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Exhibit 1 Chart Card -->
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 1 · Revenues of the materials industry, nominal $ trillion
+              </div>
+              <div class="exhibit-unit">
+                MineSpans™ Global Sector Aggregation · Historical & EBITDA Margin
+              </div>
+
+              <div class="chart-stage">
+                <!-- Stacked Bars Visual -->
+                <div class="chart-visual-area">
+                  <div class="bars-horizon">
+                    <!-- 2000 -->
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 60px;">1.8T</div>
+                      <span class="stack-total-tag">$1.8T</span>
+                      <span class="stack-year-label">2000</span>
+                    </div>
+                    <!-- 2005 -->
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 95px;">2.8T</div>
+                      <span class="stack-total-tag">$2.8T</span>
+                      <span class="stack-year-label">2005</span>
+                    </div>
+                    <!-- 2010 -->
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 160px;">4.7T</div>
+                      <span class="stack-total-tag">$4.7T</span>
+                      <span class="stack-year-label">2010</span>
+                    </div>
+                    <!-- 2021 Peak -->
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 220px;">6.7T</div>
+                      <span class="stack-total-tag">$6.7T</span>
+                      <span class="stack-year-label">2021</span>
+                    </div>
+                    <!-- 2025 Current -->
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-plastics" style="height: 28px;" title="Plastics"></div>
+                      <div class="stack-segment seg-aluminum" style="height: 38px;" title="Pulp & Paper"></div>
+                      <div class="stack-segment seg-coal" style="height: 52px;" title="Building Materials"></div>
+                      <div class="stack-segment seg-copper" style="height: 102px;" title="Metals & Mining">6.6T</div>
+                      <span class="stack-total-tag" style="color: var(--mck-blue); font-size: 15px;">$6.6T</span>
+                      <span class="stack-year-label" style="color: var(--mck-blue); font-weight: 800;">2025</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Legend & CAGR Matrix -->
+                <div class="chart-legend-area">
+                  <table class="cagr-table">
+                    <thead>
+                      <tr>
+                        <th>Category</th>
+                        <th>2000–25</th>
+                        <th>2024–25</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="font-weight: 800; background: var(--bg-canvas);">
+                        <td><strong>Overall Industry</strong></td>
+                        <td>5.4%</td>
+                        <td style="color: var(--mck-blue);">+0.7%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-purple);"></span> Plastics</td>
+                        <td>5.9%</td>
+                        <td>+1.0%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-cyan);"></span> Pulp & Paper</td>
+                        <td>3.6%</td>
+                        <td>+2.5%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: #334155;"></span> Building Materials</td>
+                        <td>4.4%</td>
+                        <td style="color: #b91c1c;">-2.3%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-navy-deep);"></span> Metals & Mining</td>
+                        <td>6.9%</td>
+                        <td style="color: var(--mck-blue);">+1.2%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div style="margin-top: 20px; padding: 12px; background: var(--mck-blue-light); border-radius: 4px; font-size: 12px; color: var(--mck-navy-deep);">
+                    <strong>EBITDA 건전성:</strong> 원자재 기업들의 가중 EBITDA 마진은 공급망 비용 압박에도 불구하고 22% 수준의 높은 회복력을 유지했습니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: American Chemistry Council; Eurostat; Statista; McKinsey MineSpans™</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 3: EXHIBIT 2 (골드 랠리와 철강·석탄의 49% 축소)
+             ================================================================== -->
+        <section class="slide" data-chapter="1" data-theme="light">
+          <div class="editorial-layout">
+            <!-- Left Editorial -->
+            <div class="col-story">
+              <h2 class="pull-statement">
+                Gold offset declines in steel and thermal coal, <em>leaving 2025 revenues up 1%</em>.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">A</span>철강(철광석·원료탄 포함)과 발전용 석탄은 <strong>2021년 업계 매출의 65%</strong>를 차지하며 정점을 찍었으나, <strong>2025년에는 49%</strong>로 급락했습니다.
+                </p>
+                <p>
+                  중국 건설 부문의 수요 위축으로 철강(-9.5%)과 석탄(-17.6%) 가격이 동반 하락했으나, <strong>금(Gold) 매출이 46.2% 폭등</strong>하며 산업 전체의 매출을 상쇄했습니다.
+                </p>
+                <p>
+                  구리(+12.3%)와 알루미늄(+8.3%) 역시 전력망과 친환경 인프라 수요에 힘입어 견고한 상승세를 기록했습니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Exhibit 2 Card -->
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 2 · Metals and mining revenue, nominal $ trillion
+              </div>
+              <div class="exhibit-unit">
+                MineSpans™ Commodity Portfolio Breakdown · 2015 vs 2021 vs 2025
+              </div>
+
+              <div class="chart-stage">
+                <!-- Stacked Bars Visual -->
+                <div class="chart-visual-area">
+                  <div class="bars-horizon">
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 120px;">1.6T</div>
+                      <span class="stack-total-tag">$1.6T</span>
+                      <span class="stack-year-label">2015</span>
+                    </div>
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 155px;">2.2T</div>
+                      <span class="stack-total-tag">$2.2T</span>
+                      <span class="stack-year-label">2019</span>
+                    </div>
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-steel" style="height: 250px;">3.6T</div>
+                      <span class="stack-total-tag">$3.6T</span>
+                      <span class="stack-year-label">2021 (Peak)</span>
+                    </div>
+                    <div class="bar-stack-col">
+                      <div class="stack-segment seg-gold" style="height: 65px;" title="Gold +46.2%"></div>
+                      <div class="stack-segment seg-copper" style="height: 55px;" title="Copper +12.3%"></div>
+                      <div class="stack-segment seg-aluminum" style="height: 40px;" title="Aluminum +8.3%"></div>
+                      <div class="stack-segment seg-steel" style="height: 80px;" title="Steel 49%">3.1T</div>
+                      <span class="stack-total-tag" style="color: var(--mck-blue); font-size: 15px;">$3.1T</span>
+                      <span class="stack-year-label" style="color: var(--mck-blue); font-weight: 800;">2025</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Legend & CAGR Matrix -->
+                <div class="chart-legend-area">
+                  <table class="cagr-table">
+                    <thead>
+                      <tr>
+                        <th>Commodity</th>
+                        <th>2015–25</th>
+                        <th>2024–25</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style="background: #fef9c3;">
+                        <td><span class="leg-dot" style="background: var(--mck-gold);"></span> <strong>Gold</strong></td>
+                        <td>13.1%</td>
+                        <td style="color: #b45309; font-weight: 800;">+46.2%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-blue);"></span> Copper</td>
+                        <td>8.8%</td>
+                        <td style="color: var(--mck-blue);">+12.3%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-cyan);"></span> Aluminum</td>
+                        <td>6.2%</td>
+                        <td>+8.3%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: #334155;"></span> Thermal Coal</td>
+                        <td>4.0%</td>
+                        <td style="color: #b91c1c;">-17.6%</td>
+                      </tr>
+                      <tr>
+                        <td><span class="leg-dot" style="background: var(--mck-navy-deep);"></span> Steel Value Chain</td>
+                        <td>5.1%</td>
+                        <td style="color: #b91c1c;">-9.5%</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div style="margin-top: 18px; padding: 12px; background: var(--bg-canvas); border-left: 3px solid var(--mck-gold); font-size: 12px;">
+                    <strong>골드 효과의 함정:</strong> 금 가격 폭등이 가려놓은 이면에는 전통 철강·건설용 원자재의 구조적 마진 침식이 도사리고 있습니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: MineSpans™ Metal Market Model; S&P Global; LME; COMEX</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 4: EXHIBIT 3 (지역별 무역 관세와 철강·알루미늄 가격 격차)
+             ================================================================== -->
+        <section class="slide" data-chapter="2" data-theme="light">
+          <div class="editorial-layout">
+            <!-- Left Editorial -->
+            <div class="col-story">
+              <h2 class="pull-statement">
+                Tariffs have contributed to regional price differences; <em>China's over-capacity keeps steel prices structurally low</em>.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">S</span>철강 가격은 지역별로 완전히 갈라졌습니다. 중국의 과잉 공급 능력이 내수 및 아시아 철강 가격을 구조적 저점에 묶어두는 반면, 유럽과 미국의 무역 관세는 서방 내수 프리미엄을 유지하고 있습니다.
+                </p>
+                <p>
+                  알루미늄의 경우 2024년까지 단일 글로벌 가격을 유지했으나, 2025년 6월 <strong>미국의 Section 232 50% 관세 인상</strong>으로 미국 내 가격이 톤당 <strong>$6,200 달러</strong>를 돌파하며 사상 초유의 '미국 전용 프리미엄'을 형성했습니다.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Exhibit 3 Card -->
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 3 · Commodity historical price differences in Europe, the US, and China
+              </div>
+              <div class="exhibit-unit">
+                $ per metric ton · Regional divergence and policy tariffs impact
+              </div>
+
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 18px; justify-content: center;">
+                <!-- Steel Row -->
+                <div style="padding: 14px; background: var(--bg-canvas); border-radius: 4px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>열연강판 (Hot-rolled coil) 스프레드</span>
+                    <span style="color: var(--mck-blue);">미국 $1,150/t vs 중국 $480/t</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                    미국의 50% 관세 및 유럽 탄소국경조정제도(CBAM)로 인해 중국산 저가 물량의 서방 유입이 차단되며 2배 이상의 가격 격차가 고착화되었습니다.
+                  </div>
+                </div>
+
+                <!-- Aluminum Row -->
+                <div style="padding: 14px; background: var(--mck-blue-light); border-radius: 4px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--mck-navy-deep);">
+                    <span>알루미늄 (Aluminum Difference to Europe)</span>
+                    <span style="color: var(--mck-blue); font-weight: 800;">US-Only Premium 폭등</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--mck-navy-deep); line-height: 1.5;">
+                    2015~2024년 10년간 평행을 달리던 글로벌 알루미늄 가격이 단일 관세 행정명령으로 분열되어, 미국 제조업계의 원가 압박을 가중시키고 있습니다.
+                  </div>
+                </div>
+
+                <!-- Copper Row -->
+                <div style="padding: 14px; background: var(--bg-canvas); border-radius: 4px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>구리 (Copper) 글로벌 통합 단일가 유지</span>
+                    <span style="color: var(--mck-teal); font-weight: 800;">Global AI & Grid Demand</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5;">
+                    반면 구리는 글로벌 AI 데이터센터와 전력망의 절박한 수요로 인해 지역별 가격 분열 없이 전 세계가 동일한 최고가 매입 경쟁을 지속하고 있습니다.
+                  </div>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: Fastmarkets; LME; MEPS; McKinsey Analysis</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 5: $4.2T CAPEX REALITY (2035년 자본지출 소요 분석)
+             ================================================================== -->
+        <section class="slide" data-chapter="2" data-theme="light">
+          <div class="editorial-layout">
+            <div class="col-story">
+              <h2 class="pull-statement">
+                Mining and processing will require <em>$4.2 trillion in capital expenditure</em> through 2035.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">C</span>글로벌 인프라 현대화, 에너지 전환, 인공지능(AI), 그리고 국방 수요를 충족하기 위해 2035년까지 <strong>4조 2천억 달러</strong>의 신규 자본지출이 필요합니다.
+                </p>
+                <p>
+                  그러나 신규 구리 광산의 첫 생산까지 걸리는 인허가 기간이 평균 <strong>16.9년</strong>으로 늘어났으며, 광석 품위(Ore Grades)는 50% 이상 저하되어 공급 지연을 초래하고 있습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 4 · Required Cumulative CapEx by Sub-sector (2026–2035)
+              </div>
+              <div class="exhibit-unit">
+                MineSpans™ Global Project Tracker · Total $4.2 Trillion
+              </div>
+
+              <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-around;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>전력망 및 청정 에너지 금속 (구리·알루미늄)</span>
+                    <span style="font-family: var(--font-num); color: var(--mck-blue);">$1,760B (42%)</span>
+                  </div>
+                  <div style="width: 100%; height: 26px; background: var(--border-subtle); border-radius: 3px; overflow: hidden;">
+                    <div style="width: 42%; height: 100%; background: var(--mck-blue); display: flex; align-items: center; padding-left: 10px; color: #fff; font-size: 12px; font-weight: 700;">42%</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>배터리 모빌리티 광물 (리튬·니켈·흑연·코발트)</span>
+                    <span style="font-family: var(--font-num); color: var(--mck-teal);">$1,300B (31%)</span>
+                  </div>
+                  <div style="width: 100%; height: 26px; background: var(--border-subtle); border-radius: 3px; overflow: hidden;">
+                    <div style="width: 31%; height: 100%; background: var(--mck-teal); display: flex; align-items: center; padding-left: 10px; color: #fff; font-size: 12px; font-weight: 700;">31%</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>수소환원제철 및 친환경 제련 설비 전환</span>
+                    <span style="font-family: var(--font-num);">$720B (17%)</span>
+                  </div>
+                  <div style="width: 100%; height: 26px; background: var(--border-subtle); border-radius: 3px; overflow: hidden;">
+                    <div style="width: 17%; height: 100%; background: var(--mck-navy-mid); display: flex; align-items: center; padding-left: 10px; color: #fff; font-size: 12px; font-weight: 700;">17%</div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+                    <span>기존 광산 수명 연장 및 환경 복원 자산</span>
+                    <span style="font-family: var(--font-num); color: var(--mck-gold);">$420B (10%)</span>
+                  </div>
+                  <div style="width: 100%; height: 26px; background: var(--border-subtle); border-radius: 3px; overflow: hidden;">
+                    <div style="width: 10%; height: 100%; background: var(--mck-gold); display: flex; align-items: center; padding-left: 10px; color: #fff; font-size: 12px; font-weight: 700;">10%</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: McKinsey Capital Projects Practice; MineSpans 2026</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 6: AI DATA CENTER & CRITICAL MINERALS (AI 인프라와 구리 수요 충격)
+             ================================================================== -->
+        <section class="slide" data-chapter="3" data-theme="light">
+          <div class="editorial-layout">
+            <div class="col-story">
+              <h2 class="pull-statement">
+                AI and digital infrastructure are driving <em>an unexpected demand surge for copper</em>.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">A</span>인공지능(AI) 하이퍼스케일 데이터센터의 전력 밀도가 랙당 100kW를 초과하면서, 변압기, 전력선, 액체 냉각 배관에 투입되는 구리 소요량이 기하급수적으로 폭증했습니다.
+                </p>
+                <p>
+                  2030년까지 전 세계 구리 수요의 약 <strong>6~8%</strong>가 AI 및 디지털 인프라에서 순수하게 발생할 것으로 추산되며, 2035년까지 <strong>650만 톤(Mt)의 구조적 공급 적자</strong>가 발생할 위험이 있습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 5 · Copper Intensity in AI Data Centers vs Legacy Infrastructure
+              </div>
+              <div class="exhibit-unit">
+                Metric tons of copper per Megawatt (t / MW) & Supply Deficit Forecast
+              </div>
+
+              <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+                <div style="background: var(--bg-canvas); padding: 24px; border-radius: 6px; text-align: center;">
+                  <div style="font-size: 12px; color: var(--text-subtle);">전통 클라우드 DC</div>
+                  <div style="font-size: 48px; font-weight: 800; font-family: var(--font-num); color: var(--mck-navy-deep); margin: 10px 0;">2.4t</div>
+                  <div style="font-size: 13px; color: var(--text-muted);">MW당 구리 소요량</div>
+                </div>
+
+                <div style="background: var(--mck-blue-light); padding: 24px; border-radius: 6px; text-align: center; border: 2px solid var(--mck-blue);">
+                  <div style="font-size: 12px; color: var(--mck-blue); font-weight: 700;">차세대 AI 하이퍼스케일</div>
+                  <div style="font-size: 48px; font-weight: 800; font-family: var(--font-num); color: var(--mck-blue); margin: 10px 0;">8.9t</div>
+                  <div style="font-size: 13px; font-weight: 700; color: var(--mck-navy-deep);">MW당 소요량 (+3.7배 폭증)</div>
+                </div>
+              </div>
+
+              <div style="margin-top: 20px; padding: 14px; background: var(--bg-canvas); border-left: 3px solid var(--mck-blue); font-size: 12.5px; color: var(--text-muted);">
+                <strong>빅테크의 공급망 내재화:</strong> 구글, 마이크로소프트 등 주요 테크 기업들은 단순 전력망 계약을 넘어, 구리 제련 및 광산 프로젝트에 지분 투자를 단행하고 있습니다.
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: McKinsey High-Tech & Power Practice; MineSpans 2026</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 7: REGIONAL AXIS: CHINA VS INDIA (인도의 제2 대형 시장 도약)
+             ================================================================== -->
+        <section class="slide" data-chapter="3" data-theme="light">
+          <div class="editorial-layout">
+            <div class="col-story">
+              <h2 class="pull-statement">
+                India has emerged as <em>the world's second-largest metals market</em> as China’s share receded.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">I</span>중국의 부동산·건설 중심 금속 수요가 2020년 정점을 통과한 이후, 인도가 대규모 국가 인프라 파이프라인(NIP)에 힘입어 <strong>세계 2위의 금속 소비 시장</strong>으로 완전히 도약했습니다.
+                </p>
+                <p>
+                  인도의 철강 및 알루미늄 소비는 연 8~10% 속도로 고속 팽창하고 있으며, 서방의 공급망 다변화 정책과 맞물려 글로벌 무역 루트의 새로운 중심축이 되었습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 6 · Shift in Global Metal Consumption Share (2015–2030E)
+              </div>
+              <div class="exhibit-unit">
+                Share of global finished metal consumption (%) · China vs India vs Rest of World
+              </div>
+
+              <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px;">
+                <div style="display: flex; gap: 20px;">
+                  <div style="flex: 1; padding: 20px; background: var(--bg-canvas); border-radius: 4px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: var(--text-subtle); font-weight: 700;">China (중국)</div>
+                    <div style="font-size: 28px; font-weight: 800; font-family: var(--font-num); color: var(--mck-navy-deep); margin: 6px 0;">58% → 46%</div>
+                    <div style="font-size: 12.5px; color: var(--text-muted);">부동산 축소로 양적 소비 감소, 단 클린테크 정제 점유율(65%+)은 유지</div>
+                  </div>
+                  <div style="flex: 1; padding: 20px; background: var(--mck-blue-light); border-radius: 4px; border: 1px solid rgba(0, 112, 173, 0.3);">
+                    <div style="font-size: 11px; text-transform: uppercase; color: var(--mck-blue); font-weight: 700;">India (인도)</div>
+                    <div style="font-size: 28px; font-weight: 800; font-family: var(--font-num); color: var(--mck-blue); margin: 6px 0;">8% → 17%</div>
+                    <div style="font-size: 12.5px; color: var(--mck-navy-deep); font-weight: 600;">철도, 도로, 도시화 주도로 2배 이상 점유율 확대 (세계 2위 등극)</div>
+                  </div>
+                </div>
+
+                <div style="padding: 14px; background: var(--bg-canvas); border-radius: 4px; font-size: 12.5px; color: var(--text-muted);">
+                  <strong>공급망 재편 시사점:</strong> 서방 원자재 메이저들은 호주-인도, 남미-인도로 이어지는 신규 수출 회랑(Corridor) 개설에 집중하고 있습니다.
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: World Steel Association; McKinsey MineSpans Regional Insights</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 8: ESG & THE GREEN PREMIUM DILEMMA (탈탄소와 녹색 프리미엄)
+             ================================================================== -->
+        <section class="slide" data-chapter="4" data-theme="light">
+          <div class="editorial-layout">
+            <div class="col-story">
+              <h2 class="pull-statement">
+                Customers demand low-carbon materials, but <em>willingness to pay a 'green premium' remains low</em>.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">D</span>수소환원제철(DRI) 및 무탄소 알루미늄 기술이 실증되었음에도 불구하고, 기존 화석 기반 제품 대비 <strong>+25~35%에 달하는 프리미엄</strong>을 지불하려는 고객사는 소수(자동차 OEM 일부)에 그치고 있습니다.
+                </p>
+                <p>
+                  결국 자발적 프리미엄보다는 <strong>EU CBAM(탄소국경세)</strong>과 같은 규제적 페널티 회피 목적의 전환이 주류를 이루고 있으며, 재활용 스크랩을 활용한 <strong>서큘러 경제</strong>가 가장 경제적인 현실 대안으로 급부상했습니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 7 · Production Cost vs Willingness to Pay for Green Materials
+              </div>
+              <div class="exhibit-unit">
+                Cost index (conventional = 100) and regulatory compliance threshold
+              </div>
+
+              <div style="flex: 1; display: flex; flex-direction: column; justify-content: space-around;">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--bg-canvas); border-radius: 4px;">
+                  <div>
+                    <strong style="color: var(--mck-navy-deep);">수소환원 그린 철강 (DRI-EAF)</strong>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">그린 수소 단가 및 청정 전력 인프라 의존</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="font-family: var(--font-num); font-size: 20px; font-weight: 800; color: #b91c1c;">+35% 원가</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--bg-canvas); border-radius: 4px;">
+                  <div>
+                    <strong style="color: var(--mck-navy-deep);">고객사 실제 녹색 프리미엄 지불 의사</strong>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">자동차 및 럭셔리 부문을 제외한 전 산업 평균</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="font-family: var(--font-num); font-size: 20px; font-weight: 800; color: var(--mck-blue);">+5~8% 한계</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--mck-blue-light); border-radius: 4px; border: 1px solid var(--mck-blue);">
+                  <div>
+                    <strong style="color: var(--mck-blue);">해법: 스크랩 기반 재활용 (Circular Mining)</strong>
+                    <div style="font-size: 12px; color: var(--mck-navy-deep); margin-top: 4px;">탄소 배출 85% 감축 및 신규 광산 개발 대비 40% 비용 절감</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="font-family: var(--font-num); font-size: 20px; font-weight: 800; color: var(--mck-blue);">즉각적 경제성</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: McKinsey Sustainability Practice; Global Materials Decarbonization Model</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 9: STRATEGIC ACTION AGENDA (소재 기업 경영진의 4대 액션 플랜)
+             ================================================================== -->
+        <section class="slide" data-chapter="4" data-theme="light">
+          <div class="editorial-layout">
+            <div class="col-story">
+              <h2 class="pull-statement">
+                CXO Action Agenda: <em>Four strategic imperatives</em> to navigate the materials supercycle.
+              </h2>
+              <div class="story-body">
+                <p>
+                  <span class="drop-cap">T</span>불확실성과 자본 비용 상승의 시대에 소재 기업 리더십은 포트폴리오를 전환 광물 중심으로 재편하고, 운영 전반에 AI를 적용하여 생산성 병목을 돌파해야 합니다.
+                </p>
+                <p>
+                  단순한 매장량 경쟁에서 벗어나, 수요 기업과의 장기적인 가치 공유 파트너십을 구축하는 기업만이 다음 사이클의 승자가 될 것입니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-exhibit">
+              <div class="exhibit-headline">
+                Exhibit 8 · The Four Strategic Priorities for Metals & Materials Leadership
+              </div>
+              <div class="exhibit-unit">
+                McKinsey Strategy & Corporate Finance Practice Recommendations
+              </div>
+
+              <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch;">
+                <div style="padding: 20px; border: 1px solid var(--border-card); border-top: 3px solid var(--mck-blue); border-radius: 4px; background: var(--bg-canvas);">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--mck-blue); text-transform: uppercase;">Priority 01</div>
+                  <h4 style="font-size: 16px; font-weight: 700; color: var(--mck-navy-deep); margin: 6px 0 10px 0;">브라운필드 확장 우선</h4>
+                  <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-muted);">
+                    15년 걸리는 신규 광산보다 기존 가동 광산의 선광 고도화와 병목 해소(Debottlenecking)에 우선 자본 배분.
+                  </p>
+                </div>
+
+                <div style="padding: 20px; border: 1px solid var(--border-card); border-top: 3px solid var(--mck-blue); border-radius: 4px; background: var(--bg-canvas);">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--mck-blue); text-transform: uppercase;">Priority 02</div>
+                  <h4 style="font-size: 16px; font-weight: 700; color: var(--mck-navy-deep); margin: 6px 0 10px 0;">전환 광물 볼트온 M&A</h4>
+                  <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-muted);">
+                    석탄 등 비핵심 자산의 매각 대금으로 중소형 구리·리튬 개발사 지분을 신속히 확보하여 다운사이드 방어.
+                  </p>
+                </div>
+
+                <div style="padding: 20px; border: 1px solid var(--border-card); border-top: 3px solid var(--mck-blue); border-radius: 4px; background: var(--bg-canvas);">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--mck-blue); text-transform: uppercase;">Priority 03</div>
+                  <h4 style="font-size: 16px; font-weight: 700; color: var(--mck-navy-deep); margin: 6px 0 10px 0;">AI 자율 광산 및 플랜트</h4>
+                  <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-muted);">
+                    자율주행 하울러, 디지털 트윈 제련 최적화를 통해 광석 품위 저하를 극복하고 생산성 15~20% 제고.
+                  </p>
+                </div>
+
+                <div style="padding: 20px; border: 1px solid var(--border-card); border-top: 3px solid var(--mck-blue); border-radius: 4px; background: var(--bg-canvas);">
+                  <div style="font-size: 11px; font-weight: 700; color: var(--mck-blue); text-transform: uppercase;">Priority 04</div>
+                  <h4 style="font-size: 16px; font-weight: 700; color: var(--mck-navy-deep); margin: 6px 0 10px 0;">수요처 장기 연대 (Off-take)</h4>
+                  <p style="font-size: 12.5px; line-height: 1.55; color: var(--text-muted);">
+                    완성차 OEM, 빅테크와의 다년 공급 계약 및 공동 자본 참여를 통해 원자재 가격 변동 위험 헤지.
+                  </p>
+                </div>
+              </div>
+
+              <div class="exhibit-footer">
+                <div>Source: McKinsey Energy & Materials Practice</div>
+                <div class="mck-sig">McKinsey & Company</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==================================================================
+             SLIDE 10: CONCLUSION & ADVISORY CONTACT (최종 결론)
+             ================================================================== -->
+        <section class="slide dark-theme" data-chapter="4" data-theme="dark" style="background: linear-gradient(135deg, #051c2c 0%, #020e18 100%);">
+          <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.15); padding-bottom: 24px; margin-bottom: 32px;">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--mck-cyan); text-transform: uppercase;">
+              Final Takeaway · McKinsey Insights
+            </div>
+            <h2 style="font-family: var(--font-serif); font-size: 38px; color: #ffffff; margin-top: 8px;">
+              Closing the Productivity Gap in a Resource-Constrained World
+            </h2>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <p style="font-family: var(--font-serif); font-size: 30px; line-height: 1.5; color: rgba(255, 255, 255, 0.95); max-width: 1250px; margin-bottom: 48px; font-style: italic;">
+              "원자재 산업의 미래 경쟁력은 더 이상 땅속에 묻힌 매장량의 크기로 결정되지 않습니다.<br>
+              복잡한 규제 환경을 돌파하고, 청정 에너지를 선점하며,<br>
+              기술 혁신을 신속하게 구현하는 경영진의 민첩성이 곧 새로운 광맥입니다."
+            </p>
+
+            <div style="display: inline-flex; gap: 48px; padding: 24px 54px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px;">
+              <div style="text-align: left;">
+                <div style="font-size: 11px; text-transform: uppercase; color: var(--mck-cyan); letter-spacing: 0.08em;">Official Publication</div>
+                <div style="font-size: 15px; font-weight: 700; color: #ffffff; margin-top: 4px;">McKinsey Global Materials Perspective 2026</div>
+              </div>
+              <div style="width: 1px; background: rgba(255, 255, 255, 0.15);"></div>
+              <div style="text-align: left;">
+                <div style="font-size: 11px; text-transform: uppercase; color: var(--mck-cyan); letter-spacing: 0.08em;">Practice Area</div>
+                <div style="font-size: 15px; font-weight: 700; color: #ffffff; margin-top: 4px;">Global Energy & Materials Practice</div>
+              </div>
+              <div style="width: 1px; background: rgba(255, 255, 255, 0.15);"></div>
+              <div style="text-align: left;">
+                <div style="font-size: 11px; text-transform: uppercase; color: var(--mck-cyan); letter-spacing: 0.08em;">Explore Insights</div>
+                <div style="font-size: 15px; font-weight: 700; color: #ffffff; margin-top: 4px;">mckinsey.com/industries/energy-and-materials</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ======================================================================
+           BOTTOM FOOTNOTE & NAVIGATION STRIP
+           ====================================================================== -->
+      <footer class="mck-bottombar" id="mckBottombar">
+        <div class="bottom-source">
+          <span>Source:</span>
+          <strong id="bottomSourceText">McKinsey & Company · Global Materials Perspective 2026</strong>
+          <span style="opacity: 0.4;">|</span>
+          <span>MineSpans™ Asset Intelligence</span>
+        </div>
+
+        <div class="bottom-takeaway" id="bottomTakeawayText">
+          Key Takeaway: $4.2T CapEx Reality
+        </div>
+
+        <div class="bottom-nav-controls">
+          <button class="nav-arrow-btn" onclick="prevSlide()" title="이전 슬라이드 (←)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+          
+          <div class="page-indicator" id="pageIndicator" onclick="openJumpModal()" title="클릭하여 원하는 슬라이드로 이동">
+            01 / 10
+          </div>
+
+          <button class="nav-arrow-btn" onclick="nextSlide()" title="다음 슬라이드 (→)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </footer>
+
+      <!-- ======================================================================
+           QUICK JUMP MODAL
+           ====================================================================== -->
+      <div class="jump-modal" id="jumpModal" onclick="closeJumpModal(event)">
+        <div class="jump-card" onclick="event.stopPropagation()">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-card); padding-bottom: 16px;">
+            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--mck-navy-deep);">
+              McKinsey Presentation Table of Contents
+            </div>
+            <button onclick="closeJumpModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--text-muted);">&times;</button>
+          </div>
+          <div class="jump-grid" id="jumpGrid">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CLIENT SCRIPT & INTERACTION ENGINE
+       ========================================================================== -->
+  <script>
+    const CHAPTERS = [
+      { id: 0, title: "Cover", slideIndex: 1 },
+      { id: 1, title: "01 거시 전망 & 수익", slideIndex: 2 },
+      { id: 2, title: "02 원자재 분열 & CapEx", slideIndex: 4 },
+      { id: 3, title: "03 AI 수요 & 지역 재편", slideIndex: 6 },
+      { id: 4, title: "04 ESG & 실행 과제", slideIndex: 8 }
+    ];
+
+    const SLIDE_META = [
+      { num: 1, chapter: 0, takeaway: "Global Materials Perspective 2026", source: "McKinsey Global Energy & Materials Practice" },
+      { num: 2, chapter: 1, takeaway: "Exhibit 1: 2025년 $6.6조 매출 달성 및 +0.7% 완만한 성장", source: "MineSpans™ Global Sector Aggregation" },
+      { num: 3, chapter: 1, takeaway: "Exhibit 2: 금 +46.2% 폭등으로 철강·석탄(49% 축소) 상쇄", source: "MineSpans™ Commodity Portfolio Breakdown" },
+      { num: 4, chapter: 2, takeaway: "Exhibit 3: 무역 관세로 인한 지역별 가격 분열 (미국 알루미늄 폭등)", source: "Fastmarkets, LME, MEPS, McKinsey Analysis" },
+      { num: 5, chapter: 2, takeaway: "Exhibit 4: 2035년까지 필요한 $4.2조 달러의 CapEx 소요", source: "McKinsey Capital Projects Practice" },
+      { num: 6, chapter: 3, takeaway: "Exhibit 5: AI 데이터센터 구리 소요량 3.7배 폭증", source: "McKinsey High-Tech & Power Practice" },
+      { num: 7, chapter: 3, takeaway: "Exhibit 6: 중국 정점 통과와 인도의 제2 대형 시장 도약", source: "World Steel Association & McKinsey Research" },
+      { num: 8, chapter: 4, takeaway: "Exhibit 7: 녹색 프리미엄 한계(+35% 원가 vs 지불의사 미미)", source: "McKinsey Sustainability Practice" },
+      { num: 9, chapter: 4, takeaway: "Exhibit 8: 소재 기업 경영진의 4대 핵심 전략 우선순위", source: "McKinsey Strategy & Corporate Finance Practice" },
+      { num: 10, chapter: 4, takeaway: "결론: 생산성 격차 해소와 민첩한 자본 배치가 승패 결정", source: "McKinsey & Company Editorial 2026" }
+    ];
+
+    let currentSlide = 1;
+    const totalSlides = 10;
+    let isVideoPlaying = true;
+
+    function fitStage() {
+      const stage = document.getElementById("stage");
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const scale = Math.min(vw / 1920, vh / 1080);
+      stage.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener("resize", fitStage);
+    window.addEventListener("DOMContentLoaded", fitStage);
+
+    function initChapters() {
+      const container = document.getElementById("mckChapters");
+      container.innerHTML = "";
+      CHAPTERS.forEach((ch, idx) => {
+        if (idx === 0) return;
+        const btn = document.createElement("button");
+        btn.className = "mck-tab";
+        btn.id = `tab-${ch.id}`;
+        btn.innerHTML = `<span class="tab-num">0${ch.id}</span> ${ch.title.substring(3)}`;
+        btn.onclick = () => goToSlide(ch.slideIndex);
+        container.appendChild(btn);
+      });
+    }
+
+    function initJumpGrid() {
+      const grid = document.getElementById("jumpGrid");
+      grid.innerHTML = "";
+      SLIDE_META.forEach((meta) => {
+        const item = document.createElement("div");
+        item.className = "jump-item";
+        item.onclick = () => {
+          goToSlide(meta.num);
+          closeJumpModal();
+        };
+        item.innerHTML = `
+          <span style="font-family: var(--font-num); font-weight: 700; color: var(--mck-blue);">${String(meta.num).padStart(2, "0")}</span>
+          <span style="font-weight: 500;">${meta.takeaway}</span>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function goToSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      currentSlide = n;
+
+      const slides = document.querySelectorAll(".slide");
+      slides.forEach((sl, idx) => {
+        if (idx + 1 === currentSlide) {
+          sl.classList.add("active");
+        } else {
+          sl.classList.remove("active");
+        }
+      });
+
+      const currentMeta = SLIDE_META[currentSlide - 1];
+      const activeSlideElem = slides[currentSlide - 1];
+      const isDark = activeSlideElem.dataset.theme === "dark";
+
+      const topbar = document.getElementById("mckTopbar");
+      const bottombar = document.getElementById("mckBottombar");
+      if (isDark) {
+        topbar.classList.add("dark-mode");
+        bottombar.classList.add("dark-mode");
+      } else {
+        topbar.classList.remove("dark-mode");
+        bottombar.classList.remove("dark-mode");
+      }
+
+      // Progress Bar Update
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      document.getElementById("progressBar").style.width = `${progressPercent}%`;
+
+      document.getElementById("pageIndicator").textContent = `${String(currentSlide).padStart(2, "0")} / ${String(totalSlides).padStart(2, "0")}`;
+      document.getElementById("bottomTakeawayText").textContent = currentMeta.takeaway;
+      document.getElementById("bottomSourceText").textContent = currentMeta.source;
+
+      const chapterId = currentMeta.chapter;
+      document.querySelectorAll(".mck-tab").forEach(tab => tab.classList.remove("active"));
+      const activeTab = document.getElementById(`tab-${chapterId}`);
+      if (activeTab) activeTab.classList.add("active");
+
+      const video = document.getElementById("heroVideo");
+      if (video) {
+        if (currentSlide === 1 && isVideoPlaying) {
+          video.muted = true;
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              console.log("Autoplay waiting for user gesture:", err);
+            });
+          }
+        } else {
+          video.pause();
+        }
+      }
+    }
+
+    function playVideoSafe() {
+      const video = document.getElementById("heroVideo");
+      if (video && currentSlide === 1 && isVideoPlaying) {
+        video.muted = true;
+        video.play().catch(e => console.log(e));
+      }
+    }
+    // Ensure play on first user interaction anywhere
+    window.addEventListener("click", playVideoSafe, { once: true });
+    window.addEventListener("touchstart", playVideoSafe, { once: true });
+    window.addEventListener("keydown", playVideoSafe, { once: true });
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) goToSlide(currentSlide - 1);
+    }
+
+    function toggleHeroVideo() {
+      const video = document.getElementById("heroVideo");
+      const icon = document.getElementById("videoStatusIcon");
+      const iconFloater = document.getElementById("videoStatusIconFloater");
+      if (!video) return;
+
+      if (video.paused) {
+        video.muted = true;
+        video.play().then(() => {
+          isVideoPlaying = true;
+          if (icon) icon.textContent = "⏸";
+          if (iconFloater) iconFloater.textContent = "⏸";
+        }).catch(err => console.log("Play failed:", err));
+      } else {
+        video.pause();
+        isVideoPlaying = false;
+        if (icon) icon.textContent = "▶";
+        if (iconFloater) iconFloater.textContent = "▶";
+      }
+    }
+
+    function openJumpModal() {
+      document.getElementById("jumpModal").classList.add("open");
+    }
+
+    function closeJumpModal(e) {
+      document.getElementById("jumpModal").classList.remove("open");
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+      switch (e.key) {
+        case "ArrowRight":
+        case "ArrowDown":
+        case " ":
+          e.preventDefault();
+          nextSlide();
+          break;
+        case "ArrowLeft":
+        case "ArrowUp":
+          e.preventDefault();
+          prevSlide();
+          break;
+        case "g":
+        case "G":
+          e.preventDefault();
+          openJumpModal();
+          break;
+        case "Escape":
+          closeJumpModal();
+          break;
+        case "f":
+        case "F":
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+        default:
+          if (e.key >= "1" && e.key <= "9") {
+            goToSlide(parseInt(e.key, 10));
+          } else if (e.key === "0") {
+            goToSlide(10);
+          }
+          break;
+      }
+    });
+
+    function initAmbientCanvas() {
+      const canvas = document.getElementById("ambientCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      let w = (canvas.width = 1920);
+      let h = (canvas.height = 1080);
+      let step = 0;
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        const grad = ctx.createLinearGradient(0, 0, w, h);
+        grad.addColorStop(0, "#051c2c");
+        grad.addColorStop(0.5, "#0a2540");
+        grad.addColorStop(1, "#020a12");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        for (let i = 0; i < 3; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, h * 0.7);
+          for (let x = 0; x <= w; x += 40) {
+            const y = Math.sin(x * 0.002 + step * 0.015 + i * 1.5) * 60 +
+                      Math.cos(x * 0.001 - step * 0.01 + i) * 30 + (h * 0.65 + i * 50);
+            ctx.lineTo(x, y);
+          }
+          ctx.lineTo(w, h);
+          ctx.lineTo(0, h);
+          ctx.closePath();
+          ctx.fillStyle = `rgba(0, 112, 173, ${0.08 - i * 0.02})`;
+          ctx.fill();
+        }
+
+        step++;
+        if (currentSlide === 1) requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      fitStage();
+      initChapters();
+      initJumpGrid();
+      initAmbientCanvas();
+      goToSlide(1);
+    });
+  </script>
+</body>
+
+</html>

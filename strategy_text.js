@@ -1,0 +1,18 @@
+const $=id=>document.getElementById(id);
+let current=Math.max(0,Math.min(presentationSlides.length-1,(parseInt(location.hash.slice(1),10)||1)-1)),staged=false,step=0,units=[];
+const plain=value=>{const t=document.createElement('template');t.innerHTML=value;return t.content.textContent.trim()};
+const groups=[];presentationSlides.forEach((s,i)=>{if(!groups.some(g=>g.label===s.badge))groups.push({label:s.badge,index:i})});
+function markup(s){return `<div class="slide-head"><div class="eyebrow">${s.badge}</div>${s.title?`<h1 class="slide-title">${s.title}</h1>`:''}</div><div class="content">${s.body}</div>`}
+function render(){const s=presentationSlides[current];$('slide').innerHTML=`<div class="enter">${markup(s)}</div>`;$('slide').scrollTop=0;units=[...$('slide').querySelectorAll('.card,.diagram-label,.toc .item')];step=staged?Math.min(1,units.length):units.length;reveal();$('counter').textContent=`${current+1} / ${presentationSlides.length}`;$('prev').disabled=current===0;$('next').disabled=current===presentationSlides.length-1&&step===units.length;$('progress').style.width=`${(current+1)/presentationSlides.length*100}%`;[...$('chapters').children].forEach(b=>{const active=b.dataset.label===s.badge;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'step':'false')});history.replaceState(null,'',`#${current+1}`)}
+function reveal(){units.forEach((e,i)=>{e.classList.toggle('pending',i>=step);e.classList.toggle('revealed',i<step)});$('status').textContent=staged&&units.length?`단계 ${step} / ${units.length} · → 다음 내용`:'← → 슬라이드 이동 · G 목차 · F 전체화면';}
+function go(i){current=Math.max(0,Math.min(presentationSlides.length-1,i));render()}
+function next(){if(staged&&step<units.length){step++;reveal();units[step-1].scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})}else go(current+1)}
+function previous(){if(staged&&step>1){step--;reveal()}else go(current-1)}
+async function full(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){$('status').textContent='브라우저에서 전체화면을 사용할 수 없습니다.'}}
+groups.forEach(g=>{const b=document.createElement('button');b.textContent=plain(g.label);b.dataset.label=g.label;b.onclick=()=>go(g.index);$('chapters').appendChild(b)});
+presentationSlides.forEach((s,i)=>{const b=document.createElement('button');b.textContent=`${String(i+1).padStart(2,'0')}  ${plain(s.title)||plain(s.badge)}`;b.onclick=()=>{$('outline').close();go(i)};$('outline-list').appendChild(b)});
+$('overview').onclick=$('counter').onclick=()=>$('outline').showModal();$('home').onclick=()=>go(0);$('next').onclick=next;$('prev').onclick=previous;$('fullscreen').onclick=full;
+$('reveal').onclick=()=>{staged=!staged;$('reveal').setAttribute('aria-pressed',String(staged));$('reveal').classList.toggle('active',staged);render()};
+function buildPrint(){$('print-deck').innerHTML=presentationSlides.map(s=>`<section class="print-slide">${markup(s)}</section>`).join('')}$('print').onclick=()=>{buildPrint();window.print()};window.addEventListener('beforeprint',buildPrint);
+document.addEventListener('keydown',e=>{if($('outline').open||e.target.closest('input,button,a')||e.ctrlKey||e.metaKey||e.altKey)return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();previous()}else if(e.key==='Home')go(0);else if(e.key==='End')go(presentationSlides.length-1);else if(e.key.toLowerCase()==='g')$('outline').showModal();else if(e.key.toLowerCase()==='f')full()});
+render();

@@ -1,12 +1,1785 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>재난안전 내실화를 위한 전략기획</title>
-  <meta http-equiv="refresh" content="0;url=재난안전 내실화를 위한 전략기획.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club-Park Presentation Hub</title>
+  <meta name="description" content="AI, 국가 정책, 연구 기획부터 라이프까지 — 유튜브 스타일로 한눈에 탐색하고 즉시 발표하는 프레젠테이션 아카이브">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff0033'/%3E%3Cpolygon points='12,9 24,16 12,23' fill='%23ffffff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & YouTube-Inspired Design Tokens ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-elevated: #f8f8f8;
+      --bg-chip: #f2f2f2;
+      --bg-chip-hover: #e5e5e5;
+      --bg-hover: #f2f2f2;
+      --border: #e5e5e5;
+      --ink: #0f0f0f;
+      --ink-muted: #606060;
+      --ink-subtle: #909090;
+      --brand-red: #ff0033;
+      --primary: #0f62fe;
+      --chip-active-bg: #0f0f0f;
+      --chip-active-ink: #ffffff;
+
+      --cat-ai: #7c3aed;
+      --cat-plan: #ea580c;
+      --cat-policy: #0284c7;
+      --cat-life: #0d9488;
+
+      --header-h: 56px;
+      --sidebar-w: 236px;
+      --sidebar-mini-w: 74px;
+
+      --f-body: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --bg-elevated: #181818;
+      --bg-chip: #272727;
+      --bg-chip-hover: #3f3f3f;
+      --bg-hover: #272727;
+      --border: #272727;
+      --ink: #f1f1f1;
+      --ink-muted: #aaaaaa;
+      --ink-subtle: #717171;
+      --brand-red: #ff0033;
+      --primary: #3ea6ff;
+      --chip-active-bg: #f1f1f1;
+      --chip-active-ink: #0f0f0f;
+
+      --cat-ai: #a78bfa;
+      --cat-plan: #fb923c;
+      --cat-policy: #38bdf8;
+      --cat-life: #2dd4bf;
+
+      color-scheme: dark;
+    }
+
+    body {
+      font-family: var(--f-body);
+      font-size: 14px;
+      line-height: 1.45;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.viewing {
+      overflow: hidden;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    mark.hl {
+      background: rgba(255, 214, 10, 0.32);
+      color: inherit;
+      padding: 0 2px;
+      border-radius: 3px;
+      font-weight: 700;
+    }
+
+    /* ===== Top Sticky YouTube Header ===== */
+    .yt-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 16px;
+      z-index: 45;
+    }
+
+    .yt-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .icon-btn:hover {
+      background: var(--bg-hover);
+    }
+
+    .icon-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .yt-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+      user-select: none;
+    }
+
+    .yt-logo-badge {
+      width: 30px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--brand-red);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(255, 0, 51, 0.35);
+    }
+
+    .yt-logo-badge svg {
+      width: 12px;
+      height: 12px;
+      fill: #ffffff;
+    }
+
+    .yt-logo sup {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-muted);
+      margin-left: -4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Center Search Pill */
+    .yt-header-center {
+      flex: 1;
+      max-width: 620px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-elevated);
+      overflow: hidden;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      background: var(--bg);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .search-lead-icon {
+      width: 16px;
+      height: 16px;
+      margin-left: 16px;
+      color: var(--ink-subtle);
+      flex-shrink: 0;
+    }
+
+    #searchInput {
+      flex: 1;
+      height: 100%;
+      border: none;
+      background: transparent;
+      padding: 0 12px;
+      font-size: 14px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    #searchInput::placeholder {
+      color: var(--ink-subtle);
+    }
+
+    .search-clear {
+      background: none;
+      border: none;
+      color: var(--ink-muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 15px;
+      display: none;
+    }
+
+    .search-clear.visible {
+      display: inline-flex;
+    }
+
+    .search-kbd {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      color: var(--ink-subtle);
+      background: var(--bg-chip);
+      border: 1px solid var(--border);
+      padding: 2px 7px;
+      border-radius: 999px;
+      margin-right: 12px;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    /* Right Controls */
+    .yt-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .deck-count-pill {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--bg-chip);
+      color: var(--ink-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+    }
+
+    .icon-sun { display: none; }
+    [data-theme="dark"] .icon-sun { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    /* ===== App Body Layout (Sidebar + Main Feed) ===== */
+    .yt-layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
+
+    /* Mobile Backdrop for Drawer */
+    .sidebar-backdrop {
+      position: fixed;
+      inset: var(--header-h) 0 0 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 38;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    body.sidebar-open .sidebar-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Left Sidebar */
+    .yt-sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 12px 12px 24px;
+      overflow-y: auto;
+      z-index: 40;
+      transition: width 0.2s ease, transform 0.22s ease;
+      scrollbar-width: thin;
+    }
+
+    body.sidebar-mini .yt-sidebar {
+      width: var(--sidebar-mini-w);
+      padding: 12px 6px;
+    }
+
+    .side-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 8px;
+    }
+
+    .side-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-subtle);
+      padding: 6px 12px;
+    }
+
+    body.sidebar-mini .side-heading,
+    body.sidebar-mini .side-footer,
+    body.sidebar-mini .side-count {
+      display: none;
+    }
+
+    .side-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s;
+    }
+
+    .side-btn:hover {
+      background: var(--bg-hover);
+    }
+
+    .side-btn.active {
+      background: var(--bg-chip);
+      font-weight: 700;
+    }
+
+    .side-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .side-btn svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .side-cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin: 0 4px;
+    }
+
+    .side-count {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      color: var(--ink-subtle);
+    }
+
+    body.sidebar-mini .side-btn {
+      flex-direction: column;
+      justify-content: center;
+      padding: 11px 4px;
+      gap: 5px;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    body.sidebar-mini .side-btn-left {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .side-footer {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    .side-footer b {
+      color: var(--ink);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .side-footer kbd {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    /* ===== Main Content Area ===== */
+    .yt-main {
+      flex: 1;
+      margin-left: var(--sidebar-w);
+      min-width: 0;
+      transition: margin-left 0.2s ease;
+    }
+
+    body.sidebar-mini .yt-main {
+      margin-left: var(--sidebar-mini-w);
+    }
+
+    /* Sticky Category & Style Chips Bar */
+    .yt-chips-bar {
+      position: sticky;
+      top: var(--header-h);
+      z-index: 25;
+      background: color-mix(in srgb, var(--bg) 94%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .yt-chips-bar::-webkit-scrollbar { display: none; }
+
+    .chips-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-wrap: nowrap;
+    }
+
+    .chip-btn {
+      border: none;
+      background: var(--bg-chip);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .chip-btn:hover {
+      background: var(--bg-chip-hover);
+    }
+
+    .chip-btn.active {
+      background: var(--chip-active-bg);
+      color: var(--chip-active-ink);
+    }
+
+    .chip-btn b {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    .chip-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      margin: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .chips-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .sort-select {
+      background: var(--bg-chip);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Filter Status Bar (shown when filtered/searched) */
+    .filter-status {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .filter-status.show {
+      display: flex;
+    }
+
+    .filter-status b {
+      color: var(--ink);
+    }
+
+    .reset-filter-btn {
+      background: var(--bg-chip);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .reset-filter-btn:hover {
+      background: var(--bg-chip-hover);
+    }
+
+    /* ===== YouTube Video Grid (3~4 Columns) ===== */
+    .yt-feed {
+      padding: 22px 24px 72px;
+    }
+
+    .yt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 28px 18px;
+    }
+
+    /* Optional Compact List Mode */
+    .yt-grid.list-mode {
+      grid-template-columns: 1fr;
+      max-width: 1080px;
+      gap: 14px;
+    }
+
+    .yt-card {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      border-radius: 14px;
+      transition: transform 0.18s ease;
+    }
+
+    .yt-grid.list-mode .yt-card {
+      flex-direction: row;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+
+    .yt-grid.list-mode .yt-thumb {
+      width: 320px;
+      flex-shrink: 0;
+    }
+
+    /* 16:9 Thumbnail Box */
+    .yt-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #101624;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .yt-thumb-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .yt-card:hover .yt-thumb-img {
+      transform: scale(1.06);
+    }
+
+    /* Cinematic Gradient Vignette Overlay on Thumbnail */
+    .yt-thumb-shade {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8, 12, 22, 0.52) 0%, rgba(8, 12, 22, 0.14) 38%, rgba(8, 12, 22, 0.90) 100%);
+    }
+
+    /* Top Badges on Thumbnail */
+    .yt-thumb-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .yt-top-left-badges {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .yt-ep-badge {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 5px;
+      background: rgba(10, 14, 24, 0.78);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(6px);
+    }
+
+    .yt-new-badge {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--brand-red);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(255, 0, 51, 0.4);
+    }
+
+    .yt-style-badge {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+    }
+
+    .yt-style-badge.cinematic {
+      background: rgba(0, 210, 255, 0.88);
+      color: #041019;
+    }
+
+    .yt-style-badge.briefing {
+      background: rgba(255, 255, 255, 0.92);
+      color: #0f172a;
+    }
+
+    .yt-style-badge.mckinsey {
+      background: rgba(0, 112, 173, 0.92);
+      color: #ffffff;
+    }
+
+    .yt-style-badge.interactive {
+      background: rgba(124, 58, 237, 0.88);
+      color: #ffffff;
+    }
+
+    /* Poster Hook Overlay inside Thumbnail (Distinct from Title below) */
+    .yt-thumb-poster {
+      position: absolute;
+      left: 12px;
+      right: 72px;
+      bottom: 12px;
+      z-index: 2;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+    }
+
+    .yt-thumb-cat {
+      display: inline-block;
+      font-family: var(--f-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 3px;
+    }
+
+    .yt-thumb-headline {
+      font-size: 14.5px;
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: rgba(255, 255, 255, 0.96);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: keep-all;
+    }
+
+    /* 밝은 배경 썸네일에서는 검은색 타이포그래피를 사용 */
+    .yt-thumb.light-thumb .yt-thumb-shade {
+      background: linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,.82) 100%);
+    }
+    .yt-thumb.light-thumb .yt-thumb-poster {
+      color: #111827;
+      text-shadow: 0 1px 4px rgba(255,255,255,.8);
+    }
+    .yt-thumb.light-thumb .yt-thumb-cat,
+    .yt-thumb.light-thumb .yt-thumb-headline {
+      color: #111827;
+      text-shadow: 0 1px 4px rgba(255,255,255,.9);
+    }
+
+    /* Bottom-Right YouTube Duration / Slide Count Pill */
+    .yt-duration {
+      position: absolute;
+      right: 8px;
+      bottom: 10px;
+      z-index: 3;
+      background: rgba(0, 0, 0, 0.86);
+      color: #ffffff;
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 7px;
+      border-radius: 5px;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    /* Center Play Button on Hover */
+    .yt-play-hover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 2;
+    }
+
+    .yt-card:hover .yt-play-hover {
+      opacity: 1;
+    }
+
+    .yt-play-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 0, 51, 0.92);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .yt-card:hover .yt-play-circle {
+      transform: scale(1);
+    }
+
+    .yt-play-circle svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      margin-left: 2px;
+    }
+
+    /* Bottom Progress Bar Accent on Thumbnail */
+    .yt-thumb-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.18);
+      z-index: 3;
+    }
+
+    .yt-thumb-bar i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--brand-red);
+      transition: width 0.35s ease;
+    }
+
+    .yt-card:hover .yt-thumb-bar i {
+      width: 100%;
+    }
+
+    /* Card Details Below Thumbnail */
+    .yt-meta {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding-top: 12px;
+    }
+
+    .yt-grid.list-mode .yt-meta {
+      padding-top: 4px;
+      flex: 1;
+    }
+
+    .yt-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 2px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      letter-spacing: -0.02em;
+    }
+
+    .yt-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .yt-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.38;
+      color: var(--ink);
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: keep-all;
+      transition: color 0.15s;
+    }
+
+    .yt-card:hover .yt-title {
+      color: var(--primary);
+    }
+
+    .yt-subline {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      margin-bottom: 5px;
+      flex-wrap: wrap;
+    }
+
+    .yt-verified {
+      width: 13px;
+      height: 13px;
+      fill: var(--ink-muted);
+      flex-shrink: 0;
+    }
+
+    .yt-desc {
+      font-size: 12.5px;
+      color: var(--ink-subtle);
+      line-height: 1.48;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: keep-all;
+    }
+
+    .empty-state {
+      padding: 72px 20px;
+      text-align: center;
+      color: var(--ink-subtle);
+      font-size: 15px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .empty-state.show {
+      display: flex;
+    }
+
+    /* ===== Fullscreen Presentation Viewer ===== */
+    #viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #05070c;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    body.viewing #viewer {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .viewer-bar {
+      height: 48px;
+      background: #11151f;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 10px;
+      color: #fff;
+      z-index: 10;
+    }
+
+    .back-btn, .viewer-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      color: #fff;
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .back-btn:hover, .viewer-action-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .back-btn svg, .viewer-action-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .viewer-pos {
+      font-family: var(--f-mono);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      flex-shrink: 0;
+    }
+
+    .viewer-pos b {
+      color: #fff;
+    }
+
+    .viewer-rail {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      flex: 1;
+      padding: 0 10px;
+      scrollbar-width: none;
+    }
+
+    .viewer-rail::-webkit-scrollbar { display: none; }
+
+    .rail-pill {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .rail-pill:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .rail-pill.active {
+      color: #fff;
+      background: var(--brand-red);
+      border-color: var(--brand-red);
+      font-weight: 600;
+    }
+
+    .cat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .viewer-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .viewer-step {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .viewer-step button {
+      width: 28px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 4px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .viewer-step button:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .viewer-step button svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .viewer-stage {
+      flex: 1;
+      position: relative;
+      background: #000;
+    }
+
+    .viewer-frame {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .viewer-frame.active {
+      opacity: 1;
+    }
+
+    body.viewing .viewer-frame.active {
+      pointer-events: auto;
+    }
+
+    .viewer-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #05070c;
+    }
+
+    /* ===== Scroll to Top ===== */
+    .scroll-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s, background 0.15s;
+      z-index: 35;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .scroll-top:hover {
+      background: var(--brand-red);
+      color: #fff;
+      border-color: var(--brand-red);
+    }
+
+    .scroll-top svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* ===== Responsive & Drawer Behavior ===== */
+    @media (max-width: 1024px) {
+      .yt-sidebar {
+        transform: translateX(-100%);
+        width: var(--sidebar-w) !important;
+        padding: 12px 12px 24px !important;
+        box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
+      }
+      body.sidebar-open .yt-sidebar {
+        transform: translateX(0);
+      }
+      .yt-main, body.sidebar-mini .yt-main {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .yt-chips-bar { padding: 10px 14px; }
+      .yt-feed { padding: 16px 14px 60px; }
+      .deck-count-pill, .search-kbd, .viewer-action-btn span { display: none; }
+      .yt-grid.list-mode .yt-card { flex-direction: column; }
+      .yt-grid.list-mode .yt-thumb { width: 100%; }
+      .viewer-rail { display: none; }
+    }
+  </style>
+  <script>
+    // FOUC 방지 테마 초기화
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme');
+        const isDark = saved ? saved === 'dark' : true;
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      } catch (e) { }
+    })();
+  </script>
 </head>
+
 <body>
-  <p><a href="재난안전 내실화를 위한 전략기획.html">재난안전 내실화를 위한 전략기획 발표자료 열기</a></p>
+
+  <!-- ===== Top Sticky YouTube Header ===== -->
+  <header class="yt-header">
+    <div class="yt-header-left">
+      <button id="sidebarToggle" class="icon-btn" type="button" aria-label="사이드바 토글" title="메뉴 접기/펼치기">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+      <a href="#hub" id="logoHome" class="yt-logo" title="Club-Park Presentation Hub 홈">
+        <span class="yt-logo-badge">
+          <svg viewBox="0 0 16 16"><polygon points="4,2.5 13.5,8 4,13.5"/></svg>
+        </span>
+        <span>Club-Park Presentation Hub</span>
+        <sup>KR</sup>
+      </a>
+    </div>
+
+    <div class="yt-header-center">
+      <div class="search-box">
+        <svg class="search-lead-icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input id="searchInput" type="search" placeholder="발표 제목, 키워드, 카테고리 검색..." autocomplete="off" aria-label="발표 검색">
+        <button id="searchClear" class="search-clear" type="button" aria-label="검색 지우기">✕</button>
+        <span class="search-kbd">/</span>
+      </div>
+    </div>
+
+    <div class="yt-header-right">
+      <span class="deck-count-pill">
+        <span class="status-dot"></span>
+        <span id="deckCountBadge">33 DECKS</span>
+      </span>
+
+      <button id="viewModeToggle" class="icon-btn" type="button" aria-label="보기 방식 전환" title="그리드 / 리스트 보기 전환">
+        <svg id="iconGrid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </button>
+
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="테마 전환" title="다크 / 라이트 테마 전환">
+        <svg class="icon-moon" viewBox="0 0 16 16" fill="currentColor" stroke="none"><path d="M6 1a6.5 6.5 0 1 0 8.5 8.5A5.5 5.5 0 0 1 6 1z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.2 1.2M11.8 11.8L13 13M3 13l1.2-1.2M11.8 4.2L13 3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile/Tablet Drawer Backdrop -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ===== Main YouTube Layout (Sidebar + Content) ===== -->
+  <div class="yt-layout">
+
+    <!-- Left Collapsible Sidebar -->
+    <aside class="yt-sidebar" id="sidebar" aria-label="카테고리 및 스타일 내비게이션">
+      <div class="side-group" id="sideMainGroup">
+        <!-- JS 렌더링 -->
+      </div>
+
+      <div class="side-divider"></div>
+      <div class="side-heading">주제별 채널</div>
+      <div class="side-group" id="sideCatGroup">
+        <!-- JS 렌더링 -->
+      </div>
+
+      <div class="side-divider"></div>
+      <div class="side-footer">
+        <b>단축키 가이드</b>
+        <div><kbd>/</kbd> 또는 <kbd>⌘K</kbd> 즉시 검색</div>
+        <div><kbd>ESC</kbd> 발표 종료 후 허브 복귀</div>
+        <div><kbd>←</kbd> <kbd>→</kbd> 슬라이드 이동</div>
+        <div><kbd>G</kbd> 슬라이드 번호 점프</div>
+      </div>
+    </aside>
+
+    <!-- Main Feed -->
+    <div class="yt-main">
+
+      <!-- Sticky Chips Bar -->
+      <div class="yt-chips-bar">
+        <div class="chips-left" id="chipBar">
+          <!-- JS 렌더링 -->
+        </div>
+        <div class="chips-right">
+          <select id="sortSelect" class="sort-select" aria-label="정렬 기준">
+            <option value="latest">최신 등록순</option>
+            <option value="slides-desc">슬라이드 많은 순</option>
+            <option value="slides-asc">슬라이드 적은 순</option>
+            <option value="title">제목 가나다순</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 16:9 Thumbnail Grid -->
+      <main class="yt-feed">
+        <div class="filter-status" id="filterStatus">
+          <span id="filterStatusText"></span>
+          <button type="button" class="reset-filter-btn" id="resetFilterBtn">필터 초기화 ↺</button>
+        </div>
+
+        <div class="yt-grid" id="cardGrid">
+          <!-- JS 렌더링 -->
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <div>검색어 또는 선택한 필터 조건에 일치하는 발표 자료가 없습니다.</div>
+          <button type="button" class="reset-filter-btn" id="emptyResetBtn">전체 발표 목록 보기 ↺</button>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Scroll Top Button -->
+  <button id="scrollTop" class="scroll-top" type="button" aria-label="맨 위로" title="맨 위로 이동">
+    <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- ===== Fullscreen Presentation Viewer ===== -->
+  <section id="viewer" aria-label="발표 전체 화면 뷰어">
+    <div class="viewer-bar">
+      <button class="back-btn" id="viewerBack" type="button">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        <span>Hub 돌아가기 (ESC)</span>
+      </button>
+
+      <span class="viewer-pos" id="viewerPos">01 / 33</span>
+
+      <nav class="viewer-rail" id="viewerRail"></nav>
+
+      <div class="viewer-controls-right">
+        <a id="viewerNewTab" class="viewer-action-btn" href="#" target="_blank" rel="noopener" title="새 탭에서 단독 창으로 열기">
+          <svg viewBox="0 0 24 24"><path d="M14 3h7v7M10 14L21 3M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"/></svg>
+          <span>새 탭 열기</span>
+        </a>
+        <button id="viewerFullscreen" class="viewer-action-btn" type="button" title="전체화면 토글">
+          <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <span>전체화면</span>
+        </button>
+        <div class="viewer-step">
+          <button id="viewerPrev" type="button" aria-label="이전 발표" title="이전 발표자료"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button id="viewerNext" type="button" aria-label="다음 발표" title="다음 발표자료"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="viewer-stage" id="viewerStage">
+      <!-- 동적 iframe 컨테이너 -->
+    </div>
+  </section>
+
+  <script>
+    const CAT_COLORS = {
+      'AI': 'var(--cat-ai)',
+      '기획': 'var(--cat-plan)',
+      '정책': 'var(--cat-policy)',
+      '정책·R&D': '#2563eb',
+      '라이프': 'var(--cat-life)'
+    };
+
+    const CAT_LABELS = {
+      'AI': 'AI · 인공지능',
+      '기획': '기획 · R&D 전략',
+      '정책': '정책 · 거버넌스',
+      '라이프': '라이프 · 웰니스'
+    };
+
+    // 발표 목록 데이터 (워크스페이스 내 전체 33개 HTML 발표자료 전수 수록)
+    // hook 필드는 16:9 썸네일 내부에 표시될 핵심 포스터 카피(아래 제목과 중복 방지)
+    const DECKS = [
+      {
+        id: 'us-korea-legislature', src: 'us_korea_legislature_cinematic_legacy.html', cat: '정치·제도',
+        title: '미국 상원·하원과 대한민국 국회 비교',
+        hook: '양원제와 단원제 · 대표 원리 · 권한 · 장점과 한계',
+        desc: '공식 자료를 바탕으로 미국 상원·하원과 한국 국회의 정의, 특징, 차이점과 장단점을 비교한 19장 시네마틱 레거시 발표자료. 기준일 2026.11.04.',
+        slides: '19장', isCinematic: true, style: 'CINEMATIC LEGACY', thumb: 'photo-1482192505345-5655af888cc4'
+      },
+      {
+        id: 'dynamic-zoom-preview', src: 'dynamic_zoom_preview.html', cat: '정책·R&D',
+        title: '동적 스타일 비교 · 줌 탐색형', hook: '전체 구조에서 주제 선택 · 세부 화면 확대',
+        desc: '동일한 원본 1~10장으로 비교하는 줌 탐색형 미리보기. 전체 구조와 개별 슬라이드를 오가며 발표합니다.',
+        slides: '10장', isCinematic: true, style: 'ZOOM EXPLORER', thumb: 'photo-1639322537228-f710d846310a'
+      },
+      {
+        id: 'dynamic-scroll-preview', src: 'dynamic_scroll_preview.html', cat: '정책·R&D',
+        title: '동적 스타일 비교 · 스크롤 스토리형', hook: '스크롤 기반 장면 전환 · 순차적 설명',
+        desc: '동일한 원본 1~10장을 스크롤로 탐색합니다. 화면 단위로 장면이 정렬되고 내용이 등장합니다.',
+        slides: '10장', isCinematic: true, style: 'SCROLL STORY', thumb: 'photo-1482192505345-5655af888cc4'
+      },
+      {
+        id: 'dynamic-data-preview', src: 'dynamic_data_preview.html', cat: '정책·R&D',
+        title: '동적 스타일 비교 · 데이터 탐색형', hook: '항목 강조 · 연도 선택 · 투자 비교',
+        desc: '동일한 원본 1~10장에 탐색 도구를 적용한 미리보기. 8·9페이지에서 연도별 투자 데이터를 선택할 수 있습니다.',
+        slides: '10장', isCinematic: true, style: 'DATA EXPLORER', thumb: 'photo-1518770660439-4636190af475'
+      },
+      {
+        id: 'dynamic-timeline-preview', src: 'dynamic_timeline_preview.html', cat: '정책·R&D',
+        title: '동적 스타일 비교 · 타임라인형', hook: '발표 순서 레일 · 단계 직접 이동',
+        desc: '동일한 원본 1~10장을 순서형 타임라인으로 탐색합니다. 하단 단계를 선택해 해당 내용으로 이동합니다.',
+        slides: '10장', isCinematic: true, style: 'TIMELINE', thumb: 'photo-1500534623283-312aade485b7'
+      },
+      {
+        id: 'disaster-rnd-strategy-briefing',
+        src: '행정안전부_중점기술_연구개발_추진현황과_발전전략_briefing_presentation.html',
+        cat: '정책·R&D',
+        title: '행정안전부 중점기술 연구개발 추진현황과 발전전략',
+        hook: '재난안전 R&D의 범위·투자·수요·발전전략',
+        desc: '원자료의 정책환경, 2026~2030 로드맵, 기술수요 533건, 지역별 현장수요와 발전전략을 흰 배경 브리핑 형식으로 재구성한 15장 덱.',
+        slides: '15장',
+        isCinematic: false,
+        style: 'BRIEFING',
+        thumb: 'photo-1473445361085-b9a07f55608b'
+      },
+      {
+        id: 'disaster-rnd-commercialization-limitations',
+        src: 'disaster_rnd_commercialization_limitations_cinematic_presentation.html',
+        cat: '정책·R&D',
+        title: '재난안전 연구개발의 실용화의 한계',
+        hook: '기술은 개발되지만 현장까지 도달하지 못한다',
+        desc: '수요·기술·제도 사이의 단절을 중심으로 재난안전 연구개발의 실용화 장벽과 전환 조건을 10장으로 정리한 시네마틱 전략 브리프.',
+        slides: '10장',
+        isCinematic: true,
+        style: 'CINEMATIC',
+        thumb: 'photo-1473445361085-b9a07f55608b'
+      },
+      {
+        id: 'disaster-rnd-cinematic-interactive-preview',
+        src: 'disaster_rnd_cinematic_interactive_preview.html',
+        cat: '정책·R&D',
+        title: '재난안전 R&D 실용화 한계 · 시네마틱 인터랙티브 미리보기',
+        hook: '챕터 탭 · SVG HUD · 실사 배경 · 켄번스',
+        desc: '최신 시네마틱 인터랙티브 발표자료 스타일 비교용 미리보기.',
+        slides: '10장', isCinematic: true, style: 'CINEMATIC INTERACTIVE', thumb: 'photo-1473445361085-b9a07f55608b'
+      },
+
+      {
+        id: 'disaster-rnd-cinematic-legacy-preview',
+        src: 'disaster_rnd_cinematic_legacy_preview.html',
+        cat: '정책·R&D',
+        title: '재난안전 R&D 실용화 한계 · 시네마틱 레거시 미리보기',
+        hook: '실사 배경 · 챕터 진행 바 · 큰 타이포그래피',
+        desc: '구형 시네마틱 발표자료 스타일 비교용 미리보기.',
+        slides: '8장', isCinematic: true, style: 'CINEMATIC LEGACY', thumb: 'photo-1482192505345-5655af888cc4'
+      },
+      {
+        id: 'disaster-rnd-briefing-preview',
+        src: 'disaster_rnd_briefing_preview.html',
+        cat: '정책·R&D',
+        title: '재난안전 R&D 실용화 한계 · 브리핑형 미리보기',
+        hook: '흰 배경 · 수치·표·출처 중심',
+        desc: '정책 브리핑 및 데이터 강의형 발표자료 스타일 비교용 미리보기.',
+        slides: '10장', isCinematic: false, style: 'BRIEFING', thumb: 'photo-1557683316-973673baf926'
+      },
+      {
+        id: 'disaster-rnd-mckinsey-preview',
+        src: 'disaster_rnd_mckinsey_preview.html',
+        cat: '정책·R&D',
+        title: '재난안전 R&D 실용화 한계 · 전략보고형 미리보기',
+        hook: 'Action Title · MECE · KPI · 실행과제',
+        desc: '국가 R&D 전략기획 및 의사결정 보고용 스타일 비교용 미리보기.',
+        slides: '10장', isCinematic: false, style: 'STRATEGY BRIEF', thumb: 'photo-1500534623283-312aade485b7'
+      },
+      {
+        id: 'disaster-rnd-html-interactive-preview',
+        src: 'disaster_rnd_html_interactive_preview.html',
+        cat: '정책·R&D',
+        title: '재난안전 R&D 실용화 한계 · HTML 인터랙티브 미리보기',
+        hook: '다크 글래스모피즘 · 네온 · 단계별 reveal',
+        desc: '웹 기반 인터랙티브 발표자료 스타일 비교용 미리보기.',
+        slides: '12장', isCinematic: false, style: 'HTML INTERACTIVE', thumb: 'photo-1518770660439-4636190af475'
+      },
+      {
+        id: 'safetyforum-strategy-planning',
+        src: '재난안전 내실화를 위한 전략기획.html',
+        cat: '정책·R&D',
+        title: '재난안전 내실화를 위한 전략기획 · 49장 완성본',
+        hook: '6개 챕터 · SVG 그래프와 인포그래픽 · 시네마틱 전환',
+        desc: '원본 49장의 텍스트·수치·순서를 유지한 통합 발표자료. 투자 추이와 인식·활용 비교 그래프, 현장성과 아이콘, 전략 환류 연결도를 포함합니다.',
+        slides: '49장', isCinematic: true, style: 'CINEMATIC INTERACTIVE', thumb: 'photo-1639322537228-f710d846310a'
+      },
+      {
+        id: 'safetyforum-strategy-planning-briefing',
+        src: '재난안전_내실화를_위한_전략기획_briefing_presentation.html',
+        cat: '정책·R&D',
+        title: '재난안전 내실화를 위한 전략기획 · 정책 브리핑',
+        hook: '흰 배경 · 대형 수치 · 표·막대그래프 · 출처 중심',
+        desc: '기존 전략기획 자료를 브리핑·강의형 발표자료로 재구성한 버전.',
+        slides: '11장', isCinematic: false, style: 'BRIEFING', thumb: 'photo-1557683316-973673baf926'
+      },
+      {
+        id: 'safetyforum-strategy-planning-cinematic',
+        src: 'cinematic_preview_10.html',
+        cat: '정책·R&D',
+        title: '재난안전 내실화를 위한 전략기획 · 10장 시안',
+        hook: '완성본의 스타일을 확인하는 1~10장 미리보기',
+        desc: '원본 첫 10장의 내용으로 구성한 승인 시안. 비교 패널·대형 수치·단계 흐름·투자 차트와 챕터 이동을 확인할 수 있습니다.',
+        slides: '10장', isCinematic: true, style: 'CINEMATIC INTERACTIVE', thumb: 'photo-1473445361085-b9a07f55608b'
+      },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ];
+
+    const $ = id => document.getElementById(id);
+    const pad = n => String(n + 1).padStart(2, '0');
+    const esc = s => String(s).replace(/[&<>\"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;' }[c]));
+    let filterCat = '전체', filterStyle = 'all', sortBy = 'latest', currentId = null, isListMode = false;
+    const parseSlideCount = s => { const m = String(s).match(/\d+/); return m ? Number(m[0]) : 0; };
+    const thumbUrl = id => id ? `https://images.unsplash.com/${id}?auto=format&fit=crop&w=720&q=80` : '';
+    function getFilteredDecks(){
+      const q = $('searchInput').value.trim().toLowerCase();
+      const a = DECKS.filter(d => (filterCat === '전체' || d.cat === filterCat) && (filterStyle === 'all' || (filterStyle === 'BRIEFING' ? ['BRIEFING','MCKINSEY'].includes(d.style) : d.style === filterStyle)) && (!q || `${d.title} ${d.hook||''} ${d.desc||''}`.toLowerCase().includes(q)));
+      if(sortBy === 'slides-desc') a.sort((x,y)=>parseSlideCount(y.slides)-parseSlideCount(x.slides));
+      if(sortBy === 'slides-asc') a.sort((x,y)=>parseSlideCount(x.slides)-parseSlideCount(y.slides));
+      if(sortBy === 'title') a.sort((x,y)=>x.title.localeCompare(y.title,'ko'));
+      return a;
+    }
+    function renderSidebar(){
+      const cats = ['전체', ...new Set(DECKS.map(d => d.cat))];
+      $('sideMainGroup').innerHTML = `<button class="side-btn ${filterCat==='전체'&&filterStyle==='all'?'active':''}" data-nav="all"><span class="side-btn-left">⌂<span>홈 (전체)</span></span><span class="side-count">${DECKS.length}</span></button><button class="side-btn ${filterStyle==='CINEMATIC'?'active':''}" data-style="CINEMATIC"><span class="side-btn-left">🎬<span>시네마틱 덱</span></span></button><button class="side-btn ${filterStyle==='BRIEFING'?'active':''}" data-style="BRIEFING"><span class="side-btn-left">📊<span>브리핑 · 맥킨지</span></span></button><button class="side-btn ${filterStyle==='INTERACTIVE'?'active':''}" data-style="INTERACTIVE"><span class="side-btn-left">⚡<span>다크 인터랙티브</span></span></button>`;
+      $('sideCatGroup').innerHTML = cats.map(cat => { const color=CAT_COLORS[cat]||'var(--ink-subtle)'; return `<button class="side-btn ${filterCat===cat?'active':''}" data-cat="${esc(cat)}"><span class="side-btn-left"><span class="side-cat-dot" style="background:${color}"></span><span>${esc(cat==='전체'?'전체 카테고리':cat==='정책·R&D'?'정책':cat)}</span></span><span class="side-count">${DECKS.filter(d=>cat==='전체'||d.cat===cat).length}</span></button>`; }).join('');
+    }
+    function renderChips(){
+      const cats=[...new Set(DECKS.map(d=>d.cat))];
+      $('chipBar').innerHTML = `<button class="chip-btn ${filterCat==='전체'?'active':''}" data-cat="전체">전체 <b>${DECKS.length}</b></button>${cats.map(cat=>`<button class="chip-btn ${filterCat===cat?'active':''}" data-cat="${esc(cat)}">${esc(cat)} <b>${DECKS.filter(d=>d.cat===cat).length}</b></button>`).join('')}<span class="chip-sep"></span><button class="chip-btn ${filterStyle==='all'?'active':''}" data-style="all">전체 스타일</button><button class="chip-btn ${filterStyle==='CINEMATIC'?'active':''}" data-style="CINEMATIC">🎬 시네마틱</button><button class="chip-btn ${filterStyle==='BRIEFING'?'active':''}" data-style="BRIEFING">📊 브리핑</button><button class="chip-btn ${filterStyle==='INTERACTIVE'?'active':''}" data-style="INTERACTIVE">⚡ 인터랙티브</button>`;
+    }
+    function renderCards(){
+      const list=getFilteredDecks();
+      $('cardGrid').innerHTML=list.map(d=>{ const thumbCat=d.cat==='정책·R&D'?'정책':d.cat; const catColor=CAT_COLORS[d.cat]||'var(--primary)'; const tone=['BRIEFING','MCKINSEY'].includes(d.style)?' light-thumb':''; return `<article class="yt-card" data-id="${d.id}"><div class="yt-thumb${tone}"><div class="yt-thumb-img" style="background-image:url('${thumbUrl(d.thumb)}')"></div><div class="yt-thumb-shade"></div><div class="yt-thumb-poster"><span class="yt-thumb-cat">${esc(thumbCat)} · ${esc(d.style)}</span><div class="yt-thumb-headline">${esc(d.hook||d.title)}</div></div><span class="yt-duration">${esc(d.slides)}</span><div class="yt-play-hover"><div class="yt-play-circle">▶</div></div></div><div class="yt-meta"><div class="yt-avatar" style="background:${catColor}" title="${esc(thumbCat)} 카테고리">${esc(thumbCat.slice(0,2))}</div><div class="yt-info"><h3 class="yt-title">${esc(d.title)}</h3><div class="yt-subline">${esc(thumbCat)} · ${esc(d.style)} · ${esc(d.slides)}</div><p class="yt-desc">${esc(d.desc||'')}</p></div></div></article>`; }).join('');
+      $('emptyState').classList.toggle('show',list.length===0);
+    }
+    function resetAllFilters(){ filterCat='전체'; filterStyle='all'; sortBy='latest'; $('sortSelect').value='latest'; $('searchInput').value=''; refreshUI(); }
+    function refreshUI(){ renderSidebar(); renderChips(); renderCards(); }
+    function buildViewer(){ $('viewerRail').innerHTML=DECKS.map(d=>`<button class="rail-pill" data-id="${d.id}">${esc(d.title)}</button>`).join(''); $('viewerStage').innerHTML=DECKS.map(d=>`<div class="viewer-frame" id="frame-${d.id}"><iframe id="iframe-${d.id}" title="${esc(d.title)}"></iframe></div>`).join(''); }
+    function openDeck(id,push=true){ const d=DECKS.find(x=>x.id===id); if(!d)return showHub(push); currentId=d.id; document.body.classList.add('viewing'); document.querySelectorAll('.viewer-frame').forEach(f=>f.classList.toggle('active',f.id===`frame-${d.id}`)); document.querySelectorAll('.rail-pill').forEach(p=>p.classList.toggle('active',p.dataset.id===d.id)); const frame=$(`iframe-${d.id}`); if(frame&&!frame.src) frame.src=d.src; if(push) history.replaceState(null,'',`#tab=${id}`); }
+
+    function showHub(push = true) {
+      const last = currentId;
+      currentId = null;
+      document.body.classList.remove('viewing');
+      document.title = 'Club-Park Presentation Hub';
+      if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
+        document.activeElement.blur();
+        window.focus();
+      }
+
+      if (last) {
+        const lastCard = document.querySelector(`.yt-card[data-id="${last}"]`);
+        if (lastCard) lastCard.scrollIntoView({ block: 'nearest' });
+      }
+
+      if (push) history.replaceState(null, '', '#hub');
+    }
+
+    function stepDeck(dir) {
+      const idx = DECKS.findIndex(d => d.id === currentId);
+      if (idx < 0) return;
+      const nextIdx = (idx + dir + DECKS.length) % DECKS.length;
+      openDeck(DECKS[nextIdx].id);
+    }
+
+    function routeFromHash() {
+      const m = location.hash.match(/#tab=([^&]+)/);
+      if (m) {
+        openDeck(decodeURIComponent(m[1]), false);
+      } else {
+        showHub(false);
+      }
+    }
+
+    // 사이드바 접기/펼치기 (데스크탑은 미니 모드 토글, 태블릿/모바일은 드로어 토글)
+    $('sidebarToggle').addEventListener('click', () => {
+      if (window.innerWidth <= 1024) {
+        document.body.classList.toggle('sidebar-open');
+      } else {
+        document.body.classList.toggle('sidebar-mini');
+      }
+    });
+
+    $('sidebarBackdrop').addEventListener('click', () => {
+      document.body.classList.remove('sidebar-open');
+    });
+
+    // 로고 클릭 시 전체 보기 초기화
+    $('logoHome').addEventListener('click', e => {
+      e.preventDefault();
+      resetAllFilters();
+      showHub();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 그리드 / 리스트 보기 토글
+    $('viewModeToggle').addEventListener('click', () => {
+      isListMode = !isListMode;
+      $('cardGrid').classList.toggle('list-mode', isListMode);
+    });
+
+    // 테마 전환
+    $('themeToggle').addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // 좌측 사이드바 클릭 이벤트
+    $('sidebar').addEventListener('click', e => {
+      const btn = e.target.closest('.side-btn');
+      if (!btn) return;
+      if (btn.dataset.nav === 'all') {
+        filterCat = '전체';
+        filterStyle = 'all';
+      } else if (btn.dataset.style) {
+        filterStyle = btn.dataset.style;
+      } else if (btn.dataset.cat) {
+        filterCat = btn.dataset.cat;
+      }
+      document.body.classList.remove('sidebar-open');
+      refreshUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 상단 칩 바 클릭 이벤트
+    $('chipBar').addEventListener('click', e => {
+      const btn = e.target.closest('.chip-btn');
+      if (!btn) return;
+      if (btn.dataset.cat) {
+        filterCat = btn.dataset.cat;
+      } else if (btn.dataset.style) {
+        filterStyle = btn.dataset.style;
+      }
+      refreshUI();
+    });
+
+    // 정렬 변경
+    $('sortSelect').addEventListener('change', e => {
+      sortBy = e.target.value;
+      renderCards();
+    });
+
+    // 필터 초기화 버튼
+    $('resetFilterBtn').addEventListener('click', resetAllFilters);
+    $('emptyResetBtn').addEventListener('click', resetAllFilters);
+
+    // 검색 입력 이벤트
+    $('searchInput').addEventListener('input', e => {
+      $('searchClear').classList.toggle('visible', !!e.target.value);
+      renderCards();
+    });
+
+    $('searchClear').addEventListener('click', () => {
+      $('searchInput').value = '';
+      $('searchClear').classList.remove('visible');
+      $('searchInput').focus();
+      renderCards();
+    });
+
+    // 카드 클릭 시 뷰어 열기
+    $('cardGrid').addEventListener('click', e => {
+      const card = e.target.closest('.yt-card');
+      if (card) openDeck(card.dataset.id);
+    });
+
+    $('viewerRail').addEventListener('click', e => {
+      const pill = e.target.closest('.rail-pill');
+      if (pill) openDeck(pill.dataset.id);
+    });
+
+    $('viewerBack').addEventListener('click', () => showHub());
+    $('viewerPrev').addEventListener('click', () => stepDeck(-1));
+    $('viewerNext').addEventListener('click', () => stepDeck(1));
+    $('viewerFullscreen').addEventListener('click', () => {
+      document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+    });
+
+    window.addEventListener('scroll', () => {
+      $('scrollTop').classList.toggle('visible', window.scrollY > 300);
+    });
+    $('scrollTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('keydown', e => {
+      if (!currentId && e.target !== $('searchInput') && (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'))) {
+        e.preventDefault();
+        $('searchInput').focus();
+        return;
+      }
+
+      if (!currentId) {
+        if (e.key === 'Escape' && document.body.classList.contains('sidebar-open')) {
+          document.body.classList.remove('sidebar-open');
+        }
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        showHub();
+        return;
+      }
+
+      try {
+        $(`iframe-${currentId}`).contentWindow.dispatchEvent(new KeyboardEvent('keydown', {
+          key: e.key, code: e.code, keyCode: e.keyCode, which: e.which, bubbles: true
+        }));
+      } catch (err) { }
+    });
+
+    window.addEventListener('hashchange', routeFromHash);
+
+    // 초기화
+    if ($('deckCountBadge')) $('deckCountBadge').textContent = `${DECKS.length} DECKS`;
+    refreshUI();
+    buildViewer();
+    routeFromHash();
+  </script>
 </body>
+
 </html>

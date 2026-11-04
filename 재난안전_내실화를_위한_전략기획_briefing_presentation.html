@@ -1,0 +1,387 @@
+<!-- 브리핑 강의형 발표자료: 재난안전 내실화를 위한 전략기획 (11장) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>재난안전 내실화를 위한 전략기획 · 정책 브리핑</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ac:#2f62f0;            /* 주 강조색 (DECK.accent로 덮어씀) */
+  --ac2:#4cc3f5;           /* 그라디언트 끝색 (DECK.accent2) */
+  --ink:#15171c; --ink2:#2b2f37; --mu:#5d636e; --dim:#8d939d;
+  --card:#f4f6f9; --line:#e3e7ed; --stripe:#f2f6ff; --bar:#3d4048;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{width:100%;height:100%;overflow:hidden;background:#fff;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--ink);word-break:keep-all}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#fff}
+#slide{position:absolute;inset:0}
+.grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* 순차 등장 */
+[data-s]{opacity:0;transform:translateY(18px);transition:opacity .55s ease var(--d,0s),transform .55s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+[data-s].on{opacity:1;transform:none}
+
+/* --- 본문 공통 (흰 배경) --- */
+.std{position:absolute;inset:0;padding:96px 144px 118px;display:flex;flex-direction:column}
+.eyebrow{font-size:26px;font-weight:700;letter-spacing:.01em}
+.title{margin-top:14px;font-size:54px;font-weight:300;line-height:1.32;color:var(--ink2);letter-spacing:-.01em}
+.title b{font-weight:800;color:var(--ink)}
+.body{flex:1;display:flex;align-items:center;min-height:0}
+.src{margin-top:24px;font-size:19px;line-height:1.55;color:var(--dim);text-align:center}
+.take{margin-top:36px;font-size:38px;font-weight:800;color:var(--ink2);text-align:center;letter-spacing:-.01em}
+
+/* split: 좌측 카드 + 우측 표/선택지 */
+.split{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.card{background:var(--card);border-radius:36px;padding:60px 56px;min-height:470px;display:flex;flex-direction:column;justify-content:center}
+.metric{text-align:center}
+.metric .big{font-size:170px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.metric .big small{font-size:84px;font-weight:600;letter-spacing:0;margin-left:6px}
+.metric .cap{margin-top:40px;font-size:34px;font-weight:700;color:var(--ink)}
+.metric .desc{margin-top:14px;font-size:25px;line-height:1.6;color:var(--mu)}
+.text h3{font-size:40px;font-weight:800;color:var(--ink2)}
+.text p{margin-top:36px;font-size:25px;line-height:1.7;color:var(--mu)}
+.text p+p{margin-top:28px}
+
+.tbl{width:100%}
+.tbl .row{display:grid;align-items:center;padding:0 26px;min-height:80px;font-size:24px;font-weight:600;color:var(--ink2)}
+.tbl .row:nth-child(even){background:var(--stripe)}
+.tbl .hd{min-height:50px;border-radius:12px;background:var(--bar);color:#fff;font-size:18px;font-weight:600;margin-bottom:6px}
+.tbl .row>span{padding-right:16px}
+.tbl .row:not(.hd) .v{color:var(--ac);font-weight:700;font-size:27px;font-variant-numeric:tabular-nums}
+.tbl .row:not(.hd) .v.sep{border-left:1px solid #d6dbe4;padding-left:22px}
+.tbl .hd .v.sep{padding-left:23px}
+
+.opts{display:flex;flex-direction:column;gap:20px}
+.opt{border:1.5px solid var(--line);border-radius:20px;padding:24px 32px;text-align:center;background:#fff}
+.opt .k{font-size:21px;font-weight:700;color:var(--ac)}
+.opt .t{margin-top:6px;font-size:27px;font-weight:700;color:var(--ink)}
+.opt .d{margin-top:6px;font-size:20px;color:var(--mu)}
+.opt.em{background:var(--ac);border-color:var(--ac);box-shadow:0 18px 40px rgba(var(--ac-rgb),.28)}
+.opt.em .k,.opt.em .d{color:rgba(255,255,255,.85)}
+.opt.em .t{color:#fff}
+
+/* bars */
+.bars{width:100%;height:100%;display:flex;justify-content:center;align-items:flex-end;gap:96px;padding-bottom:6px}
+.bcol{display:flex;flex-direction:column;align-items:center;width:150px}
+.bcol .val{font-size:46px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums}
+.bcol .val small{font-size:22px;font-weight:600;margin-left:3px}
+.bcol .b{margin-top:16px;width:150px;border-radius:26px;background:#e3e5e9}
+.bcol.em .val{color:var(--ac)}
+.bcol.em .b{background:linear-gradient(180deg,var(--ac) 0%,rgba(var(--ac-rgb),.55) 55%,rgba(var(--ac-rgb),.04) 100%)}
+.bcol .lb{margin-top:20px;font-size:25px;line-height:1.4;color:var(--mu);text-align:center;white-space:nowrap}
+
+/* quotes */
+.quotes{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.qcard{background:var(--card);border-radius:32px;padding:56px 56px 50px;display:flex;flex-direction:column}
+.qcard .q{font-size:33px;font-weight:700;line-height:1.5;color:var(--ink)}
+.qcard .qd{margin-top:36px;font-size:23px;line-height:1.7;color:var(--mu);flex:1}
+.qcard .by{margin-top:34px;font-size:21px;color:var(--mu)}
+
+/* cards (수치 3개) */
+.cards{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.scard{background:var(--card);border-radius:30px;padding:52px 44px}
+.scard .v{font-size:80px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.scard .v small{font-size:38px;font-weight:600;margin-left:4px}
+.scard .l{margin-top:30px;font-size:31px;font-weight:700;color:var(--ink)}
+.scard .d{margin-top:16px;font-size:22px;line-height:1.65;color:var(--mu)}
+
+/* delta-bars: 레퍼런스 (두 막대 사이 옐로우 배지) */
+.delta-bars-wrap{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:80px;height:100%;width:100%;max-width:900px;padding-bottom:10px}
+.delta-bars-wrap .bcol{width:190px}
+.delta-bars-wrap .bcol .b{width:190px;border-radius:24px}
+.delta-badge{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);background:#ffd54a;color:#15171c;font-size:22px;font-weight:800;padding:12px 26px;border-radius:999px;box-shadow:0 12px 28px rgba(0,0,0,.1);z-index:2;white-space:nowrap}
+
+/* level4: 레퍼런스 (가로 4분할 레벨 카드) */
+.level4{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch}
+.lcard{background:var(--card);border-radius:26px;padding:46px 34px;display:flex;flex-direction:column;border:2px solid transparent;transition:all .3s}
+.lcard .lv{font-size:36px;font-weight:800;color:var(--ink)}
+.lcard .maintxt{margin-top:28px;font-size:25px;font-weight:700;color:var(--ink2);line-height:1.45}
+.lcard .subtxt{margin-top:36px;font-size:20px;line-height:1.65;color:var(--mu);flex:1}
+.lcard.em{background:#fff;border-color:var(--ac);box-shadow:0 18px 45px rgba(var(--ac-rgb),.14)}
+.lcard.em .lv{color:var(--ac)}
+
+/* cards3: 레퍼런스 (3콘셉트 텍스트 카드) */
+.cards3{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:stretch}
+.c3card{background:var(--card);border-radius:28px;padding:54px 44px;display:flex;flex-direction:column}
+.c3card .h{font-size:38px;font-weight:800;color:var(--ink)}
+.c3card .p{margin-top:28px;font-size:22px;line-height:1.65;color:var(--mu);flex:1}
+
+/* flow3: 레퍼런스 (3단계 화살표 플로우) */
+.flow3{width:100%;display:flex;align-items:center;justify-content:center;gap:20px}
+.flow-box{border:1.5px solid var(--line);border-radius:22px;padding:32px 38px;font-size:25px;font-weight:700;color:var(--ink2);background:#fff;text-align:center;max-width:440px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.03)}
+.flow-arrow{font-size:24px;color:var(--ac);display:flex;align-items:center;justify-content:center;user-select:none}
+.flow-box.em{background:var(--ac);border-color:var(--ac);color:#fff;box-shadow:0 18px 40px rgba(var(--ac-rgb),.28)}
+
+/* fulltable: 레퍼런스 (전폭 6행 아젠다 테이블) */
+.fulltbl{width:100%;max-width:1600px}
+.fulltbl .row{display:grid;align-items:center;padding:0 36px;min-height:70px;font-size:23px;font-weight:600;color:var(--ink2);border-bottom:1px solid #edf0f5}
+.fulltbl .row:nth-child(even){background:var(--stripe)}
+.fulltbl .hd{min-height:54px;border-radius:12px;background:var(--bar);color:#fff;font-size:19px;font-weight:700;margin-bottom:8px;border-bottom:none}
+.fulltbl .c-part{font-weight:700;color:var(--ink)}
+.fulltbl .c-what{color:var(--ac);font-weight:700}
+.fulltbl .c-why{color:var(--mu)}
+
+/* center-quote: 레퍼런스 (중앙 대형 인용 + 2단 설명) */
+.cquote{width:100%;max-width:1480px;text-align:left}
+.cquote .q{font-size:33px;font-weight:800;line-height:1.6;color:var(--ink)}
+.cquote .desc{margin-top:36px;font-size:24px;line-height:1.75;color:var(--mu)}
+.cquote .desc p+p{margin-top:20px}
+
+/* --- 파트 표지 (네이비 격자) --- */
+.part{position:absolute;inset:0;color:#fff;overflow:hidden;
+  background:radial-gradient(ellipse 34% 46% at 2% 34%,rgba(36,120,235,.85),transparent 72%),
+    radial-gradient(ellipse 42% 48% at 92% 96%,rgba(24,80,225,.9),transparent 72%),
+    radial-gradient(ellipse 50% 60% at 48% 70%,rgba(14,58,170,.75),transparent 75%),
+    linear-gradient(165deg,#1b2a40 0%,#122a63 55%,#0b1f55 100%)}
+.part .grid{position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 330px,rgba(255,255,255,.08) 330px,rgba(255,255,255,.08) 331px,transparent 331px,transparent 486px,rgba(255,255,255,.08) 486px,rgba(255,255,255,.08) 487px,transparent 487px,transparent 1440px,rgba(255,255,255,.08) 1440px,rgba(255,255,255,.08) 1441px,transparent 1441px),
+    linear-gradient(180deg,transparent 394px,rgba(255,255,255,.08) 394px,rgba(255,255,255,.08) 395px,transparent 395px,transparent 688px,rgba(255,255,255,.08) 688px,rgba(255,255,255,.08) 689px,transparent 689px)}
+.part .ring{position:absolute;width:980px;height:980px;border-radius:50%;border:1.5px solid rgba(255,255,255,.09);top:40px}
+.part .r1{left:220px}.part .r2{left:710px}
+.part .in{position:absolute;left:144px;top:196px}
+.part .kick{font-size:29px;font-weight:500;color:rgba(255,255,255,.88)}
+.part .pnum{margin-top:44px;font-size:110px;font-weight:800;line-height:1.05;background:linear-gradient(100deg,#5db6ff,#3b78ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.part .ptitle{font-size:110px;font-weight:800;line-height:1.2;letter-spacing:-.01em}
+.part .psub{margin-top:34px;font-size:32px;color:rgba(255,255,255,.72)}
+.part .brand{position:absolute;left:144px;bottom:108px}
+.part .brand b{display:flex;align-items:center;gap:14px;font-size:31px;font-weight:700}
+.part .brand span{display:block;margin-top:18px;font-size:20px;color:rgba(255,255,255,.6)}
+
+/* --- 목차 --- */
+.contents{position:absolute;inset:0;display:grid;grid-template-columns:580px 1fr;padding:200px 240px 0 240px}
+.contents h2{font-size:56px;font-weight:800}
+.contents ol{list-style:none}
+.contents li{display:grid;grid-template-columns:90px 1fr auto;align-items:center;height:130px;border-bottom:1px solid var(--line)}
+.contents li:first-child{border-top:1px solid var(--line)}
+.contents li .n{font-size:38px;font-weight:800}
+.contents li .t{font-size:34px;font-weight:700;color:var(--ink2)}
+.contents li .tag{font-size:19px;font-weight:600;color:var(--mu);background:var(--card);padding:8px 18px;border-radius:999px}
+
+/* --- 섹션 구분 (검정) --- */
+.section{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 40%,#202227,#141518 75%);color:#fff}
+.section .in{position:absolute;left:144px;top:360px}
+.section .snum{font-size:60px;font-weight:800}
+.section .stitle{margin-top:18px;font-size:92px;font-weight:800;letter-spacing:-.01em}
+.section .smeta{margin-top:30px;font-size:30px;line-height:1.95;color:#9ba1ab}
+
+/* --- 하단 챕터 바 · 카운터 --- */
+#pbar{position:absolute;left:0;right:0;bottom:0;height:46px;display:flex;z-index:5;transition:opacity .3s}
+#pbar.hide{opacity:0;pointer-events:none}
+#pbar div{flex:1;display:grid;place-items:center;font-size:20px;font-weight:600;color:#a3a8b1;background:#f3f4f6;cursor:pointer;transition:background .2s}
+#pbar div:hover{background:#e7e9ed}
+#pbar div.on{background:var(--bar);color:#fff}
+#counter{position:absolute;right:28px;bottom:54px;font-size:17px;font-weight:600;color:var(--dim);cursor:pointer;z-index:6;font-variant-numeric:tabular-nums}
+#counter.dark{color:rgba(255,255,255,.5)}
+
+/* --- 점프 --- */
+#jump-toast{position:absolute;left:50%;top:60px;transform:translateX(-50%);padding:14px 26px;border-radius:14px;font-size:22px;font-weight:700;background:var(--bar);color:#fff;z-index:9;display:none}
+#jump-modal{position:absolute;inset:0;background:rgba(10,12,16,.45);display:none;place-items:center;z-index:10}
+#jump-modal.open{display:grid}
+#jump-modal form{padding:40px 48px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:20px;align-items:center;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+#jump-modal label{font-size:24px;font-weight:700;color:var(--ac)}
+#jump-input{width:160px;height:56px;font-size:32px;font-weight:700;text-align:center;border-radius:12px;border:1.5px solid var(--line);color:var(--ink)}
+#jump-modal button{padding:12px 32px;border-radius:12px;font-size:18px;font-weight:700;background:var(--ac);color:#fff;border:none;cursor:pointer}
+@media (prefers-reduced-motion:reduce){[data-s]{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="slide"></div>
+  <div id="pbar"></div>
+  <div id="counter" title="클릭하거나 G 키로 페이지 이동"></div>
+  <div id="jump-toast">Go to <b id="jump-num"></b></div>
+  <div id="jump-modal"><form><label for="jump-input">페이지 바로 이동</label><input id="jump-input" type="number" min="1"><button>이동</button></form></div>
+</div>
+
+<script>
+/* ===================== 덱 데이터 — 이 부분만 고친다 ===================== */
+const DECK = {
+  brand: { name: '재난안전 R&D', contact: '전략기획 브리핑 · 박영진' },
+  eyebrow: '재난안전 연구개발 내실화',
+  accent: '#2f62f0', accent2: '#4cc3f5',
+  reveal: 'auto',
+  chapters: ['정책·투자 환경', '데이터 기반 기획', '현장 활용과 전략'],
+  slides: [
+    { layout: 'part', kicker: '정책·연구개발 브리핑 · 2026', part: 'Part 1.', title: '재난안전 연구개발<br><b>내실화를 위한 전략기획</b>', sub: '수요·투자·성과를 연결해 현장 활용을 높이는 기획체계' },
+    { layout: 'contents', tags: ['정책', '데이터', '실행'], items: ['정책·투자 환경과 현재의 질문', '데이터 기반 투자·성과 분석', '현장 활용을 위한 전략과 과제'] },
+
+    { layout: 'section', chapter: 0, title: '재난안전 R&D는 <b>현장 작동성</b>을 중심으로 재설계해야 한다', meta: ['Part 1. 정책·투자 환경 · 8분', '상위계획과 재정기조를 연구개발 기획의 기준으로 연결'] },
+    { layout: 'split', chapter: 0,
+      title: '정책 방향은 분명하지만 <b>기획 근거는 분산</b>되어 있다',
+      left: { type: 'metric', value: '5', unit: '개', label: '기획 판단에 함께 연결해야 할 핵심 데이터 축', desc: '국민수요 · 정책·투자 · 과제·성과 · 현장활용' },
+      right: { type: 'options', items: [
+        { k: '01', t: '국가 안전관리', d: '과학적 예측과 현장 작동 체계' },
+        { k: '02', t: '과학기술 정책', d: '사회문제 해결과 임무지향 연구' },
+        { k: '03', t: '재정·투자', d: '예방부터 대응·복구까지의 투자 연결', em: true }] },
+      src: '출처 · 원 발표자료의 정책동향 정리; 제5차 국가안전관리기본계획(2024.6.28), 제3차 과학기술기반 사회문제해결 종합계획(2023.2.22)',
+      take: '정책 방향을 과제 기획의 공통 언어로 바꾸는 연결체계가 필요하다.' },
+
+    { layout: 'section', chapter: 1, title: '분산된 자료를 <b>공통 기준</b>으로 묶어야 투자 판단이 바뀐다', meta: ['Part 2. 데이터 기반 기획 · 10분', '수요·투자·과제·성과를 재난유형과 핵심기술 축으로 통합'] },
+    { layout: 'flow3', chapter: 1, title: '데이터 기반 전략기획의 <b>3단계 전환</b>', items: [{ text: '수요를 구조화<br>국민·현장 문제를 재난유형으로 분류' }, { text: '투자를 연결<br>사업·과제·예산을 공통 축으로 매칭' }, { text: '성과를 환류<br>중복·공백·확산 가능성을 재기획에 반영', em: true }], src: '출처 · 원 발표자료의 「재난안전 R&D 레이더」 개념 및 데이터 연계 구조', take: '분석의 목적은 조회가 아니라 다음 투자 결정을 더 정교하게 만드는 것이다.' },
+    { layout: 'bars', chapter: 1,
+      title: '재난안전 R&D 투자는 <b>규모보다 흐름</b>으로 읽어야 한다',
+      items: [{ label: '2026 재난유형', value: 15170, show: '15,170', unit: '백만원' }, { label: '2026 생활안전', value: 11116, show: '11,116', unit: '백만원', em: true }, { label: '2026 사회재난', value: 480, show: '480', unit: '백만원' }],
+      src: '출처 · 원 발표자료 표: 재난 및 안전관리 기술개발(R&D) 연도별 투자규모. 항목별 집계 기준은 원자료 정의를 따름.', take: '투자액 자체보다 재난유형·사업·성과의 연결 구조를 함께 관리해야 한다.' },
+    { layout: 'cards3', chapter: 1, title: '성과관리의 기준을 <b>산출물에서 활용</b>으로 이동한다', items: [{ h: '성과 창출', p: '논문·특허·기술료 등<br>연구 결과를 체계적으로 수집' }, { h: '성과 해석', p: '문제·대상·기능·접근방법을<br>의미 단위로 비교' }, { h: '성과 활용', p: '중복 방지와 후속기획으로<br>현장 활용 가능성을 높임' }], src: '출처 · 원 발표자료의 AI 유사과제 검색 및 성과 환류 구상', take: '성과는 기록하는 데서 끝나지 않고 다음 과제의 설계변수가 되어야 한다.' },
+
+    { layout: 'section', chapter: 2, title: '전략은 기술 목록이 아니라 <b>현장 수요와 실행체계</b>여야 한다', meta: ['Part 3. 현장 활용과 전략 · 10분', '기술·데이터·제도·현장기관을 하나의 실행 포트폴리오로 설계'] },
+    { layout: 'fulltable', chapter: 2, title: '내실화를 위한 <b>전략기획 아젠다</b>', cols: '1fr 2.2fr 2.2fr', head: ['전략축', '무엇을 바꿀 것인가', '왜 필요한가'], rows: [['수요 기반', '현장기관과 문제·요건을 공동 정의', '개발 후 활용처 부재를 예방'], ['데이터 기반', '수요·투자·과제·성과를 공통 기준으로 연계', '중복·공백·우선순위 판단을 객관화'], ['실증 기반', '운용환경·교육·유지관리까지 검증', '시제품과 실제 운영 사이의 단절을 축소'], ['확산 기반', '조달·표준·책임체계를 후속과제로 연결', '과제 종료 후 지속 사용을 가능하게 함']], src: '출처 · 원 발표자료 및 국가연구개발혁신법의 연구개발성과 활용·추적관리 취지', take: '재난안전 R&D의 내실화는 연구과제의 품질과 도입체계의 품질을 함께 높이는 일이다.' },
+    { layout: 'cards', chapter: 2, title: '최종적으로 관리해야 할 것은 <b>세 가지 결과</b>다', items: [{ value: '수요', unit: '적합성', label: '현장 문제와 맞는가', desc: '사용자·업무·재난 시나리오와<br>연결된 기획인가' }, { value: '현장', unit: '운용성', label: '반복 사용 가능한가', desc: '성능뿐 아니라 교육·데이터·<br>유지관리까지 준비됐는가' }, { value: '확산', unit: '가능성', label: '다른 기관으로 퍼지는가', desc: '조달·표준·책임체계로<br>이어질 수 있는가' }], src: '제안 프레임 · 원 발표자료의 현장 활용 및 성과 환류 방향을 브리핑형 지표로 재구성', take: '“만들었는가”에서 “계속 쓰이는가”로 평가 질문을 바꿔야 한다.' },
+    { layout: 'part', kicker: '정책 제언 · 2026', part: 'Next.', title: '연구개발의 시작부터<br><b>현장 활용을 설계한다</b>', sub: '수요 공동설계 · 데이터 연계 · 운용 실증 · 제도 확산' }
+  ]
+};
+/* ===================== 렌더링 엔진 — 고치지 않는다 ===================== */
+const $ = id => document.getElementById(id);
+const S = DECK.slides;
+let cur = 0, step = 0, maxStep = 0;
+const pad = i => String(i).padStart(2, '0');
+const LOGO = `<svg width="40" height="30" viewBox="0 0 40 30"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#5db6ff"/><stop offset="1" stop-color="#3b78ff"/></linearGradient></defs><path d="M2 28 16 2h9L11 28z" fill="url(#lg)"/><path d="M18 28 25 15l7 13z" fill="#ffd54a"/></svg>`;
+
+const head = (s, n) => `<div class="eyebrow grad" ${n(0)}>${s.eyebrow || DECK.eyebrow || ''}</div><h2 class="title" ${n(0)}>${s.title}</h2>`;
+const foot = (s, n, k) => (s.src ? `<div class="src" ${n(k)}>${s.src}</div>` : '') + (s.take ? `<div class="take" ${n(k + 1)}>${s.take}</div>` : '');
+const std = (s, n, body, k) => `<div class="std">${head(s, n)}<div class="body">${body}</div>${foot(s, n, k)}</div>`;
+const num = (v, u) => `${v}<small>${u || ''}</small>`;
+
+const LEFT = {
+  metric: p => `<div class="card metric"><div class="big grad">${num(p.value, p.unit)}</div><div class="cap">${p.label}</div>${p.desc ? `<div class="desc">${p.desc}</div>` : ''}</div>`,
+  text: p => `<div class="card text"><h3>${p.head}</h3>${p.paras.map(t => `<p>${t}</p>`).join('')}</div>`
+};
+const RIGHT = {
+  table: p => {
+    const row = (r, cls) => `<div class="row ${cls}" style="grid-template-columns:${p.cols}">${r.map((c, i) => `<span class="${i === p.val ? (i ? 'v sep' : 'v') : ''}">${c}</span>`).join('')}</div>`;
+    return `<div class="tbl">${row(p.head, 'hd')}${p.rows.map(r => row(r, '')).join('')}</div>`;
+  },
+  options: p => `<div class="opts">${p.items.map(it =>
+    `<div class="opt${it.em ? ' em' : ''}">${it.k ? `<div class="k">${it.k}</div>` : ''}<div class="t">${it.t}</div>${it.d ? `<div class="d">${it.d}</div>` : ''}</div>`).join('')}</div>`
+};
+
+const LAYOUTS = {
+  part: (s, n) => `<div class="part"><div class="grid"></div><div class="ring r1"></div><div class="ring r2"></div>
+      <div class="in"><div class="kick" ${n(0)}>${s.kicker || ''}</div><div class="pnum" ${n(1)}>${s.part || ''}</div><h1 class="ptitle" ${n(1)}>${s.title}</h1>${s.sub ? `<p class="psub" ${n(2)}>${s.sub}</p>` : ''}</div>
+      <div class="brand" ${n(2)}><b>${LOGO}${DECK.brand.name}</b>${DECK.brand.contact ? `<span>${DECK.brand.contact}</span>` : ''}</div></div>`,
+  contents: (s, n) => `<div class="contents"><h2 class="grad" ${n(0)}>Contents</h2><ol>${(s.items || DECK.chapters).map((t, i) =>
+      `<li ${n(i + 1)}><span class="n grad">${pad(i + 1)}</span><span class="t">${t}</span>${s.tags && s.tags[i] ? `<span class="tag">${s.tags[i]}</span>` : '<span></span>'}</li>`).join('')}</ol></div>`,
+  section: (s, n) => `<div class="section"><div class="in"><div class="snum grad" ${n(0)}>${s.num || pad((s.chapter ?? 0) + 1)}</div>
+      <h1 class="stitle" ${n(1)}>${s.title}</h1>${s.meta ? `<div class="smeta" ${n(2)}>${s.meta.join('<br>')}</div>` : ''}</div></div>`,
+  split: (s, n) => std(s, n, `<div class="split"><div ${n(1)}>${LEFT[s.left.type](s.left)}</div><div ${n(2)}>${RIGHT[s.right.type](s.right)}</div></div>`, 3),
+  bars: (s, n) => {
+    const max = Math.max(...s.items.map(it => it.value));
+    return std(s, n, `<div class="bars">${s.items.map((it, i) =>
+      `<div class="bcol${it.em ? ' em' : ''}" ${n(i + 1)}><div class="val">${num(it.show ?? it.value, it.unit)}</div><div class="b" style="height:${Math.max(24, it.value / max * (s.h || 300))}px"></div><div class="lb">${it.label}</div></div>`).join('')}</div>`, s.items.length + 1);
+  },
+  quotes: (s, n) => std(s, n, `<div class="quotes">${s.items.map((it, i) =>
+      `<div class="qcard" ${n(i + 1)}><div class="q">${it.quote}</div>${it.desc ? `<div class="qd">${it.desc}</div>` : ''}${it.by ? `<div class="by">${it.by}</div>` : ''}</div>`).join('')}</div>`, s.items.length + 1),
+  cards: (s, n) => std(s, n, `<div class="cards">${s.items.map((it, i) =>
+      `<div class="scard" ${n(i + 1)}><div class="v grad">${num(it.value, it.unit)}</div><div class="l">${it.label}</div>${it.desc ? `<div class="d">${it.desc}</div>` : ''}</div>`).join('')}</div>`, s.items.length + 1),
+
+  deltabars: (s, n) => {
+    const max = Math.max(...s.items.map(it => it.value));
+    const barsHtml = s.items.map((it, i) =>
+      `<div class="bcol${it.em ? ' em' : ''}" ${n(i + 1)}><div class="val">${num(it.show ?? it.value, it.unit)}</div><div class="b" style="height:${Math.max(24, it.value / max * 320)}px"></div><div class="lb">${it.label}</div></div>`).join('');
+    return std(s, n, `<div class="delta-bars-wrap">${barsHtml}<div class="delta-badge" ${n(s.items.length + 1)}>${s.delta}</div></div>`, s.items.length + 2);
+  },
+
+  level4: (s, n) => std(s, n, `<div class="level4">${s.items.map((it, i) =>
+    `<div class="lcard${it.em ? ' em' : ''}" ${n(i + 1)}><div class="lv">${it.lv}</div><div class="maintxt">${it.main}</div><div class="subtxt">${it.sub}</div></div>`).join('')}</div>`, s.items.length + 1),
+
+  cards3: (s, n) => std(s, n, `<div class="cards3">${s.items.map((it, i) =>
+    `<div class="c3card" ${n(i + 1)}><div class="h">${it.h}</div><div class="p">${it.p}</div></div>`).join('')}</div>`, s.items.length + 1),
+
+  flow3: (s, n) => {
+    let html = '<div class="flow3">';
+    s.items.forEach((it, i) => {
+      html += `<div class="flow-box${it.em ? ' em' : ''}" ${n(i * 2 + 1)}>${it.text}</div>`;
+      if (i < s.items.length - 1) {
+        html += `<div class="flow-arrow" ${n(i * 2 + 2)}>▶</div>`;
+      }
+    });
+    html += '</div>';
+    return std(s, n, html, s.items.length * 2);
+  },
+
+  fulltable: (s, n) => {
+    const headRow = `<div class="row hd" style="grid-template-columns:${s.cols}">${s.head.map(h => `<span>${h}</span>`).join('')}</div>`;
+    const bodyRows = s.rows.map((r, i) =>
+      `<div class="row" style="grid-template-columns:${s.cols}" ${n(i + 1)}><span class="c-part">${r[0]}</span><span class="c-what">${r[1]}</span><span class="c-why">${r[2]}</span></div>`).join('');
+    return std(s, n, `<div class="fulltbl">${headRow}${bodyRows}</div>`, s.rows.length + 1);
+  },
+
+  cquote: (s, n) => std(s, n, `<div class="cquote"><div class="q" ${n(1)}>${s.quote}</div><div class="desc" ${n(2)}>${s.paras.map(p => `<p>${p}</p>`).join('')}</div></div>`, 3)
+};
+
+function renderBar() {
+  const s = S[cur], on = s.chapter != null && !['part', 'contents'].includes(s.layout);
+  $('pbar').classList.toggle('hide', !on);
+  $('pbar').innerHTML = DECK.chapters.map((c, i) => `<div class="${i === s.chapter ? 'on' : ''}" data-slide="${Math.max(0, S.findIndex(x => x.chapter === i))}" title="${c}">${pad(i + 1)}</div>`).join('');
+  $('counter').classList.toggle('dark', ['part', 'section'].includes(s.layout));
+}
+
+function go(i, full) {
+  cur = Math.max(0, Math.min(S.length - 1, i));
+  const s = S[cur];
+  $('slide').innerHTML = LAYOUTS[s.layout](s, k => `data-s="${k}"`);
+  renderBar();
+  $('counter').textContent = `${cur + 1} / ${S.length}`;
+  try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) { }
+  const els = [...$('slide').querySelectorAll('[data-s]')];
+  maxStep = Math.max(0, ...els.map(e => +e.dataset.s));
+  const mode = s.reveal || DECK.reveal;
+  step = (full || mode === 'auto') ? maxStep : 0;
+  els.forEach(e => e.style.setProperty('--d', mode === 'auto' && !full ? (0.08 + e.dataset.s * 0.2) + 's' : '0s'));
+  requestAnimationFrame(() => requestAnimationFrame(showSteps));
+}
+function showSteps() { $('slide').querySelectorAll('[data-s]').forEach(e => e.classList.toggle('on', +e.dataset.s <= step)); }
+function next() { if (step < maxStep) { step++; showSteps(); } else if (cur < S.length - 1) go(cur + 1); }
+function prev() { if (cur > 0) go(cur - 1, true); }
+
+function scale() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  $('stage').style.transform = `translate(${(innerWidth - 1920 * k) / 2}px,${(innerHeight - 1080 * k) / 2}px) scale(${k})`;
+}
+
+let buf = '', bufT;
+function jumpTo(v) { const n = parseInt(v, 10); if (n >= 1 && n <= S.length) go(n - 1, true); }
+function openModal() { $('jump-modal').classList.add('open'); const inp = $('jump-input'); inp.max = S.length; inp.value = ''; inp.focus(); }
+function closeModal() { $('jump-modal').classList.remove('open'); }
+$('jump-modal').querySelector('form').addEventListener('submit', e => { e.preventDefault(); jumpTo($('jump-input').value); closeModal(); });
+$('jump-modal').addEventListener('click', e => { if (e.target.id === 'jump-modal') closeModal(); });
+$('counter').addEventListener('click', e => { e.stopPropagation(); openModal(); });
+$('pbar').addEventListener('click', e => {
+  e.stopPropagation();
+  const t = e.target.closest('[data-slide]');
+  if (t) go(+t.dataset.slide, true);
+});
+
+window.addEventListener('keydown', e => {
+  if ($('jump-modal').classList.contains('open')) { if (e.key === 'Escape') closeModal(); return; }
+  if (/^[0-9]$/.test(e.key)) {
+    buf += e.key; $('jump-num').textContent = buf; $('jump-toast').style.display = 'block';
+    clearTimeout(bufT); bufT = setTimeout(() => { jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; }, 1200);
+    return;
+  }
+  if (e.key === 'Enter' && buf) { clearTimeout(bufT); jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; return; }
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+  else if (e.key === 'Home') go(0);
+  else if (e.key === 'End') go(S.length - 1, true);
+  else if (e.key === 'g' || e.key === 'G') { e.preventDefault(); openModal(); }
+  else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.(); }
+});
+$('stage').addEventListener('click', e => { if (!e.target.closest('#jump-modal')) next(); });
+let tx0 = null;
+addEventListener('touchstart', e => tx0 = e.touches[0].clientX, { passive: true });
+addEventListener('touchend', e => { if (tx0 === null) return; const dx = e.changedTouches[0].clientX - tx0; if (Math.abs(dx) > 50) dx < 0 ? next() : prev(); tx0 = null; });
+
+const hex = DECK.accent.replace('#', '');
+document.documentElement.style.setProperty('--ac', DECK.accent);
+document.documentElement.style.setProperty('--ac2', DECK.accent2 || DECK.accent);
+document.documentElement.style.setProperty('--ac-rgb', [0, 2, 4].map(i => parseInt(hex.substr(i, 2), 16)).join(','));
+addEventListener('resize', scale); scale();
+window.addEventListener('hashchange', () => go((parseInt(location.hash.slice(1), 10) || 1) - 1));
+go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>

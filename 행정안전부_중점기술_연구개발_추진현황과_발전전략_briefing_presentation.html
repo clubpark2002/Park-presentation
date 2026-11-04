@@ -1,0 +1,424 @@
+<!-- 브리핑 강의형 발표자료: 행정안전부 중점기술 연구개발 추진현황과 발전전략 (15장) -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>행정안전부 중점기술 연구개발 추진현황과 발전전략</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --ac:#2f62f0;            /* 주 강조색 (DECK.accent로 덮어씀) */
+  --ac2:#4cc3f5;           /* 그라디언트 끝색 (DECK.accent2) */
+  --ink:#15171c; --ink2:#2b2f37; --mu:#5d636e; --dim:#8d939d;
+  --card:#f4f6f9; --line:#e3e7ed; --stripe:#f2f6ff; --bar:#3d4048;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+html,body{width:100%;height:100%;overflow:hidden;background:#fff;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--ink);word-break:keep-all}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#fff}
+#slide{position:absolute;inset:0}
+.grad{background:linear-gradient(100deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* 순차 등장 */
+[data-s]{opacity:0;transform:translateY(18px);transition:opacity .55s ease var(--d,0s),transform .55s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+[data-s].on{opacity:1;transform:none}
+
+/* --- 본문 공통 (흰 배경) --- */
+.std{position:absolute;inset:0;padding:96px 144px 118px;display:flex;flex-direction:column}
+.eyebrow{font-size:26px;font-weight:700;letter-spacing:.01em}
+.title{margin-top:14px;font-size:54px;font-weight:300;line-height:1.32;color:var(--ink2);letter-spacing:-.01em}
+.title b{font-weight:800;color:var(--ink)}
+.body{flex:1;display:flex;align-items:center;min-height:0}
+.src{margin-top:24px;font-size:19px;line-height:1.55;color:var(--dim);text-align:center}
+.take{margin-top:36px;font-size:38px;font-weight:800;color:var(--ink2);text-align:center;letter-spacing:-.01em}
+
+/* split: 좌측 카드 + 우측 표/선택지 */
+.split{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.card{background:var(--card);border-radius:36px;padding:60px 56px;min-height:470px;display:flex;flex-direction:column;justify-content:center}
+.metric{text-align:center}
+.metric .big{font-size:170px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.metric .big small{font-size:84px;font-weight:600;letter-spacing:0;margin-left:6px}
+.metric .cap{margin-top:40px;font-size:34px;font-weight:700;color:var(--ink)}
+.metric .desc{margin-top:14px;font-size:25px;line-height:1.6;color:var(--mu)}
+.text h3{font-size:40px;font-weight:800;color:var(--ink2)}
+.text p{margin-top:36px;font-size:25px;line-height:1.7;color:var(--mu)}
+.text p+p{margin-top:28px}
+
+.tbl{width:100%}
+.tbl .row{display:grid;align-items:center;padding:0 26px;min-height:80px;font-size:24px;font-weight:600;color:var(--ink2)}
+.tbl .row:nth-child(even){background:var(--stripe)}
+.tbl .hd{min-height:50px;border-radius:12px;background:var(--bar);color:#fff;font-size:18px;font-weight:600;margin-bottom:6px}
+.tbl .row>span{padding-right:16px}
+.tbl .row:not(.hd) .v{color:var(--ac);font-weight:700;font-size:27px;font-variant-numeric:tabular-nums}
+.tbl .row:not(.hd) .v.sep{border-left:1px solid #d6dbe4;padding-left:22px}
+.tbl .hd .v.sep{padding-left:23px}
+
+.opts{display:flex;flex-direction:column;gap:20px}
+.opt{border:1.5px solid var(--line);border-radius:20px;padding:24px 32px;text-align:center;background:#fff}
+.opt .k{font-size:21px;font-weight:700;color:var(--ac)}
+.opt .t{margin-top:6px;font-size:27px;font-weight:700;color:var(--ink)}
+.opt .d{margin-top:6px;font-size:20px;color:var(--mu)}
+.opt.em{background:var(--ac);border-color:var(--ac);box-shadow:0 18px 40px rgba(var(--ac-rgb),.28)}
+.opt.em .k,.opt.em .d{color:rgba(255,255,255,.85)}
+.opt.em .t{color:#fff}
+
+/* bars */
+.bars{width:100%;height:100%;display:flex;justify-content:center;align-items:flex-end;gap:96px;padding-bottom:6px}
+.bcol{display:flex;flex-direction:column;align-items:center;width:150px}
+.bcol .val{font-size:46px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums}
+.bcol .val small{font-size:22px;font-weight:600;margin-left:3px}
+.bcol .b{margin-top:16px;width:150px;border-radius:26px;background:#e3e5e9}
+.bcol.em .val{color:var(--ac)}
+.bcol.em .b{background:linear-gradient(180deg,var(--ac) 0%,rgba(var(--ac-rgb),.55) 55%,rgba(var(--ac-rgb),.04) 100%)}
+.bcol .lb{margin-top:20px;font-size:25px;line-height:1.4;color:var(--mu);text-align:center;white-space:nowrap}
+
+/* quotes */
+.quotes{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.qcard{background:var(--card);border-radius:32px;padding:56px 56px 50px;display:flex;flex-direction:column}
+.qcard .q{font-size:33px;font-weight:700;line-height:1.5;color:var(--ink)}
+.qcard .qd{margin-top:36px;font-size:23px;line-height:1.7;color:var(--mu);flex:1}
+.qcard .by{margin-top:34px;font-size:21px;color:var(--mu)}
+
+/* cards (수치 3개) */
+.cards{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.scard{background:var(--card);border-radius:30px;padding:52px 44px}
+.scard .v{font-size:80px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.scard .v small{font-size:38px;font-weight:600;margin-left:4px}
+.scard .l{margin-top:30px;font-size:31px;font-weight:700;color:var(--ink)}
+.scard .d{margin-top:16px;font-size:22px;line-height:1.65;color:var(--mu)}
+
+/* delta-bars: 레퍼런스 (두 막대 사이 옐로우 배지) */
+.delta-bars-wrap{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:80px;height:100%;width:100%;max-width:900px;padding-bottom:10px}
+.delta-bars-wrap .bcol{width:190px}
+.delta-bars-wrap .bcol .b{width:190px;border-radius:24px}
+.delta-badge{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);background:#ffd54a;color:#15171c;font-size:22px;font-weight:800;padding:12px 26px;border-radius:999px;box-shadow:0 12px 28px rgba(0,0,0,.1);z-index:2;white-space:nowrap}
+
+/* level4: 레퍼런스 (가로 4분할 레벨 카드) */
+.level4{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch}
+.lcard{background:var(--card);border-radius:26px;padding:46px 34px;display:flex;flex-direction:column;border:2px solid transparent;transition:all .3s}
+.lcard .lv{font-size:36px;font-weight:800;color:var(--ink)}
+.lcard .maintxt{margin-top:28px;font-size:25px;font-weight:700;color:var(--ink2);line-height:1.45}
+.lcard .subtxt{margin-top:36px;font-size:20px;line-height:1.65;color:var(--mu);flex:1}
+.lcard.em{background:#fff;border-color:var(--ac);box-shadow:0 18px 45px rgba(var(--ac-rgb),.14)}
+.lcard.em .lv{color:var(--ac)}
+
+/* cards3: 레퍼런스 (3콘셉트 텍스트 카드) */
+.cards3{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;align-items:stretch}
+.c3card{background:var(--card);border-radius:28px;padding:54px 44px;display:flex;flex-direction:column}
+.c3card .h{font-size:38px;font-weight:800;color:var(--ink)}
+.c3card .p{margin-top:28px;font-size:22px;line-height:1.65;color:var(--mu);flex:1}
+
+/* flow3: 레퍼런스 (3단계 화살표 플로우) */
+.flow3{width:100%;display:flex;align-items:center;justify-content:center;gap:20px}
+.flow-box{border:1.5px solid var(--line);border-radius:22px;padding:32px 38px;font-size:25px;font-weight:700;color:var(--ink2);background:#fff;text-align:center;max-width:440px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.03)}
+.flow-arrow{font-size:24px;color:var(--ac);display:flex;align-items:center;justify-content:center;user-select:none}
+.flow-box.em{background:var(--ac);border-color:var(--ac);color:#fff;box-shadow:0 18px 40px rgba(var(--ac-rgb),.28)}
+
+/* fulltable: 레퍼런스 (전폭 6행 아젠다 테이블) */
+.fulltbl{width:100%;max-width:1600px}
+.fulltbl .row{display:grid;align-items:center;padding:0 36px;min-height:70px;font-size:23px;font-weight:600;color:var(--ink2);border-bottom:1px solid #edf0f5}
+.fulltbl .row:nth-child(even){background:var(--stripe)}
+.fulltbl .hd{min-height:54px;border-radius:12px;background:var(--bar);color:#fff;font-size:19px;font-weight:700;margin-bottom:8px;border-bottom:none}
+.fulltbl .c-part{font-weight:700;color:var(--ink)}
+.fulltbl .c-what{color:var(--ac);font-weight:700}
+.fulltbl .c-why{color:var(--mu)}
+
+/* center-quote: 레퍼런스 (중앙 대형 인용 + 2단 설명) */
+.cquote{width:100%;max-width:1480px;text-align:left}
+.cquote .q{font-size:33px;font-weight:800;line-height:1.6;color:var(--ink)}
+.cquote .desc{margin-top:36px;font-size:24px;line-height:1.75;color:var(--mu)}
+.cquote .desc p+p{margin-top:20px}
+
+/* --- 파트 표지 (네이비 격자) --- */
+.part{position:absolute;inset:0;color:#fff;overflow:hidden;
+  background:radial-gradient(ellipse 34% 46% at 2% 34%,rgba(36,120,235,.85),transparent 72%),
+    radial-gradient(ellipse 42% 48% at 92% 96%,rgba(24,80,225,.9),transparent 72%),
+    radial-gradient(ellipse 50% 60% at 48% 70%,rgba(14,58,170,.75),transparent 75%),
+    linear-gradient(165deg,#1b2a40 0%,#122a63 55%,#0b1f55 100%)}
+.part .grid{position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 330px,rgba(255,255,255,.08) 330px,rgba(255,255,255,.08) 331px,transparent 331px,transparent 486px,rgba(255,255,255,.08) 486px,rgba(255,255,255,.08) 487px,transparent 487px,transparent 1440px,rgba(255,255,255,.08) 1440px,rgba(255,255,255,.08) 1441px,transparent 1441px),
+    linear-gradient(180deg,transparent 394px,rgba(255,255,255,.08) 394px,rgba(255,255,255,.08) 395px,transparent 395px,transparent 688px,rgba(255,255,255,.08) 688px,rgba(255,255,255,.08) 689px,transparent 689px)}
+.part .ring{position:absolute;width:980px;height:980px;border-radius:50%;border:1.5px solid rgba(255,255,255,.09);top:40px}
+.part .r1{left:220px}.part .r2{left:710px}
+.part .in{position:absolute;left:144px;top:196px}
+.part .kick{font-size:29px;font-weight:500;color:rgba(255,255,255,.88)}
+.part .pnum{margin-top:44px;font-size:110px;font-weight:800;line-height:1.05;background:linear-gradient(100deg,#5db6ff,#3b78ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.part .ptitle{font-size:110px;font-weight:800;line-height:1.2;letter-spacing:-.01em}
+.part .psub{margin-top:34px;font-size:32px;color:rgba(255,255,255,.72)}
+.part .brand{position:absolute;left:144px;bottom:108px}
+.part .brand b{display:flex;align-items:center;gap:14px;font-size:31px;font-weight:700}
+.part .brand span{display:block;margin-top:18px;font-size:20px;color:rgba(255,255,255,.6)}
+
+/* --- 목차 --- */
+.contents{position:absolute;inset:0;display:grid;grid-template-columns:580px 1fr;padding:200px 240px 0 240px}
+.contents h2{font-size:56px;font-weight:800}
+.contents ol{list-style:none}
+.contents li{display:grid;grid-template-columns:90px 1fr auto;align-items:center;height:130px;border-bottom:1px solid var(--line)}
+.contents li:first-child{border-top:1px solid var(--line)}
+.contents li .n{font-size:38px;font-weight:800}
+.contents li .t{font-size:34px;font-weight:700;color:var(--ink2)}
+.contents li .tag{font-size:19px;font-weight:600;color:var(--mu);background:var(--card);padding:8px 18px;border-radius:999px}
+
+/* --- 섹션 구분 (검정) --- */
+.section{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 40%,#202227,#141518 75%);color:#fff}
+.section .in{position:absolute;left:144px;top:360px}
+.section .snum{font-size:60px;font-weight:800}
+.section .stitle{margin-top:18px;font-size:92px;font-weight:800;letter-spacing:-.01em}
+.section .smeta{margin-top:30px;font-size:30px;line-height:1.95;color:#9ba1ab}
+
+/* --- 하단 챕터 바 · 카운터 --- */
+#pbar{position:absolute;left:0;right:0;bottom:0;height:46px;display:flex;z-index:5;transition:opacity .3s}
+#pbar.hide{opacity:0;pointer-events:none}
+#pbar div{flex:1;display:grid;place-items:center;font-size:20px;font-weight:600;color:#a3a8b1;background:#f3f4f6;cursor:pointer;transition:background .2s}
+#pbar div:hover{background:#e7e9ed}
+#pbar div.on{background:var(--bar);color:#fff}
+#counter{position:absolute;right:28px;bottom:54px;font-size:17px;font-weight:600;color:var(--dim);cursor:pointer;z-index:6;font-variant-numeric:tabular-nums}
+#counter.dark{color:rgba(255,255,255,.5)}
+
+/* --- 점프 --- */
+#jump-toast{position:absolute;left:50%;top:60px;transform:translateX(-50%);padding:14px 26px;border-radius:14px;font-size:22px;font-weight:700;background:var(--bar);color:#fff;z-index:9;display:none}
+#jump-modal{position:absolute;inset:0;background:rgba(10,12,16,.45);display:none;place-items:center;z-index:10}
+#jump-modal.open{display:grid}
+#jump-modal form{padding:40px 48px;border-radius:22px;background:#fff;display:flex;flex-direction:column;gap:20px;align-items:center;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+#jump-modal label{font-size:24px;font-weight:700;color:var(--ac)}
+#jump-input{width:160px;height:56px;font-size:32px;font-weight:700;text-align:center;border-radius:12px;border:1.5px solid var(--line);color:var(--ink)}
+#jump-modal button{padding:12px 32px;border-radius:12px;font-size:18px;font-weight:700;background:var(--ac);color:#fff;border:none;cursor:pointer}
+@media (prefers-reduced-motion:reduce){[data-s]{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="slide"></div>
+  <div id="pbar"></div>
+  <div id="counter" title="클릭하거나 G 키로 페이지 이동"></div>
+  <div id="jump-toast">Go to <b id="jump-num"></b></div>
+  <div id="jump-modal"><form><label for="jump-input">페이지 바로 이동</label><input id="jump-input" type="number" min="1"><button>이동</button></form></div>
+</div>
+
+<script>
+/* ===================== 덱 데이터 — 이 부분만 고친다 ===================== */
+const DECK = {
+  brand: { name: '행정안전부 출연금 R&D', contact: '원자료 · 행정안전부 중점기술 연구개발 추진현황과 발전전략(박영진)' },
+  accent: '#2f62f0',
+  accent2: '#4cc3f5',
+  eyebrow: '행정안전부 중점기술 연구개발',
+  chapters: ['정책환경', '중장기 로드맵', '수요와 성과', '발전전략'],
+  slides: [
+    { layout: 'part', chapter: 0, kicker: '행정안전부 중점기술 연구개발 · 2026', part: 'Part 1.', title: '추진현황과<br>발전전략', sub: '재난안전 연구개발의 범위·투자·수요를 한 장의 전략으로 연결합니다.' },
+    { layout: 'contents', chapter: 0, items: ['정책환경과 연구개발 범위', '중장기 기술로드맵과 투자', '수요·성과·지역현장 분석', '발전전략과 실행과제'], tags: ['범위·체계', '2026~2030', '533건 분석', '전환 방향'] },
+    { layout: 'section', chapter: 0, title: '정책환경과 연구개발 범위', meta: ['Part 1. 행정안전부의 역할과 중점기술 체계', '재난유형·관리분야·관계부처를 연결해 투자 범위를 정의합니다.'] },
+    { layout: 'level4', chapter: 0, title: '연구개발 대상은 <b>재난 유형에서 관리 전 과정</b>으로 확장됩니다.', items: [
+      { lv: '01', main: '자연재난', sub: '풍수해·지진·폭염·가뭄·화산·급경사지' },
+      { lv: '02', main: '사회재난', sub: '인파·화재·붕괴·산불·화학사고·시스템장애' },
+      { lv: '03', main: '안전사고', sub: '수난·승강기·교통·어린이놀이시설' , em: true },
+      { lv: '04', main: '미래·비상', sub: '신종·잠재재난·대규모 이재민·전시비상' }
+    ], src: '출처 · 원자료 p.12~14, 재난유형별 주관기관·소관법령·예타 포함 현황.', take: '중점기술은 단일 재난 대응을 넘어 예방·대비·대응·복구 전주기를 포괄해야 합니다.' },
+    { layout: 'cards3', chapter: 0, title: '관리분야는 <b>예방·대응·복구와 생활안전</b>을 함께 봅니다.', items: [
+      { h: '생활안전', p: '어린이·노인·장애인 보호구역, 보행환경, 물놀이, 승강기, 안전신문고' },
+      { h: '재난관리', p: '예방 5개 · 대응 8개 · 복구 3개 분야로 연구개발 수요를 구조화' },
+      { h: '비상대비', p: '민방위 교육·시설·장비, 민방위 경보, 화생방 장비' }
+    ], src: '출처 · 원자료 p.13, 관리분야별 세부유형.', take: '연구개발 포트폴리오는 재난 발생 순간보다 평시 관리와 회복까지 포함해야 합니다.' },
+    { layout: 'section', chapter: 1, title: '중장기 로드맵과 투자', meta: ['Part 2. 2026~2030 중점기술 연구개발 로드맵', '예산·기술로드맵·사업구조를 함께 읽어야 투자 우선순위가 보입니다.'] },
+    { layout: 'bars', chapter: 1, title: '2026년 연구개발 투자는 <b>약 978.7억원</b> 규모입니다.', items: [
+      { label: '2025년', value: 94045, show: '940.45', unit: '억원' },
+      { label: '2026년', value: 97868, show: '978.68', unit: '억원', em: true }
+    ], src: '출처 · 원자료 p.32. 표의 단위는 백만원이며 억원으로 환산해 표시했습니다.', take: '2026년 총액은 2025년 대비 약 4.1% 증가하며 신규·계속사업을 함께 운용합니다.' },
+    { layout: 'deltabars', chapter: 1, title: '사업 포트폴리오는 <b>신규 착수와 계속사업의 균형</b>으로 구성됩니다.', items: [
+      { label: '신규사업', value: 3500, show: '35.0', unit: '억원', em: true },
+      { label: '계속·예타·관리', value: 90868, show: '908.68', unit: '억원' }
+    ], delta: '계속사업 비중이 높음', src: '출처 · 원자료 p.32. 신규사업은 재난안전중점기술로드맵 연계형 15억원과 산업 우수기술개발 20억원을 합산.', take: '신규기획의 파급력은 기존 사업의 현장 적용·확산 구조와 결합될 때 커집니다.' },
+    { layout: 'fulltable', chapter: 1, title: '주요 사업은 <b>로드맵·산업·예타·지역문제</b>를 축으로 묶입니다.', cols: '1.1fr 2.4fr 1.2fr', head: ['축', '주요 사업·기술', '기간'], rows: [
+      ['로드맵', '재난안전중점기술로드맵 연계형 기술개발', '2026~2028'],
+      ['산업', '재난안전산업 우수기술개발 지원', '2026~계속'],
+      ['예타', '재난 및 안전관리 연구개발', '2026~계속'],
+      ['현장', '지역맞춤형 재난안전 문제해결 기술개발', '2024~2028'],
+      ['협력', '재난안전 부처협력 기술개발', '2020~계속'],
+      ['관리', '재난안전 연구개발 사업관리·기평비', '2019~계속']
+    ], src: '출처 · 원자료 p.32, 2026년 재난안전 R&D 투자사업.', take: '사업명보다 중요한 것은 각 사업이 어느 전환 단계의 공백을 메우는가입니다.' },
+    { layout: 'section', chapter: 2, title: '수요와 성과, 지역현장 분석', meta: ['Part 3. 533건 수요조사와 지역별 기술수요', '공급자 중심 기획을 넘어 지역과 현장의 문제를 투자 포트폴리오에 반영합니다.'] },
+    { layout: 'cards', chapter: 2, title: '기술수요조사 533건 중 <b>산·학·연이 82%</b>를 제안했습니다.', items: [
+      { value: '533', unit: '건', label: '전체 기술수요', desc: '정부 94건과<br>산·학·연 429건' },
+      { value: '82', unit: '%', label: '산·학·연 비중', desc: '산 56% · 학 12%<br>연 32%' },
+      { value: '64', unit: '%', label: '정부 수요 중 지자체', desc: '정부 접수 94건 중<br>지자체 60건' }
+    ], src: '출처 · 원자료 p.20. 조사대상·기간·분석방법 표의 접수 건수.', take: '현장 문제를 가진 지자체와 전문 연구주체를 연결하는 기획 구조가 핵심입니다.' },
+    { layout: 'split', chapter: 2, title: '지역별 수요는 <b>재난유형과 산업기반에 따라 다르게 나타납니다.</b>', left: { type: 'metric', value: '13', unit: '건', label: '전북 지역 수요', desc: '드론·탄소발열·특수소재·해파리<br>신소재 개발과 해양생물 감시' }, right: { type: 'options', items: [
+      { k: '강원 1건', t: '자연재해 취약지역 감시·관리', d: '센서·지능형 관리기술' },
+      { k: '경북 12건', t: '산불·유해화학물질 대응', d: '산불진화·주수시스템·고정앵커', em: true },
+      { k: '울산 4건', t: '도시침수·산업설비 예지보전', d: '에너지설비·고위험 시설' },
+      { k: '광주 10건', t: '화재·붕괴·환자이송', d: '불꽃·센싱·지반·환자관리' }
+    ] }, src: '출처 · 원자료 p.22. 지역별 기술수요조사 주요 키워드.', take: '지역 맞춤형 R&D는 지역의 위험과 산업 역량을 동시에 활용해야 합니다.' },
+    { layout: 'flow3', chapter: 2, title: '현장 성과는 <b>탐지·판단·대응의 연결</b>로 설명됩니다.', items: [
+      { text: '탐지<br><small>센서·위성·드론·영상</small>' },
+      { text: '판단<br><small>AI 분석·위험예측·진단</small>' },
+      { text: '대응·복구<br><small>대피·구조·복구·심리회복</small>', em: true }
+    ], src: '출처 · 원자료 p.25~31, 지역맞춤형 R&D 현장적용 주요성과 사례.', take: '연구성과는 기술 단품이 아니라 재난 대응 의사결정 흐름 안에서 평가해야 합니다.' },
+    { layout: 'section', chapter: 3, title: '발전전략과 실행과제', meta: ['Part 4. 중점기술 R&D의 다음 단계', '투자 확대보다 중요한 것은 수요·실증·확산을 연결하는 운영체계입니다.'] },
+    { layout: 'level4', chapter: 3, title: '발전전략은 <b>수요자 중심 전주기 관리</b>로 전환해야 합니다.', items: [
+      { lv: '01', main: '수요 발굴', sub: '지역·기관·현장문제 기반 과제기획' },
+      { lv: '02', main: '실증 강화', sub: '운용환경·반복성·상호운용성 검증' },
+      { lv: '03', main: '사업화 연계', sub: '조달·표준·산업생태계 연결', em: true },
+      { lv: '04', main: '성과 확산', sub: '기관 간 공유·재난대응 적용·추적평가' }
+    ], src: '근거 · 원자료 p.11, 중장기 중점기술 연구개발 로드맵 및 p.32 사업 포트폴리오.', take: '중점기술 R&D는 과제 종료가 아니라 현장 도입 이후까지 관리하는 체계가 되어야 합니다.' },
+    { layout: 'fulltable', chapter: 3, title: '2026년 실행 아젠다는 <b>연결성과 지속성</b>에 초점을 둡니다.', cols: '1.1fr 2.2fr 1.3fr', head: ['과제', '실행 내용', '성과 확인'], rows: [
+      ['수요', '지자체·현장기관 공동기획 확대', '현장 문제 채택률'],
+      ['실증', '운용 시나리오·반복시험·데이터 연계', '현장 검증 완료율'],
+      ['확산', '조달·표준·교육·유지관리 패키지화', '도입·재사용 건수'],
+      ['산업', '우수기술개발 지원과 사업화 연계', '기업 후속투자·매출'],
+      ['평가', '성과물에서 대응효과·지속사용으로 전환', '추적평가 결과']
+    ], src: '전략 제안 · 원자료의 로드맵·수요조사·투자사업·현장성과를 종합한 실행 프레임.', take: '다음 단계의 성과지표는 개발 완료가 아니라 실제 재난안전 의사결정과 대응력을 바꾸는가입니다.' },
+    { layout: 'part', chapter: 3, kicker: '행정안전부 중점기술 연구개발 · 결론', part: 'Next.', title: '현장의 위험을<br>연구개발의 우선순위로', sub: '중점기술·수요·실증·확산을 하나의 전주기 전략으로 연결합니다.' }
+  ]
+};
+/* ===================== 렌더링 엔진 — 고치지 않는다 ===================== */
+const $ = id => document.getElementById(id);
+const S = DECK.slides;
+let cur = 0, step = 0, maxStep = 0;
+const pad = i => String(i).padStart(2, '0');
+const LOGO = `<svg width="40" height="30" viewBox="0 0 40 30" aria-label="대한민국 정부 태극문양"><defs><clipPath id="tgClip"><circle cx="20" cy="15" r="12"/></clipPath></defs><circle cx="20" cy="15" r="12" fill="#0047a0"/><g clip-path="url(#tgClip)"><path d="M8 15c0-8 12-12 18-6 3 3 1 7-2 8-4 2-6-2-8-2-4 0-5 4-8 4z" fill="#cd2e3a"/><circle cx="20" cy="9" r="4.2" fill="#cd2e3a"/><circle cx="20" cy="21" r="4.2" fill="#0047a0"/></g><circle cx="20" cy="15" r="12" fill="none" stroke="#183b70" stroke-width="1.2"/><path d="M4 6l4 2M4 24l4-2M36 6l-4 2M36 24l-4-2" stroke="#4b5563" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+
+const head = (s, n) => `<div class="eyebrow grad" ${n(0)}>${s.eyebrow || DECK.eyebrow || ''}</div><h2 class="title" ${n(0)}>${s.title}</h2>`;
+const foot = (s, n, k) => (s.src ? `<div class="src" ${n(k)}>${s.src}</div>` : '') + (s.take ? `<div class="take" ${n(k + 1)}>${s.take}</div>` : '');
+const std = (s, n, body, k) => `<div class="std">${head(s, n)}<div class="body">${body}</div>${foot(s, n, k)}</div>`;
+const num = (v, u) => `${v}<small>${u || ''}</small>`;
+
+const LEFT = {
+  metric: p => `<div class="card metric"><div class="big grad">${num(p.value, p.unit)}</div><div class="cap">${p.label}</div>${p.desc ? `<div class="desc">${p.desc}</div>` : ''}</div>`,
+  text: p => `<div class="card text"><h3>${p.head}</h3>${p.paras.map(t => `<p>${t}</p>`).join('')}</div>`
+};
+const RIGHT = {
+  table: p => {
+    const row = (r, cls) => `<div class="row ${cls}" style="grid-template-columns:${p.cols}">${r.map((c, i) => `<span class="${i === p.val ? (i ? 'v sep' : 'v') : ''}">${c}</span>`).join('')}</div>`;
+    return `<div class="tbl">${row(p.head, 'hd')}${p.rows.map(r => row(r, '')).join('')}</div>`;
+  },
+  options: p => `<div class="opts">${p.items.map(it =>
+    `<div class="opt${it.em ? ' em' : ''}">${it.k ? `<div class="k">${it.k}</div>` : ''}<div class="t">${it.t}</div>${it.d ? `<div class="d">${it.d}</div>` : ''}</div>`).join('')}</div>`
+};
+
+const LAYOUTS = {
+  part: (s, n) => `<div class="part"><div class="grid"></div><div class="ring r1"></div><div class="ring r2"></div>
+      <div class="in"><div class="kick" ${n(0)}>${s.kicker || ''}</div><div class="pnum" ${n(1)}>${s.part || ''}</div><h1 class="ptitle" ${n(1)}>${s.title}</h1>${s.sub ? `<p class="psub" ${n(2)}>${s.sub}</p>` : ''}</div>
+      <div class="brand" ${n(2)}><b>${LOGO}${DECK.brand.name}</b>${DECK.brand.contact ? `<span>${DECK.brand.contact}</span>` : ''}</div></div>`,
+  contents: (s, n) => `<div class="contents"><h2 class="grad" ${n(0)}>Contents</h2><ol>${(s.items || DECK.chapters).map((t, i) =>
+      `<li ${n(i + 1)}><span class="n grad">${pad(i + 1)}</span><span class="t">${t}</span>${s.tags && s.tags[i] ? `<span class="tag">${s.tags[i]}</span>` : '<span></span>'}</li>`).join('')}</ol></div>`,
+  section: (s, n) => `<div class="section"><div class="in"><div class="snum grad" ${n(0)}>${s.num || pad((s.chapter ?? 0) + 1)}</div>
+      <h1 class="stitle" ${n(1)}>${s.title}</h1>${s.meta ? `<div class="smeta" ${n(2)}>${s.meta.join('<br>')}</div>` : ''}</div></div>`,
+  split: (s, n) => std(s, n, `<div class="split"><div ${n(1)}>${LEFT[s.left.type](s.left)}</div><div ${n(2)}>${RIGHT[s.right.type](s.right)}</div></div>`, 3),
+  bars: (s, n) => {
+    const max = Math.max(...s.items.map(it => it.value));
+    return std(s, n, `<div class="bars">${s.items.map((it, i) =>
+      `<div class="bcol${it.em ? ' em' : ''}" ${n(i + 1)}><div class="val">${num(it.show ?? it.value, it.unit)}</div><div class="b" style="height:${Math.max(24, it.value / max * (s.h || 300))}px"></div><div class="lb">${it.label}</div></div>`).join('')}</div>`, s.items.length + 1);
+  },
+  quotes: (s, n) => std(s, n, `<div class="quotes">${s.items.map((it, i) =>
+      `<div class="qcard" ${n(i + 1)}><div class="q">${it.quote}</div>${it.desc ? `<div class="qd">${it.desc}</div>` : ''}${it.by ? `<div class="by">${it.by}</div>` : ''}</div>`).join('')}</div>`, s.items.length + 1),
+  cards: (s, n) => std(s, n, `<div class="cards">${s.items.map((it, i) =>
+      `<div class="scard" ${n(i + 1)}><div class="v grad">${num(it.value, it.unit)}</div><div class="l">${it.label}</div>${it.desc ? `<div class="d">${it.desc}</div>` : ''}</div>`).join('')}</div>`, s.items.length + 1),
+
+  deltabars: (s, n) => {
+    const max = Math.max(...s.items.map(it => it.value));
+    const barsHtml = s.items.map((it, i) =>
+      `<div class="bcol${it.em ? ' em' : ''}" ${n(i + 1)}><div class="val">${num(it.show ?? it.value, it.unit)}</div><div class="b" style="height:${Math.max(24, it.value / max * 320)}px"></div><div class="lb">${it.label}</div></div>`).join('');
+    return std(s, n, `<div class="delta-bars-wrap">${barsHtml}<div class="delta-badge" ${n(s.items.length + 1)}>${s.delta}</div></div>`, s.items.length + 2);
+  },
+
+  level4: (s, n) => std(s, n, `<div class="level4">${s.items.map((it, i) =>
+    `<div class="lcard${it.em ? ' em' : ''}" ${n(i + 1)}><div class="lv">${it.lv}</div><div class="maintxt">${it.main}</div><div class="subtxt">${it.sub}</div></div>`).join('')}</div>`, s.items.length + 1),
+
+  cards3: (s, n) => std(s, n, `<div class="cards3">${s.items.map((it, i) =>
+    `<div class="c3card" ${n(i + 1)}><div class="h">${it.h}</div><div class="p">${it.p}</div></div>`).join('')}</div>`, s.items.length + 1),
+
+  flow3: (s, n) => {
+    let html = '<div class="flow3">';
+    s.items.forEach((it, i) => {
+      html += `<div class="flow-box${it.em ? ' em' : ''}" ${n(i * 2 + 1)}>${it.text}</div>`;
+      if (i < s.items.length - 1) {
+        html += `<div class="flow-arrow" ${n(i * 2 + 2)}>▶</div>`;
+      }
+    });
+    html += '</div>';
+    return std(s, n, html, s.items.length * 2);
+  },
+
+  fulltable: (s, n) => {
+    const headRow = `<div class="row hd" style="grid-template-columns:${s.cols}">${s.head.map(h => `<span>${h}</span>`).join('')}</div>`;
+    const bodyRows = s.rows.map((r, i) =>
+      `<div class="row" style="grid-template-columns:${s.cols}" ${n(i + 1)}><span class="c-part">${r[0]}</span><span class="c-what">${r[1]}</span><span class="c-why">${r[2]}</span></div>`).join('');
+    return std(s, n, `<div class="fulltbl">${headRow}${bodyRows}</div>`, s.rows.length + 1);
+  },
+
+  cquote: (s, n) => std(s, n, `<div class="cquote"><div class="q" ${n(1)}>${s.quote}</div><div class="desc" ${n(2)}>${s.paras.map(p => `<p>${p}</p>`).join('')}</div></div>`, 3)
+};
+
+function renderBar() {
+  const s = S[cur], on = s.chapter != null && !['part', 'contents'].includes(s.layout);
+  $('pbar').classList.toggle('hide', !on);
+  $('pbar').innerHTML = DECK.chapters.map((c, i) => `<div class="${i === s.chapter ? 'on' : ''}" data-slide="${Math.max(0, S.findIndex(x => x.chapter === i))}" title="${c}">${pad(i + 1)}</div>`).join('');
+  $('counter').classList.toggle('dark', ['part', 'section'].includes(s.layout));
+}
+
+function go(i, full) {
+  cur = Math.max(0, Math.min(S.length - 1, i));
+  const s = S[cur];
+  $('slide').innerHTML = LAYOUTS[s.layout](s, k => `data-s="${k}"`);
+  renderBar();
+  $('counter').textContent = `${cur + 1} / ${S.length}`;
+  try { history.replaceState(null, '', '#' + (cur + 1)); } catch (e) { }
+  const els = [...$('slide').querySelectorAll('[data-s]')];
+  maxStep = Math.max(0, ...els.map(e => +e.dataset.s));
+  const mode = s.reveal || DECK.reveal;
+  step = (full || mode === 'auto') ? maxStep : 0;
+  els.forEach(e => e.style.setProperty('--d', mode === 'auto' && !full ? (0.08 + e.dataset.s * 0.2) + 's' : '0s'));
+  requestAnimationFrame(() => requestAnimationFrame(showSteps));
+}
+function showSteps() { $('slide').querySelectorAll('[data-s]').forEach(e => e.classList.toggle('on', +e.dataset.s <= step)); }
+function next() { if (step < maxStep) { step++; showSteps(); } else if (cur < S.length - 1) go(cur + 1); }
+function prev() { if (cur > 0) go(cur - 1, true); }
+
+function scale() {
+  const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+  $('stage').style.transform = `translate(${(innerWidth - 1920 * k) / 2}px,${(innerHeight - 1080 * k) / 2}px) scale(${k})`;
+}
+
+let buf = '', bufT;
+function jumpTo(v) { const n = parseInt(v, 10); if (n >= 1 && n <= S.length) go(n - 1, true); }
+function openModal() { $('jump-modal').classList.add('open'); const inp = $('jump-input'); inp.max = S.length; inp.value = ''; inp.focus(); }
+function closeModal() { $('jump-modal').classList.remove('open'); }
+$('jump-modal').querySelector('form').addEventListener('submit', e => { e.preventDefault(); jumpTo($('jump-input').value); closeModal(); });
+$('jump-modal').addEventListener('click', e => { if (e.target.id === 'jump-modal') closeModal(); });
+$('counter').addEventListener('click', e => { e.stopPropagation(); openModal(); });
+$('pbar').addEventListener('click', e => {
+  e.stopPropagation();
+  const t = e.target.closest('[data-slide]');
+  if (t) go(+t.dataset.slide, true);
+});
+
+window.addEventListener('keydown', e => {
+  if ($('jump-modal').classList.contains('open')) { if (e.key === 'Escape') closeModal(); return; }
+  if (/^[0-9]$/.test(e.key)) {
+    buf += e.key; $('jump-num').textContent = buf; $('jump-toast').style.display = 'block';
+    clearTimeout(bufT); bufT = setTimeout(() => { jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; }, 1200);
+    return;
+  }
+  if (e.key === 'Enter' && buf) { clearTimeout(bufT); jumpTo(buf); buf = ''; $('jump-toast').style.display = 'none'; return; }
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+  else if (e.key === 'Home') go(0);
+  else if (e.key === 'End') go(S.length - 1, true);
+  else if (e.key === 'g' || e.key === 'G') { e.preventDefault(); openModal(); }
+  else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.(); }
+});
+$('stage').addEventListener('click', e => { if (!e.target.closest('#jump-modal')) next(); });
+let tx0 = null;
+addEventListener('touchstart', e => tx0 = e.touches[0].clientX, { passive: true });
+addEventListener('touchend', e => { if (tx0 === null) return; const dx = e.changedTouches[0].clientX - tx0; if (Math.abs(dx) > 50) dx < 0 ? next() : prev(); tx0 = null; });
+
+const hex = DECK.accent.replace('#', '');
+document.documentElement.style.setProperty('--ac', DECK.accent);
+document.documentElement.style.setProperty('--ac2', DECK.accent2 || DECK.accent);
+document.documentElement.style.setProperty('--ac-rgb', [0, 2, 4].map(i => parseInt(hex.substr(i, 2), 16)).join(','));
+addEventListener('resize', scale); scale();
+window.addEventListener('hashchange', () => go((parseInt(location.hash.slice(1), 10) || 1) - 1));
+go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>
